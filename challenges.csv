@@ -1,0 +1,424 @@
+id,name,description,attribution,connection_info,next_id,max_attempts,value,category,type,state,logic,initial,minimum,decay,function,requirements
+1,First Light,"Every system leaves something behind.
+
+Not all information is hidden behind layers of encryption or complex defenses. Sometimes, the most important details remain exactly where they were placed — unnoticed.
+
+Before diving deeper, take a moment to observe your surroundings. Interact with the interface. Look carefully at what is already in front of you.
+
+The archive designation is present.
+
+Flag format: `flag{...}`
+",,,,0,50,Warmup,standard,visible,any,,,,static,
+2,The Dark Below,"Beneath the Surface
+
+What you see is only part of the story.
+
+Interfaces are designed to present information clearly — but not always completely. Sometimes, additional details exist just beneath the surface layer, waiting for someone curious enough to look.
+
+If something feels incomplete, it probably is.
+
+Examine the page more closely. The archive record has not been removed — only hidden.
+
+Flag format: `flag{...}`
+",,,,0,50,Warmup,standard,visible,any,,,,static,
+3,Welcome Guardian,"The Golden Age was a time of unparalleled advancement. Human civilization expanded beyond Earth, guided by scientific discovery and the silent watch of distant observation facilities.
+
+One such facility was AROHAL SYLORIN.
+
+Constructed by the Ishtar Collective, AROHAL SYLORIN operated as a deep-space archival and monitoring station. Its purpose was simple in design, but vast in scope: to observe, preserve, and safeguard knowledge across time and space. Within its sealed archive nodes rested fragments of human understanding — research, signals, and records never meant to be lost.
+
+When the Collapse came, AROHAL SYLORIN went silent.
+
+Now, fragments of its archive have begun transmitting once more.
+
+You are among the first to establish a recovery link with the facility.
+
+This designation confirms that your interface is synchronized with the Ishtar Collective recovery network.
+
+Submit the initialization designation to confirm readiness.
+
+flag{EYES-UP-GUARDIAN}",,,,0,20,Warmup,standard,visible,any,,,,static,
+4,Recovered Log,"The fragment recovered from AROHAL SYLORIN was archived in its original transmission format.
+
+Automated archive interfaces failed to render the contents correctly, marking the record as empty. However, Ishtar Collective recovery protocol requires operators to verify archive fragments using direct system-level access when standard viewing systems fail.
+
+Not all records are intended for conventional viewing environments.
+
+Retrieve the archive fragment and access it using appropriate recovery tools. The archive designation is present within the recovered log.
+
+Flag format: `flag{...}`
+",,,,0,50,Warmup,standard,visible,any,,,,static,
+5,Incomplete Archive,"The Ishtar Collective archive recovered from AROHAL SYLORIN contains inconsistencies.
+
+Initial inspection suggests the container is empty, yet internal indexing logs reference additional entries that do not appear through standard listing methods. This behavior was intentional — certain archive systems were designed to obscure sensitive records beneath layers of manifest data and diagnostic output.
+
+When archives become fragmented, automated recovery systems often produce excessive metadata. Most of it is irrelevant. Only specific entries retain archival significance.
+
+Focus on identifying the true record among the noise. The designation has been preserved within the hidden archive structure.
+
+Flag format: `flag{...}`",,,,0,50,Warmup,standard,visible,any,,,,static,
+6,Ishtar Archive 1,"two flags in hereeee.... 
+
+Ishtar Collective recovery teams intercepted a fragmented diagnostic archive originating from the AROHAL SYLORIN observation node.
+
+Preliminary analysis indicates that portions of the archive remain readable, though not through conventional viewing interfaces. Recovery specialists typically relied on low-level extraction utilities capable of isolating human-readable strings from otherwise opaque archive containers. These tools allowed technicians to filter recovered text and identify valid archive designations hidden within diagnostic noise.
+
+However, Ishtar archival protocols also permitted the embedding of visual records directly within transport logs. These embedded artifacts were not visible through standard inspection and required dedicated structural analysis tools capable of identifying and extracting embedded file signatures from larger archive containers.
+
+Modern recovery environments still support these reconstruction utilities. Tools such as `strings`, combined with filtering mechanisms like `grep`, can reveal readable archive markers. For deeper structural inspection and extraction of embedded visual records, Ishtar recovery teams relied on signature analysis utilities such as `binwalk`, which can identify and recover embedded file structures.
+
+Recover all archive designations contained within the fragment.
+
+Flag format: flag{...}",,,,0,150,Warmup,standard,visible,any,,,,static,
+7,Ishtar Archive 2,"ISHTAR COLLECTIVE ARCHIVE — PERSONAL LOG
+AUTHOR: DR. MAYA SUNDARESH
+RECOVERY NODE: AROHAL SYLORIN
+SOURCE REFERENCE: ISHTAR ARCHIVE 1
+STATUS: PARTIAL VISUAL RECONSTRUCTION
+
+The fragment recovered in Ishtar Archive 1 was only the surface layer. Beneath it, hidden outside normal indexing, I found a visual imprint.
+
+The manifest preserved a name:
+
+**hold_me**
+
+Chioma used to say that to me. Not as fear — as certainty. A reminder that I was still real. Still hers.
+
+This image was not preserved by accident. It was placed here. Deliberately. Left behind by another version of this archive. Another version of me.
+
+She wanted me to find it.
+
+Recover the image. Extract it. See what she saw. Confirm the designation she preserved.
+
+Because if Chioma exists here, preserved in signal and structure… then something is looking back.
+Flag format: flag{...}
+—
+
+""You have her shape. Her voice. Her memory.
+
+But you are not my Chioma.
+
+And I am no longer the Maya who would have cared.""
+",,,,0,150,New Light,standard,visible,any,,,,static,{'prerequisites': [6]}
+8,Not the Edge But the Beginning,"**Guardian…**
+
+When I found you, you were buried beneath centuries of dust. Forgotten. Hidden. Waiting.
+
+The world isn’t always what it appears to be at first glance. Sometimes the truth isn’t at the edge of things… sometimes it’s underneath.
+
+I’m detecting something unusual in this interface. A residual signal. Structured. Intentional. Not human.
+
+It’s faint — tucked away beneath the surface layer. Not in front of you. Beneath you.
+
+The Ishtar Collective once studied symbols like these. Hive glyphs. Ritual markings. Language carved into existence itself.
+
+If we’re going to understand what was left here, we need to look carefully.
+Look beneath what’s presented.
+Recover what’s hidden underneath.
+Extract the visual record.
+Study the glyphs column by column.
+Reconstruct the designation in its proper order.
+
+The Hive arrange meaning with purpose. Left to right. Column by column. No accidents.
+
+Piece it together, Guardian.
+
+When you recover the full designation string, submit it in this format:
+
+flag{decodeddesignation} all caps
+no spaces no hyphens...
+
+[https://www.slideshare.net/slideshow/hive-language-project-101722340/101722340#5](https://)
+
+page 5 and 6 
+
+Not the edge.
+
+The beginning.
+
+Look underneath.(Its in front of you look at it) the page ctf page
+",,,,0,350,Ishtar Vanquisher,standard,visible,all,,,,static,
+9,Heresy of the Shoemaker,"*The Sylorin archive did not survive the Collapse intact.
+
+Among the fragments recovered from Arohal Sylorin was a doctrinal transcription attributed to the Shoemaker — the philosopher who spoke of endings without sorrow.
+The text appears faithful to the Unveiling record, yet archivists have noted irregularities in its formatting.
+
+The Sylorin were meticulous.
+They did not preserve words idly.*
+
+flag format flag{...} all upper case",,,,0,150,New Light,standard,visible,all,,,,static,
+10,flaws in SPACE-time,"We wrestled in the garden, in the loam of possibility where nothing existed and everything might.
+
+The Sylorin transcription matches all known records.
+
+> Line counts align. Word counts align. Punctuation aligns.
+> No letters are missing. No words are altered.
+
+And yet, archive validation reports inconsistencies at the character level.
+
+> The discrepancies do not appear in ink.
+> They appear between it.
+
+The Sylorin believed that structure hides in the spaces others ignore.
+If nothing is visibly wrong, perhaps you are not looking closely enough.
+flag format flag{...}",,,,0,150,New Light,standard,visible,any,,,,static,
+11,Principles of Separation,"Archive Fragment: Gardener and Winnower
+
+The Sylorin archivists recovered this transcription along with a reconstruction utility.
+The utility was meant to separate signal from noise.
+It no longer runs.
+
+The archivists noted:
+
+> “Non-printing inconsistencies detected.
+> Structural integrity compromised.”
+
+The gardener plants.
+The winnower separates.
+
+Restore the structure.
+Let only what should execute flourish.
+flag format  
+> flag{...}",,,,0,150,New Light,standard,visible,any,,,,static,
+13,Dominance Without Purpose,"📜 Lore Source: Unveiling — The Final Shape
+
+ISHTAR COLLECTIVE — PARACAUSAL SIMULATION LOG
+AROHAL SYLORIN // Dominance Study
+
+In Unveiling — The Final Shape, the Gardener complains:
+
+“This one stupid pattern!”
+
+The Winnower responds:
+
+“They have no purpose except to subsume all other purposes.”
+
+Ishtar philosophers debated this statement extensively. If a pattern exists only to continue existing, what is its defining characteristic?
+
+A transmission recovered from AROHAL SYLORIN contains structured entropy — repeating intervals hidden beneath apparent randomness.
+
+The pattern is not decorative.
+It is dominant.
+
+Decrypt the signal. Determine what the dominant pattern claims about itself.
+
+Recover the embedded philosophical conclusion.
+
+Flag format:
+flag{...}",,,,0,250,Ishtar Justiciar,standard,visible,any,,,,static,
+14,Inevitability Simulation,"ISHTAR COLLECTIVE — EMERGENT SYSTEMS ANALYSIS
+AROHAL SYLORIN // Simulation Fragment
+Deep within Golden Age archives lies a philosophical curiosity — a game played not with pieces, but with life and death on an infinite grid of flowers.
+The Gardener was fascinated. Patterns would rise, collapse, stabilize. No matter the starting arrangement, the rules always had the final say.
+You have been given one such starting arrangement, recovered from AROHAL SYLORIN.
+Read the enclosed lore entry carefully. It contains the four rules that govern the Flower Game.
+Apply those rules to advance the configuration by exactly one generation.
+Only one generation. The flowers that survive that single step are your answer.
+Flag format: flag{...}",,,,0,250,Ishtar Justiciar,standard,visible,any,,,,static,
+15,Parallel Law,"ISHTAR COLLECTIVE — NOMINAL LAW ANOMALY REPORT
+AROHAL SYLORIN
+In The First Knife, the Gardener proposes a new rule — something separate, running in parallel, immune to compromise. The Winnower rejects it. Not with argument. With certainty.
+Ishtar analysts recovered an encrypted transmission from the archive. The cipher is a Vigenère — a key word shifts each letter through the alphabet in repeating sequence.
+The key is not hidden. It is the word the lore uses to describe what the game became when two beings entered it.
+Ciphertext:
+BBQ-NKAOX-AJNDQ
+Flag format: flag{...}",,,,0,250,Ishtar Justiciar,standard,visible,any,,,,static,
+16,Patternfall,"ISHTAR COLLECTIVE — COSMIC PROPAGATION RECORD
+AROHAL SYLORIN
+The patterns that escaped the garden did not announce themselves.
+They propagated quietly — substrate to substrate, medium to medium. First through quantum foam. Then through saline meltwater. Then through steaming seas. Always tenacious. Always hidden inside something ordinary.
+Ishtar analysts intercepted network traffic from AROHAL SYLORIN's last known transmission point. The capture looks unremarkable. Standard HTTP. Nothing spectacular.
+But the patterns never travel through spectacle.
+
+""They rained from the sky into the steaming seas of fallow worlds, and there they built their first housings.""
+
+Something was transferred. Something persists inside the stream.
+Open the capture. Follow what flows. Find what they built first.
+Flag format: flag{...}",,,,0,250,Ishtar Justiciar,standard,visible,any,,,,static,
+17,Doctrine of Balance,"ISHTAR COLLECTIVE — TRUST PROTOCOL ARCHIVE
+AROHAL SYLORIN
+Eris Morn wrote to a trusted Guardian. In that letter, she wrestled with the Queen's doctrine of balance — and arrived at her own conclusion. Not equity. Not transgression. Something harder to hold.
+Ishtar analysts recovered an authentication artifact from AROHAL SYLORIN's trust layer — a structured token asserting claims about the archive.
+The truth is not encrypted. It is declared plainly in the payload.
+But the token has three parts. You must know how to read it.
+Token:
+
+> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJJU0hUQVItQ09MTEVDVElWRSIsInN1YiI6IkFST0hBTC1TWUxPUklOIiwiYXJjaGl2ZSI6IlRSVVNULUFORC1IT1BFIiwiYXV0aG9yIjoiRVJJUy1NT1JOIiwiZG9jdHJpbmUiOiJVTlNIQUtBQkxFLUlSUkFUSU9OQUwtSE9QRSIsInZlcmlmaWVkIjp0cnVlfQ.zkWpjMZeUpE_COuU4NH4v4HcoqcqrNGtINkHq_sGIcA
+
+Decode the token. Inspect the payload. Find the doctrine.
+Flag format: flag{...}",,,,0,250,Ishtar Justiciar,standard,visible,any,,,,static,
+18,Salvation Convergence Record,"ISHTAR COLLECTIVE — WITNESS ORIGIN ANALYSIS NODE
+AROHAL SYLORIN
+Before there was a Witness, there was a civilization.
+They were once like us — struggling, hoping, prospering under a god that gave them gifts but never spoke. And in that silence, they began to crave something more. They found the Veil. They studied the Darkness. They saw the Light not as salvation but as chaos unbound.
+And so they chose to end the chaos. To merge themselves into the answer they had always wanted.
+Ahsa's testimony records their ultimate ambition — not as metaphor, but as doctrine. A single phrase. The state they sought to impose on all of existence.
+A cryptographic digest of that phrase was recovered from AROHAL SYLORIN's archive.
+
+Hash (SHA-256):
+
+> 22e29bdc0ff5ebd9aa84b4dc61bf806d4a4be821342989e00bfc53cf3c988d58
+
+Candidates:
+
+> UNFETTERED-CHAOS
+> SALVATION-THEY-CRAVED
+> IMPOSE-MEANING
+> ETERNAL-AND-PERFECTED
+> CALCIFY-THE-GARDEN
+> BINDING-POWER-OF-DARKNESS
+> FINAL-SHAPE-CONVERGENCE
+> CARVE-AWAY-EXISTENCE
+> WITNESS-THE-TRUTH
+> GOLDEN-AGE-DOCTRINE
+
+Hash each candidate. Only one matches.
+Flag format: flag{...}",,,,0,250,Ishtar Justiciar,standard,visible,any,,,,static,
+19,The Quietest Voice,"ISHTAR COLLECTIVE — WITNESS ORIGIN ANALYSIS
+AROHAL SYLORIN // Fragment: Phlegethon II
+When the Witness first acted, not all voices within it agreed.
+One voice — a philosopher — screamed into the chorus. Raged against what had just been done to the Eurhythmia. A species that had smiled at them. Sung to them. Given freely and asked for nothing.
+And the Witness answered with a single word. Over and over. Calm. Absolute. Immovable.
+Ishtar recovered a page from that moment. The philosopher's account. It is all there — the horror, the wound that would never heal, the mountain of corpses beneath their so-called final shape.
+But buried in the page's structure — not visible on the surface — is the word the Witness used to justify everything.
+What did the Witness call it?
+Open the file. Look beneath what is rendered. The answer is encoded in the bones of the page.
+Flag format: flag{...}",,,,0,350,Ishtar Vanquisher,standard,visible,any,,,,static,
+20,The Abyssal Divide,"ISHTAR COLLECTIVE — LUBRAE ORIGIN RECORD
+AROHAL SYLORIN // Fragment: Untamed
+Before the Witness. Before the war. There was Lubrae.
+A world divided — not by geography, but by design. The Regime built the Abyss deliberately. A chasm between the city and the wildlands. Between those who were kept and those who were left to die.
+The fragment recovered from this node is a psychological record — a Lubraean mind in fracture, wrestling with what the Darkness is showing it. Somewhere in the transmission, a single phrase echoes. It appears in the lore almost as an aside. A parenthetical. Easy to miss.
+But it is not an aside. It is the doctrine of the Abyss itself. What the divide was designed to do. What it always does.
+The archive key is embedded in this script — encoded for transit. The browser has always known how to decode it. Find the function. Call it.
+What does the Abyss do to those it separates?
+Flag format: flag{...}",,,,0,350,Ishtar Vanquisher,standard,visible,any,,,,static,
+21,What Am I,"ISHTAR COLLECTIVE — LUBRAE ORIGIN RECORD
+AROHAL SYLORIN // Fragment: Endangered
+He was a boy once. He held a small creature — a Yhadt — in his hands. Something happened. Something that told him, clearly, what he was.
+Years later, after blood and survival and the deaths of strangers he both protected and destroyed, he asked the Darkness directly:
+What am I?
+The Darkness did not hesitate.
+Two answers are hidden in this file. Both encoded in a language that has no keywords, no variables, no syntax — only instructions to move a single value up or down, one step at a time, and print what remains.
+Find an interpreter for this language. Run each sequence.
+The first answer is what the Darkness called him.
+The second answer is what he called the creature in his hands.
+Both truths were always the same truth.
+Flag format: flag{...}",,,,0,400,Ishtar Vanquisher,standard,visible,any,,,,static,
+22,Rheliksbane,"ISHTAR COLLECTIVE — LUBRAE ORIGIN RECORD
+AROHAL SYLORIN // Fragment: Nepotistic
+He searched for his father for a year. Killed many. Walked the Abyssal perimeter under the Umbral Sun. Believed, somewhere beneath the rage, that his father was still the man who had held his shoulder and spoken of a better world.
+He was not.
+At the trial, his father testified. Not to have him executed — but to have him conscripted. Put to use. A weapon aimed at the very Wanderers they had once tried to protect.
+Two things crystallized in that courtroom. Two judgments. Both recorded in this script — but rotated. Every printable character shifted through a 94-character cycle. Not just letters. Everything.
+The first: what he did every time he killed, hoping his father still lived.
+The second: the single word he had for his father by the time the trial ended.
+Find the cipher. Rotate back. Recover both.
+Flag format: flag{...}",,,,0,400,Ishtar Vanquisher,standard,visible,any,,,,static,
+23,Fed and Free,"ISHTAR COLLECTIVE — LUBRAE ORIGIN RECORD
+AROHAL SYLORIN // Fragment: Defiant
+The Regime gave him everything his clan never could. A roof. Regular meals. Consistent light from a Sapphiric sky. And most importantly — it never asked him to hold back. Never made him watch in silence while Wanderers were torn apart across a bridge.
+It fed what he was.
+When he later read Eris Morn's letter — her warnings about the Darkness, her doctrine of hope — he would have had answers for every line. He had already lived her nightmare and called it salvation.
+Two truths from that fragment are encoded in this stylesheet — hidden in the structure that makes pages beautiful, translated into the oldest signalling system humanity ever used. Dots. Dashes. Silence between them.
+Each letter separated by a space. Each word by a slash.
+The first: what The Regime never denied him.
+The second: what The Regime gave him that enslavement never could.
+Find a decoder. Listen to what the stylesheet is saying.
+Flag format: flag{...}",,,,0,400,Ishtar Vanquisher,standard,visible,any,,,,static,
+24,Needle and Worm,"""This year of wild voyaging, these lightning nights and golden days, these forays into ancient wrecks and windblown flights from monsters...there was one called Docker""
+The Needle Ship was salvaged from the Shvubi Maelstrom — older than death itself, tumbling through the wreckage of a forgotten age. Sathona lied about its worth. She always does.
+The dead worm still speaks. It carved something into the code before it went silent. The crew left their mark somewhere in the wreckage — long, slender, unbreakable.
+
+[https://drive.google.com/file/d/18qlRhrEjuTv41zDhzE_a0iiQu-SMzVbw/view?usp=sharing
+
+Find what was hidden in the hull.
+Flag: flag{l...}
+",,,,0,700,Ishtar Vanquisher,standard,visible,any,,,,static,
+25, Resonant Fury 1,"""I am Xita, the nurturing worm. Behold Yul, and Eir, and Xol, and Ur, and Akka. The virtuous worms. Look upon us and know that We are go[o]d.""
+Ur yearns for nurture. It does so through hunger.
+Rhulk came to the Deep uninvited. He knew of their hunger — abandoned, imprisoned, vulnerable. A trade was made in the dark. Servitude for survival. The worms had no choice.
+Something is running in this system that refuses to die. It has been here since before you arrived. It is hungry. It is waiting.
+Go on, then. Sustenance has arrived.
+Find what Rhulk left behind.
+
+[https://drive.google.com/file/d/1WOOIBL8uuclNHfy6suoBJoDycQc-pJBF/view?usp=sharing](https://)
+
+flag format
+
+> flag{...}",,,,0,150,New Light,standard,visible,all,,,,static,
+26,Resonant Fury 2,"""Yul yearns for nurture. It does so through honesty.""
+The Subjugator came uninvited. Unbreakable. Unstoppable. The cruel Leviathan learned this truth the hard way — a rib torn from its chest, wielded as nothing. What lies beyond belongs not to you. It belongs to that which witnesses all.
+This system has been compromised. Three truths are buried here. Yul does not lie — everything you need is already in plain sight, if you know how to look.
+Stench follows. You drag it before you.
+Something in this machine runs on a schedule it was never meant to keep. The Subjugator left his tribute system running — find what the schedule was hiding in its own instructions.
+It will not consume you, for you have conquered it — or so you prefer to believe.
+Something was given a power it was never meant to have. Not full dominion — something lighter. A capability. Use it to reach what lies locked in the Deep.
+What lies beyond belongs not to you. Or does it?
+A terminal runs within this machine. It will not reveal itself unless you bring it into the light. Run this container with port 8080 exposed — only then will the third truth surface. Behind it waits a message from Yul, encrypted and patient, honest as always.
+
+
+Three flags. One machine. Find them all.
+
+[https://drive.google.com/file/d/1V_4eRee7-zEcofXMR1ysWP1k8aED9yVB/view?usp=sharing](https://)
+
+Flag Format: flag{...}",,,,0,700,Ishtar Exemplar,standard,visible,all,,,,static,
+27,Resonant Fury 3,"""Xol yearned for nurture. It did so amongst the thousands.""
+The Osmium King was surrounded by whispers — whispers of the end of all things. Designed to incite madness. The Witness watched from on high, patient, plotting. It does not shout. It hides. It lingers in the spaces between things — in memory that was never meant to persist, in instructions buried where no one thinks to read, in names that cannot be spoken aloud.
+Young Sathona. The end is coming. A great cataclysm.
+Something lives in this machine's shared memory, placed there and forgotten — or perhaps left deliberately. Whispers that fade when the machine sleeps, but not before you find them.
+Our whispers were fed to a weak mind. But you… are a brave mind. A clever mind.
+The system was configured by someone who hid their intentions in plain sight — inside the very instructions that run the machine. Read what should not have been written there.
+In the Sky… there is only death. But salvation… lies in the Deep.
+The third truth hides in a name you cannot read with your eyes alone. Some things are not meant for conventional viewing environments. Look closer than you have ever looked before.
+Three flags. No website this time. Only the machine. Only the deep.
+
+> https://drive.google.com/file/d/1M6AeVac50yUmrf0pkY-IgcBkCrF7c2lF/view?usp=sharing
+
+flag format
+
+> flag{...}",,,,0,700,Ishtar Exemplar,standard,visible,all,,,,static,
+28,Resonant Fury 4,"""Akka yearned for nurture. It did so through secrets.""
+The Subjugator did what he does best. Conquer. Capture. Those who proved useful served. Akka was kept — for the desire for domination of all things.
+This system keeps secrets too. Two of them. Neither will yield to brute force. Both require cunning.
+He knew of our strengths. Our powers. To grip the mind and guide.
+The first secret speaks through a book. Not every word matters — only the ones that were marked. The Calcified Fragments hold the key. Find the text. Find the numbers. Let the numbers point to the words.
+The Subjugator returned living pieces of me to Fundament. Segments he called larvae. He set them adrift on the ocean, knowing full well where the current would carry them.
+The second secret is a place. A real place. Coordinates were left behind — encoded, disguised, buried in the system. Find the numbers. Look at where they point on this earth. The name of that place is your flag.
+Two secrets. Two flags. Akka does not give them freely.
+
+
+Flag Format: flag{...}",,,,0,400,Ishtar Exemplar,standard,visible,all,,,,static,
+29,Resonant Fury 5 The Merge,"""Eir yearns for nurture. It does so through order.""
+The record is complete. Five worm gods. Five domains. Five lies dressed as virtue.
+Xita called them virtuous — Ur, Yul, Xol, Akka, Eir. She said: ""Look upon us and know that We are go[o]d."" But look at what they wrought. Hunger that imprisoned. Honesty that conquered. Thousands that whispered madness. Secrets that enslaved. Order that served a Witness that cared nothing for any of them.
+The Krill became the Hive. The worms became servants. Rhulk became a Disciple. And somewhere beneath all of it — beneath the trades, the servitude, the nurturing — a truth was buried that the Subjugator never wanted spoken aloud.
+In the Deep, my children pay a price in servitude, for survival. In ascendance, the Hive pay a price in servitude, for power. And in the dark, I pay a price in servitude, so that others may be nurtured.
+This system holds two final truths.
+The first lives in the nature of the worms themselves. You have walked through their domains — hunger, honesty, thousands, secrets. Eir is the last. Its domain is hidden somewhere in this machine. Find it. Then ask yourself what all five domains have in common. What were they, truly? Assemble the answer in order, from first to last, and you will have what you seek.
+The second requires you to prove yourself worthy of the conclusion. Somewhere in this machine a judgment waits. Find it. Host it. Download it. Face what it throws at you. Five phases. Five domains. Survive them all and the final truth — the one Rhulk could never admit — will be spoken aloud at last.
+It must not be in vain.
+
+https://drive.google.com/file/d/10LruPetq4C7NSOdrx_VrpU00mugItGFQ/view?usp=sharing
+
+flag format 
+
+> flag{...}",,,,0,900,Ishtar Exemplar,standard,visible,all,,,,static,
+30,AROHAL SYLORIN — The Lost Node,"**Why are we here????**
+
+""227 Ishtars in a Vex.""
+During the Golden Age, the Ishtar Collective captured a Vex unit for study. What they discovered changed everything — the Vex had been simulating the entire research team with such perfection that the odds of being the real version of yourself collapsed to near zero. Rasputin pulled them out. The simulated copies volunteered to go back in — to study the Vex from the inside for as long as it took.
+AROHAL SYLORIN was built to listen to them.
+A classified deep archive node on Venus, off the books, outside the Academy's official records. It received transmissions from the copies inside the Vex network for decades — data on chronological mechanics, paracausal phenomena, the nature of the Final Shape itself. The AUGURMIND was built partly on what AROHAL SYLORIN learned.
+When the Collapse came, the node went dark. The Ishtar Collective assumed it destroyed. The Vanguard never knew it existed. Rasputin's records of it were purged by the Malahayati submind when Chioma Esi sent Stargazer to scrub Neptune from his memory.
+It was not destroyed.
+You have found it. The archive is fragmented across six recovery protocols, each one locked behind a different layer of security that the Ishtar researchers built to protect what they had learned from the wrong hands.
+The wrong hands have always found it in the end.
+Six flags. Six layers. One truth about what the copies inside the Vex network discovered before the Collapse silenced them forever. The AUGURMIND predicted the end. Soteria tried to warn us. AROHAL SYLORIN recorded it all.
+Not all records are intended for conventional viewing environments.
+
+https://drive.google.com/file/d/1sm4yDREEsiLNduZ3feyjiSAmfUnh-C94/view?usp=sharing
+
+
+Flag Format: flag{...}
+",,,,0,0,A story Untold,standard,visible,all,,,,static,

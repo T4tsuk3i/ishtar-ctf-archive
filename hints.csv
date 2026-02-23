@@ -1,0 +1,55 @@
+id,title,type,challenge_id,content,cost,requirements
+1,Flag 2 hint,standard,6,"Ishtar recovery specialists used signature analysis tools to extract embedded files from archive containers.
+
+Tool: binwalk
+
+Command format:
+
+binwalk --dd='png:png' challenge.bin",100,{'prerequisites': []}
+2,Hint 1,standard,10,Dont edit the file or you will definately break it guardian,0,{'prerequisites': []}
+3,Hint 2,standard,10,"Whitespace Steganography
+
+More specifically:
+
+* Trailing Whitespace Encoding
+* 
+* Binary encoding using spaces and tabs
+* 
+* A form of text-based steganography
+
+It falls under:
+
+Steganography — hiding information inside non-obvious carriers.
+Instead of hiding data in images or audio, you're hiding it in:
+Invisible formatting characters.",0,{'prerequisites': []}
+4,Hint 3,standard,10,"Cant figure it out yet its Hex data hidden as spaces find the hex in a pattern.
+
+
+If you still didnt get it ill give it for free solve the next challenge if you do youll get the answer for this for free",20,"{'prerequisites': [2, 3]}"
+5,Hint 1,standard,11,broken python file execute it right to get it flowing,0,{'prerequisites': []}
+6,Hint 1,standard,13,"	The gardener got up and brushed their knees. ""Every game we play, this one pattern consumes all the others. Wipes out every interesting development. A stupid, boring exploit that cuts off entire possibility spaces from ever arising. There's so much that we'll never get to see because of this… pest.""
+	
+	find the pest that will unlock your pattern",0,{'prerequisites': []}
+7,Hint 1,standard,17,Some guy named Jason Loves Web tokenses it looks like,0,{'prerequisites': []}
+8,Hint 1,standard,24,Load the image and run it with Docker. You are looking for a file that shares its name with the ship. It is not a directory. It is not a text file. Use the right tool to read what is hidden inside it.,300,{'prerequisites': []}
+9,Hint 1,standard,26,"Yul speaks through honesty. Nothing is conjured from nothing — everything left behind has a trace. Look at what runs, what is scheduled, and what has been given unusual power.",0,{'prerequisites': []}
+10,Hint 2,standard,26,The machine runs a web terminal on port 8080. You must start the container with -p 8080:8080 or the third truth will never surface. Open your browser at http://localhost:8080 once inside.,0,{'prerequisites': [9]}
+11,Hint 3,standard,26,The schedule leaves its instructions in /etc/cron.d/. Read what the cron job points to. The script it calls was never cleaned up properly.,100,"{'prerequisites': [9, 10]}"
+12,Hint 4,standard,26,Some binaries are given capabilities instead of full root access. Run getcap -r / 2>/dev/null to find what was granted unusual power — then use it to reach what is locked away in /var/lib/yul/.,100,"{'prerequisites': [9, 10, 11]}"
+13,Hint 5,standard,26,The website uses multi-prime RSA. Factor n = 151951 into three primes. Compute φ(n) = (p−1)(q−1)(r−1). Find d such that 17·d ≡ 1 (mod φ(n)). Enter d into the decryption interface.,100,"{'prerequisites': [9, 10, 11, 12]}"
+14,Hint 1,standard,27,"The Witness does not shout. It lingers in memory, in margins, in names. Three things are hidden in three very different places. None of them are where you would normally look for a flag.",0,{'prerequisites': []}
+15,Hint 2,standard,27,Linux keeps a region of memory for sharing between processes. Services have unit files with more than just instructions. And not every filename is what it appears to be — some carry invisible characters you cannot see without the right tool.,0,{'prerequisites': [14]}
+16,Hint 3,standard,27,Check /dev/shm/ for files that should not exist. Look inside /etc/systemd/system/ for a unit file and read every line carefully. Use ls -lb or cat -A on suspicious filenames — hidden characters will reveal themselves.,100,"{'prerequisites': [14, 15]}"
+17,Hint 4,standard,27,Flag 1: ls /dev/shm/ then cat whatever you find. Flag 2: cat /etc/systemd/system/witness.service and look at the Environment lines. Flag 3: ls -lb /opt/osmium/ reveals the hidden characters in the filename — use cat with tab completion or find to read it.,100,"{'prerequisites': [14, 15, 16]}"
+18,H 1,standard,28,Akka keeps secrets through knowledge and location. One flag lives inside a text — you need the right book and the right numbers to find the right words. The other flag is a place on this earth — coordinates will take you there.,0,{'prerequisites': []}
+19,H 2,standard,28,"The book cipher uses the Calcified Fragment called Curiosity. Each number in the cipher refers to a word in that text. Find the fragment, count the words, read what they spell. The coordinate cipher left numbers in the system — look them up on a map.",0,{'prerequisites': []}
+20,H 3,standard,28,"For Flag 1: Find the cipher numbers in the system. Open the Calcified Fragment: Curiosity text also hidden in the machine. Count to each numbered word. String them together to form the flag. For Flag 2: The coordinates are stored somewhere in the filesystem. Plug them into Google Maps. The name of the peak is your flag — lowercase, no spaces.",50,{'prerequisites': []}
+21,H 4,standard,28,Flag 1: cat /var/lib/akka/cipher.txt gives you the numbers. cat /var/lib/akka/curiosity.txt gives you the book. Count words from the start of the text. Flag 2: cat /var/lib/akka/coordinates.txt — take those numbers straight into Google Maps.,600,"{'prerequisites': [19, 20]}"
+23,H last,standard,28,"54, 16, 4, 57, 47",0,{'prerequisites': []}
+24,H 1,standard,30,AROHAL SYLORIN has six recovery protocols. Each one uses a different method to protect its data. Some are in the filesystem. Some are in running services. One is in an image. One requires you to forge an identity. One hides in ten thousand lines of noise. One cannot be opened without what came before.,0,{'prerequisites': []}
+27,H 2,standard,30,The node runs several services on startup. Check what is listening with ss -tlnp. The web interface runs on port 8080. The archive image is somewhere in /var/lib/ishtar/. The logs are in /var/log/arohal/. Not everything that looks like noise is noise.,0,{'prerequisites': [24]}
+28,H 3,standard,30,Flag 1: Images can carry more than what your eyes see. Look at the archive image with a tool designed to extract hidden data — steghide is installed. The passphrase is the name of the facility in lowercase. Flag 6 cannot be opened until you have all five others.,0,{'prerequisites': []}
+29,H 4,standard,30,Flag 2: A JWT token is stored in /etc/ishtar/.auth_token. Decode it at jwt.io. The secret used to sign it is weak — try ishtar as the secret. Forge a new token with role: administrator and present it to the web service at /admin. Flag 3: The web interface at http://localhost:8080/archive has a search field. It passes your input directly to SQLite. Try ' OR '1'='1.,0,{'prerequisites': []}
+30,H 5,standard,30,Flag 4: Run find / -perm -4000 2>/dev/null to find SUID binaries. There is one called sylorin-query. Run it and pass it a very long input. The binary has no bounds checking. The flag lives in a function called win() — overflow the buffer to reach it. Flag 5: grep alone won't find it. The flag is split across log lines — each line containing FRAGMENT: holds one piece. Collect them in order and concatenate.,0,{'prerequisites': []}
+31,H 6,standard,30,"Flag 6: Concatenate all five flags in order 1 through 5 without the flag{} wrapper, separated by underscores. Use this as the AES key to decrypt /var/lib/ishtar/final_transmission.enc. The tool to do this is already on the system — python3 /opt/arohal/decrypt.py.",0,{'prerequisites': []}
+32,Hint 1,standard,7,use binwalk,0,{'prerequisites': []}
