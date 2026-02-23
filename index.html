@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISHTAR ANOMALY — CTF Archive</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #0d1526;
+  --gold:       #d4b45a;
+  --gold-bright:#f5de90;
+  --gold-dim:   #9a7840;
+  --cream:      #f4ecdc;
+  --cream-dim:  #c8b898;
+  --silver:     #ccd8e4;
+  --bronze:     #c88040;
+  --panel:      rgba(6,10,20,0.95);
+  --panel2:     rgba(4,7,16,0.97);
+  --border:     rgba(212,176,90,0.40);
+  --border-dim: rgba(212,176,90,0.20);
+  --text:       var(--cream);
+  --text-dim:   var(--cream-dim);
+  --red:        #e07050;
+  --green:      #90d880;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{background:var(--navy) url('bg.jpg') center top/cover fixed;color:var(--text);font-family:'Share Tech Mono',monospace;min-height:100vh;overflow-x:hidden;}
+
+/* vignette — heavier so panels pop */
+body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at center,transparent 20%,rgba(5,9,18,.80) 100%),linear-gradient(180deg,rgba(5,9,18,.60) 0%,rgba(5,9,18,.35) 40%,rgba(5,9,18,.72) 100%);pointer-events:none;z-index:0;}
+header,main,footer,#loading{position:relative;z-index:1;}
+
+/* ── LOADING ── */
+#loading{position:fixed;inset:0;background:rgba(5,9,18,0.96);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1000;gap:24px;transition:opacity .6s;}
+.ld-emblem{width:64px;height:64px;border:2px solid var(--gold-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:spinEmblem 8s linear infinite;box-shadow:0 0 20px rgba(212,180,90,.25);}
+.ld-emblem::before{content:'✦';font-size:22px;color:var(--gold-bright);text-shadow:0 0 12px rgba(245,222,144,.7);}
+@keyframes spinEmblem{to{transform:rotate(360deg);}}
+.ld-title{font-family:'Cinzel',serif;font-size:15px;letter-spacing:8px;color:var(--gold-bright);font-weight:700;text-shadow:0 0 20px rgba(245,222,144,.4);}
+.ld-bar-wrap{width:280px;height:1px;background:var(--border-dim);}
+.ld-bar{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold-bright));box-shadow:0 0 8px var(--gold);width:0%;transition:width .3s ease;}
+.ld-status{font-size:10px;letter-spacing:4px;color:var(--cream-dim);text-transform:uppercase;font-weight:700;}
+
+/* ── HEADER ── */
+header{padding:80px 0 50px;text-align:center;border-bottom:1px solid var(--border);}
+header::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:500px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-bright),transparent);box-shadow:0 0 24px rgba(245,222,144,.4);}
+header::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:300px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.hdr-grid{display:none;}
+.event-tag{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:7px;color:var(--gold);margin-bottom:20px;text-transform:uppercase;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.9);}
+h1{font-family:'Cinzel',serif;font-size:clamp(36px,6vw,80px);font-weight:900;letter-spacing:6px;line-height:1;color:var(--gold-bright);text-shadow:0 0 40px rgba(245,222,144,.4),0 2px 6px rgba(0,0,0,.95);margin-bottom:10px;}
+.subtitle{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:9px;color:var(--cream);margin-bottom:36px;text-transform:uppercase;font-weight:700;text-shadow:0 1px 5px rgba(0,0,0,.9);}
+.hdr-stats{display:flex;justify-content:center;gap:50px;flex-wrap:wrap;margin-top:24px;}
+.hstat{text-align:center;}
+.hstat+.hstat{border-left:1px solid var(--border-dim);padding-left:50px;}
+.hstat-val{font-family:'Cinzel',serif;font-size:30px;font-weight:700;color:var(--gold-bright);text-shadow:0 0 14px rgba(245,222,144,.35),0 2px 4px rgba(0,0,0,.9);}
+.hstat-label{font-size:9px;letter-spacing:4px;color:var(--cream-dim);text-transform:uppercase;margin-top:5px;font-weight:700;}
+.status-bar{display:inline-flex;align-items:center;gap:9px;background:rgba(144,216,128,.14);border:1px solid rgba(144,216,128,.55);padding:8px 22px;font-size:11px;letter-spacing:4px;font-weight:700;color:#c4f0b4;margin-top:28px;text-shadow:0 0 8px rgba(144,216,128,.5);}
+.status-dot{width:6px;height:6px;border-radius:50%;background:#c4f0b4;box-shadow:0 0 6px #90d880;animation:pulse 2.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
+
+/* ── MAIN ── */
+main{max-width:1400px;margin:0 auto;padding:40px 24px 80px;}
+
+/* ── SECTION HEADS ── */
+.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.sec-head h2{font-family:'Cinzel',serif;font-size:12px;letter-spacing:5px;color:var(--gold-bright);text-transform:uppercase;white-space:nowrap;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.8);}
+.sec-line{flex:1;height:1px;background:linear-gradient(90deg,var(--gold-dim),transparent);}
+.sec-tag{font-size:9px;letter-spacing:2px;color:var(--cream-dim);border:1px solid var(--border);padding:3px 8px;font-weight:700;}
+
+/* ── TABS ── */
+.tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:32px;background:rgba(4,7,16,.7);backdrop-filter:blur(8px);}
+.tab-btn{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--cream-dim);font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;font-weight:700;padding:16px 28px;cursor:pointer;text-transform:uppercase;transition:all .25s;margin-bottom:-1px;}
+.tab-btn.active{color:var(--gold-bright);border-bottom-color:var(--gold-bright);}
+.tab-btn:hover{color:var(--cream);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ── PODIUM ── */
+.podium{display:flex;justify-content:center;align-items:flex-end;gap:0;height:240px;margin:0 auto 50px;max-width:700px;}
+.podium-slot{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;animation:riseUp .9s ease-out forwards;opacity:0;transform:translateY(30px);}
+.podium-slot:nth-child(1){animation-delay:.3s;}
+.podium-slot:nth-child(2){animation-delay:.1s;}
+.podium-slot:nth-child(3){animation-delay:.5s;}
+@keyframes riseUp{to{opacity:1;transform:translateY(0);}}
+.podium-info{text-align:center;margin-bottom:12px;padding:0 8px;}
+.podium-medal{font-size:32px;line-height:1;}
+.podium-slot.first .podium-medal{filter:drop-shadow(0 0 12px rgba(255,215,0,.9));font-size:38px;}
+.podium-name{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;color:var(--cream);margin:8px 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;text-shadow:0 2px 6px rgba(0,0,0,.95);}
+.podium-score{font-size:13px;color:var(--gold-bright);font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.9);}
+.podium-block{width:100%;border-top:2px solid;display:flex;align-items:center;justify-content:center;position:relative;}
+.podium-block::before{content:attr(data-pos);font-family:'Cinzel',serif;font-size:30px;font-weight:900;color:var(--cream);opacity:.55;}
+.podium-slot.first .podium-block{height:150px;background:linear-gradient(180deg,rgba(212,176,90,.40),rgba(212,176,90,.10));border-color:var(--gold-bright);border-width:2px;box-shadow:0 0 30px rgba(245,222,144,.20),inset 0 1px 0 rgba(245,222,144,.4);}
+.podium-slot.second .podium-block{height:110px;background:linear-gradient(180deg,rgba(204,216,228,.30),rgba(204,216,228,.07));border-color:var(--silver);border-width:2px;box-shadow:0 0 16px rgba(204,216,228,.15);}
+.podium-slot.third .podium-block{height:80px;background:linear-gradient(180deg,rgba(200,128,64,.28),rgba(200,128,64,.07));border-color:var(--bronze);border-width:2px;box-shadow:0 0 14px rgba(200,128,64,.15);}
+
+/* ── SCOREBOARD TABLE ── */
+.score-table-wrap{overflow:hidden;margin-bottom:50px;border:1px solid var(--border);backdrop-filter:blur(8px);}
+.score-table-head{display:grid;grid-template-columns:60px 1fr 160px 110px;background:rgba(4,7,16,.98);border-bottom:1px solid var(--border);padding:12px 20px;}
+.score-table-head span{font-size:9px;letter-spacing:3px;color:var(--cream-dim);text-transform:uppercase;font-family:'Share Tech Mono',monospace;font-weight:700;}
+.score-row{display:grid;grid-template-columns:60px 1fr 160px 110px;padding:14px 20px;border-bottom:1px solid var(--border-dim);align-items:center;transition:background .2s;cursor:pointer;animation:fadeIn .4s ease-out forwards;opacity:0;background:rgba(6,10,20,.94);}
+.score-row:hover{background:rgba(212,176,90,.07);}
+.score-row:last-child{border-bottom:none;}
+@keyframes fadeIn{to{opacity:1;}}
+.row-rank{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--cream-dim);}
+.score-row.r1 .row-rank{color:var(--gold-bright);text-shadow:0 0 8px rgba(245,222,144,.5);}
+.score-row.r2 .row-rank{color:var(--silver);}
+.score-row.r3 .row-rank{color:var(--bronze);}
+.row-name{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;color:var(--cream);}
+.score-row.r1 .row-name{color:var(--gold-bright);}
+.row-members{font-size:10px;color:var(--cream-dim);letter-spacing:1px;margin-top:2px;font-weight:600;}
+.row-bar-wrap{display:flex;align-items:center;gap:10px;}
+.row-bar{flex:1;height:3px;background:rgba(212,176,90,.12);overflow:hidden;}
+.row-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold-bright));box-shadow:0 0 6px rgba(212,176,90,.4);width:0%;transition:width 1.3s cubic-bezier(.4,0,.2,1);}
+.row-score{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--gold-bright);text-align:right;text-shadow:0 0 8px rgba(245,222,144,.3);}
+
+/* ── MEMBER EXPAND ── */
+.member-panel{display:none;background:rgba(4,7,16,.97);border-bottom:1px solid var(--border-dim);padding:12px 20px 12px 80px;}
+.member-panel.open{display:block;}
+.member-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(212,176,90,.08);}
+.member-row:last-child{border-bottom:none;}
+.member-name{font-family:'Rajdhani',sans-serif;font-size:14px;color:var(--cream);font-weight:700;}
+.member-score{font-size:12px;color:var(--gold-bright);font-weight:700;}
+
+/* ── GRAPH ── */
+.graph-panel{padding:30px;position:relative;margin-bottom:50px;background:rgba(6,10,20,.95);backdrop-filter:blur(8px);border:1px solid var(--border);}
+.graph-panel::before{content:'';position:absolute;top:0;left:20px;right:20px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.graph-controls{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.ctrl-btn{background:transparent;border:1px solid var(--border-dim);color:var(--cream-dim);padding:6px 16px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;cursor:pointer;transition:all .2s;text-transform:uppercase;font-weight:700;}
+.ctrl-btn:hover,.ctrl-btn.active{border-color:var(--gold-bright);color:var(--gold-bright);background:rgba(212,176,90,.08);}
+#ctfdGraph{max-height:420px;}
+
+/* ── CHALLENGE GRID ── */
+.chal-filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.cat-btn{background:transparent;border:1px solid var(--border-dim);color:var(--cream-dim);padding:5px 14px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;cursor:pointer;transition:all .2s;text-transform:uppercase;font-weight:700;}
+.cat-btn:hover,.cat-btn.active{border-color:var(--gold-bright);color:var(--gold-bright);background:rgba(212,176,90,.09);}
+.challenges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;}
+.chal-card{background:rgba(6,10,20,.95);backdrop-filter:blur(8px);border:1px solid var(--border-dim);overflow:hidden;transition:all .25s;animation:fadeIn .5s ease-out forwards;opacity:0;display:flex;flex-direction:column;max-height:380px;}
+.chal-card::before{content:'';display:block;height:1px;background:var(--gold-dim);transition:all .35s;}
+.chal-card:hover::before{background:var(--gold-bright);box-shadow:0 0 8px rgba(245,222,144,.5);}
+.chal-card:hover{border-color:rgba(212,176,90,.45);box-shadow:0 4px 24px rgba(0,0,0,.5);}
+.chal-card.hidden{display:none;}
+.chal-body{flex:1;overflow-y:auto;min-height:0;position:relative;}
+.chal-body{scrollbar-width:none;} /* Firefox hidden by default */
+.chal-body::-webkit-scrollbar{width:4px;}
+.chal-body::-webkit-scrollbar-track{background:transparent;}
+.chal-body::-webkit-scrollbar-thumb{background:transparent;border-radius:2px;transition:background .3s;}
+.chal-body.scrolling{scrollbar-width:thin;scrollbar-color:var(--gold-dim) transparent;}
+.chal-body.scrolling::-webkit-scrollbar-thumb{background:var(--gold-dim);}
+.chal-body.scrolling::-webkit-scrollbar-thumb:hover{background:var(--gold-bright);}
+
+.chal-head{padding:16px 16px 12px;flex-shrink:0;}
+.chal-cat-label{font-size:9px;letter-spacing:4px;color:var(--gold-bright);text-transform:uppercase;margin-bottom:7px;font-family:'Share Tech Mono',monospace;font-weight:700;}
+.chal-name{font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:var(--cream);margin-bottom:10px;line-height:1.3;text-shadow:0 1px 4px rgba(0,0,0,.8);}
+.chal-meta{display:flex;gap:16px;align-items:center;}
+.chal-pts{font-family:'Cinzel',serif;font-size:20px;font-weight:700;color:var(--gold-bright);}
+.chal-pts span{font-size:9px;color:var(--cream-dim);font-family:'Share Tech Mono',monospace;font-weight:700;}
+.chal-solves-badge{font-size:10px;color:var(--cream-dim);letter-spacing:1px;font-weight:700;}
+.chal-solves-badge.high{color:var(--green);}
+.chal-solves-badge.none{color:var(--red);}
+
+/* accordions shared */
+.chal-desc-toggle,.chal-solvers-toggle,.chal-hints-toggle{width:100%;background:transparent;border:none;border-top:1px solid var(--border-dim);padding:10px 16px;text-align:left;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;font-weight:700;color:var(--cream-dim);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .2s;text-transform:uppercase;}
+.chal-desc-toggle:hover{color:var(--cream);background:rgba(212,176,90,.05);}
+.chal-solvers-toggle:hover{color:var(--green);background:rgba(144,216,128,.04);}
+.chal-hints-toggle:hover{color:var(--gold-bright);background:rgba(212,176,90,.04);}
+.chal-desc-toggle .arrow,.chal-solvers-toggle .arrow,.chal-hints-toggle .arrow{transition:transform .3s;}
+.chal-desc-toggle.open .arrow,.chal-solvers-toggle.open .arrow,.chal-hints-toggle.open .arrow{transform:rotate(180deg);}
+
+.chal-desc{display:none;padding:16px;border-top:1px solid var(--border-dim);font-family:'Rajdhani',sans-serif;font-size:14px;line-height:1.8;color:var(--cream);background:rgba(4,7,16,.8);font-weight:600;}
+.chal-desc.open{display:block;}
+.chal-desc code{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--gold-bright);background:rgba(212,176,90,.12);padding:1px 5px;}
+.chal-desc a{color:var(--gold-bright);text-decoration:none;border-bottom:1px solid var(--gold-dim);}
+.chal-desc a:hover{color:var(--cream);}
+.chal-desc blockquote{border-left:2px solid var(--gold-dim);padding-left:12px;color:var(--cream-dim);margin:8px 0;font-style:italic;}
+.chal-desc strong{color:var(--gold-bright);font-weight:700;}
+
+.chal-solvers{display:none;padding:12px 16px;border-top:1px solid var(--border-dim);background:rgba(4,7,16,.8);}
+.chal-solvers.open{display:block;}
+.solver-chip{display:inline-block;background:rgba(144,216,128,.10);border:1px solid rgba(144,216,128,.35);color:#c4f0b4;font-size:9px;letter-spacing:2px;padding:3px 9px;margin:3px 3px 3px 0;font-family:'Share Tech Mono',monospace;font-weight:700;}
+
+.chal-hints{display:none;border-top:1px solid var(--border-dim);background:rgba(4,7,16,.8);}
+.chal-hints.open{display:block;}
+.hint-item{padding:12px 16px;border-bottom:1px solid rgba(212,176,90,.08);}
+.hint-item:last-child{border-bottom:none;}
+.hint-title{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-weight:700;}
+.hint-cost{color:var(--red);}
+.hint-cost.free{color:var(--green);}
+.hint-body{font-family:'Rajdhani',sans-serif;font-size:14px;line-height:1.7;color:var(--cream);white-space:pre-wrap;font-weight:600;}
+
+/* ── DOWNLOADS ── */
+.chal-files{padding:12px 16px;border-top:1px solid var(--border-dim);display:flex;flex-wrap:wrap;gap:8px;}
+.dl-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;text-decoration:none;transition:all .2s;border:1px solid;text-transform:uppercase;font-weight:700;}
+.dl-btn.github{color:var(--cream);border-color:var(--border);background:rgba(212,176,90,.06);}
+.dl-btn.github:hover{color:var(--gold-bright);border-color:var(--gold-bright);background:rgba(212,176,90,.14);box-shadow:0 0 12px rgba(212,176,90,.15);}
+.dl-btn.gdrive{color:var(--gold-bright);border-color:rgba(212,176,90,.45);background:rgba(212,176,90,.10);}
+.dl-btn.gdrive:hover{border-color:var(--gold-bright);background:rgba(212,176,90,.18);box-shadow:0 0 14px rgba(212,176,90,.20);}
+.dl-btn svg{width:11px;height:11px;flex-shrink:0;}
+
+/* ── ERROR ── */
+#error-msg{display:none;background:rgba(224,112,80,.10);border:1px solid rgba(224,112,80,.40);color:#f0a080;padding:20px;font-size:13px;letter-spacing:1px;line-height:1.8;margin-bottom:30px;font-weight:700;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border-dim);padding:30px 24px;text-align:center;color:var(--cream-dim);font-size:10px;letter-spacing:3px;font-weight:700;}
+
+/* ── SCROLL FADE INDICATOR at bottom of card ── */
+.chal-card{position:relative;}
+.chal-card::after{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:32px;
+  background:linear-gradient(transparent, rgba(6,10,20,.95));
+  pointer-events:none;z-index:2;
+  opacity:0;transition:opacity .3s;
+}
+.chal-card.has-overflow::after{opacity:1;}
+
+/* ── ACCORDION TOGGLES: colored left border when open ── */
+.chal-desc-toggle.open{color:var(--cream);border-left:2px solid var(--gold-dim);padding-left:14px;}
+.chal-solvers-toggle.open{color:var(--green);border-left:2px solid var(--green);padding-left:14px;}
+.chal-hints-toggle.open{color:var(--gold-bright);border-left:2px solid var(--gold);padding-left:14px;}
+
+/* ── SCORE ROW: left accent on rank 1/2/3 ── */
+.score-row.r1{border-left:2px solid var(--gold-bright);}
+.score-row.r2{border-left:2px solid var(--silver);}
+.score-row.r3{border-left:2px solid var(--bronze);}
+
+/* ── PODIUM: team name uppercase ── */
+.podium-name{text-transform:uppercase;letter-spacing:3px;}
+
+/* ── SECTION HEAD: decorative diamond ── */
+.sec-head h2::before{content:'◆ ';font-size:8px;color:var(--gold-dim);vertical-align:middle;}
+
+/* ── GRAPH: subtle top border glow ── */
+.graph-panel{border-top:1px solid var(--gold-dim);}
+
+/* ── TABS: subtle bg on hover ── */
+.tab-btn:hover{background:rgba(212,176,90,.04);}
+
+/* ── CAT FILTER: active has left tick ── */
+.cat-btn.active::before{content:'▸ ';}
+
+/* ── HEADER: subtle backdrop ── */
+header{background:linear-gradient(180deg,rgba(4,7,16,.55) 0%,rgba(4,7,16,.25) 100%);backdrop-filter:blur(4px);}
+
+/* ── SCORE TABLE HEAD: gold left border ── */
+.score-table-head{border-left:2px solid var(--gold-dim);}
+
+/* ── MEMBER ROW: indent marker ── */
+.member-name::before{content:'╰ ';color:var(--gold-dim);font-size:11px;}
+
+/* ── HINT ITEM: numbered marker ── */
+.hint-item{counter-increment:hint-counter;}
+.chal-hints{counter-reset:hint-counter;}
+.hint-title::before{content:counter(hint-counter,decimal-leading-zero) ' ';color:var(--gold-dim);margin-right:4px;}
+
+/* ── SOLVER CHIP: subtle pulse on first one ── */
+.solver-chip:first-child{border-color:rgba(144,216,128,.6);color:#d8ffd0;}
+
+/* ── CHAL META: separator dot ── */
+.chal-meta::before{display:none;}
+.chal-solves-badge{padding-left:12px;border-left:1px solid var(--border-dim);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .score-table-head,.score-row{grid-template-columns:44px 1fr 90px;}
+  .row-bar-wrap{display:none;}
+  .podium-name{font-size:11px;max-width:90px;}
+  h1{letter-spacing:2px;}
+  .challenges-grid{grid-template-columns:1fr;}
+  .hstat+.hstat{border-left:none;padding-left:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div id="loading">
+  <div class="ld-emblem"></div>
+  <div class="ld-title">ISHTAR ANOMALY</div>
+  <div class="ld-bar-wrap"><div class="ld-bar" id="ld-bar"></div></div>
+  <div class="ld-status" id="ld-status">INITIALIZING SYSTEMS...</div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr-grid"></div>
+  <div class="event-tag">EVENT ARCHIVE // MISSION DEBRIEF</div>
+  <h1>ISHTAR ANOMALY</h1>
+  <div class="subtitle">CAPTURE THE FLAG</div>
+  <div class="hdr-stats">
+    <div class="hstat"><div class="hstat-val" id="stat-teams">—</div><div class="hstat-label">Teams</div></div>
+    <div class="hstat"><div class="hstat-val" id="stat-solves">—</div><div class="hstat-label">Total Solves</div></div>
+    <div class="hstat"><div class="hstat-val" id="stat-chals">—</div><div class="hstat-label">Challenges</div></div>
+    <div class="hstat"><div class="hstat-val" id="stat-top">—</div><div class="hstat-label">Top Score</div></div>
+  </div>
+  <div><div class="status-bar"><div class="status-dot"></div>ARCHIVE LOCKED</div></div>
+</header>
+
+<main>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('scoreboard',this)">Scoreboard</button>
+    <button class="tab-btn" onclick="switchTab('graph',this)">Score Timeline</button>
+    <button class="tab-btn" onclick="switchTab('challenges',this)">Challenges</button>
+  </div>
+
+  <div id="error-msg"></div>
+
+  <!-- SCOREBOARD TAB -->
+  <div class="tab-panel active" id="tab-scoreboard">
+    <div class="sec-head"><h2>Top Operators</h2><div class="sec-line"></div><div class="sec-tag">PODIUM</div></div>
+    <div class="podium" id="podium"></div>
+    <div class="sec-head"><h2>Full Rankings</h2><div class="sec-line"></div><div class="sec-tag" id="rank-count">LOADING</div></div>
+    <div class="score-table-wrap">
+      <div class="score-table-head">
+        <span>Rank</span><span>Team</span><span>Progress</span><span style="text-align:right">Score</span>
+      </div>
+      <div id="score-table"></div>
+    </div>
+  </div>
+
+  <!-- GRAPH TAB -->
+  <div class="tab-panel" id="tab-graph">
+    <div class="sec-head"><h2>Score Progression</h2><div class="sec-line"></div><div class="sec-tag">TIMELINE</div></div>
+    <div class="graph-panel">
+      <div class="graph-controls">
+        <button class="ctrl-btn active" onclick="setTopN(10,this)">TOP 10</button>
+        <button class="ctrl-btn" onclick="setTopN(20,this)">TOP 20</button>
+        <button class="ctrl-btn" onclick="setTopN(999,this)">ALL</button>
+      </div>
+      <canvas id="ctfdGraph"></canvas>
+    </div>
+  </div>
+
+  <!-- CHALLENGES TAB -->
+  <div class="tab-panel" id="tab-challenges">
+    <div class="sec-head"><h2>Challenge Manifest</h2><div class="sec-line"></div><div class="sec-tag" id="chal-count">LOADING</div></div>
+    <div class="chal-filter-bar" id="chal-filters"></div>
+    <div class="challenges-grid" id="challenges-grid"></div>
+  </div>
+</main>
+
+<footer>ISHTAR ANOMALY CTF — PERMANENT ARCHIVE // ALL DATA FINAL</footer>
+
+<script>
+// ══════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════
+const S = {
+  challenges:   [],   // from challenges.csv
+  teams:        {},   // id -> name
+  teamMembers:  {},   // team_id -> [{name, score}]
+  scoreboard:   [],   // [{place, teamName, teamId, score}]
+  solves:       [],   // from solves.csv
+  submissions:  [],   // correct submissions for graph
+  hints:        {},   // challenge_id -> [hints]
+  filesConfig:  {},   // filename -> {url, host, challenge_id}
+  chalFiles:    {},   // challenge_id -> [{filename, url, host}]
+  solvesPerChal:{},   // challenge_id -> [team_names]
+  loaded:       0,
+  total:        6,    // challenges, teams, scoreboard, solves, submissions, filesConfig
+  chartInst:    null,
+  allDatasets:  [],
+  axisMin:      null,
+  axisMax:      null,
+  topN:         10,
+};
+
+// ── progress bar ──
+function progress(msg, n) {
+  document.getElementById('ld-status').textContent = msg;
+  document.getElementById('ld-bar').style.width = Math.round((n / S.total) * 100) + '%';
+}
+
+function checkDone() {
+  S.loaded++;
+  progress('LOADING DATA...', S.loaded);
+  if (S.loaded >= S.total) {
+    progress('RENDERING ARCHIVE...', S.total);
+    setTimeout(buildAll, 150);
+  }
+}
+
+function showError(msg) {
+  document.getElementById('error-msg').style.display = 'block';
+  document.getElementById('error-msg').innerHTML =
+    `<strong>⚠ DATA LOAD ERROR</strong><br><br>${msg}<br><br>
+     Run from a local server: <code>python3 -m http.server 8000</code>`;
+  document.getElementById('loading').style.opacity = '0';
+  setTimeout(() => document.getElementById('loading').style.display = 'none', 500);
+}
+
+// ══════════════════════════════════════════════════════
+//  LOAD ALL DATA
+// ══════════════════════════════════════════════════════
+function loadAll() {
+  progress('LOADING CHALLENGES...', 0);
+
+  // 1. challenges.csv
+  Papa.parse('challenges.csv', { download:true, header:true,
+    complete(r) {
+      S.challenges = r.data.filter(x => x.id);
+      checkDone();
+    }, error: () => showError('Failed: challenges.csv')
+  });
+
+  // 2. teams.csv
+  Papa.parse('teams.csv', { download:true, header:true,
+    complete(r) {
+      r.data.forEach(row => {
+        if (row.id) S.teams[row.id] = (row.name || '').trim();
+      });
+      checkDone();
+    }, error: () => showError('Failed: teams.csv')
+  });
+
+  // 3. scoreboard.csv — hierarchical: team row then member rows
+  Papa.parse('scoreboard.csv', { download:true, header:true,
+    complete(r) {
+      let curTeam = null;
+      r.data.forEach(row => {
+        if (row.place && row.place.trim()) {
+          curTeam = {
+            place:    parseInt(row.place),
+            teamName: (row.team || '').trim(),
+            teamId:   (row['team id'] || '').trim(),
+            score:    parseInt(row.score) || 0,
+          };
+          S.scoreboard.push(curTeam);
+          S.teamMembers[curTeam.teamId] = [];
+        } else if (curTeam && (row['member name'] || '').trim()) {
+          S.teamMembers[curTeam.teamId].push({
+            name:  (row['member name'] || '').trim(),
+            score: parseInt(row['member score']) || 0,
+          });
+        }
+      });
+      checkDone();
+    }, error: () => showError('Failed: scoreboard.csv')
+  });
+
+  // 4. solves.csv — for per-challenge solver lists
+  Papa.parse('solves.csv', { download:true, header:true,
+    complete(r) {
+      S.solves = r.data.filter(x => x.challenge_id);
+      S.solves.forEach(s => {
+        const cid = s.challenge_id;
+        const tid = s.team_id;
+        if (!S.solvesPerChal[cid]) S.solvesPerChal[cid] = [];
+        if (!S.solvesPerChal[cid].includes(tid))
+          S.solvesPerChal[cid].push(tid);
+      });
+      checkDone();
+    }, error: () => showError('Failed: solves.csv')
+  });
+
+  // 5. submissions.csv — correct ones for the graph timeline
+  Papa.parse('submissions.csv', { download:true, header:true,
+    complete(r) {
+      S.submissions = r.data.filter(x =>
+        (x.type || '').toLowerCase() === 'correct'
+      );
+      checkDone();
+    }, error: () => showError('Failed: submissions.csv')
+  });
+
+  // 6. hints.csv
+  Papa.parse('hints.csv', { download:true, header:true,
+    complete(r) {
+      r.data.forEach(h => {
+        if (!h.challenge_id) return;
+        if (!S.hints[h.challenge_id]) S.hints[h.challenge_id] = [];
+        S.hints[h.challenge_id].push(h);
+      });
+      checkDone();
+    }, error: () => {
+      // hints are optional — don't block
+      checkDone();
+    }
+  });
+
+  // files-config.json — optional, don't block on failure
+  fetch('files-config.json')
+    .then(r => r.json())
+    .then(cfg => {
+      Object.entries(cfg).forEach(([filename, info]) => {
+        if (filename.startsWith('_')) return;
+        const cid = String(info.challenge_id || '');
+        if (!cid) return;
+        if (!S.chalFiles[cid]) S.chalFiles[cid] = [];
+        S.chalFiles[cid].push({
+          filename,
+          url:  info.url || '',
+          host: info.host || 'github',
+          note: info.note || '',
+        });
+      });
+    })
+    .catch(() => {})
+    // files-config counts as one of our "total" loads only if we treat it as a bonus
+    // we handle it outside the counter — already set total=6
+}
+
+loadAll();
+
+// ══════════════════════════════════════════════════════
+//  BUILD EVERYTHING
+// ══════════════════════════════════════════════════════
+function buildAll() {
+  // challenge points lookup
+  const chalPoints = {};
+  S.challenges.forEach(c => { chalPoints[c.id] = Number(c.value || c.initial || 0); });
+
+  // header stats
+  const topScore = S.scoreboard.length ? S.scoreboard[0].score : 0;
+  document.getElementById('stat-teams').textContent  = S.scoreboard.filter(t => t.teamName !== 'TestingTeam').length;
+  document.getElementById('stat-solves').textContent  = S.solves.length;
+  document.getElementById('stat-chals').textContent   = S.challenges.length;
+  document.getElementById('stat-top').textContent     = topScore.toLocaleString();
+
+  buildPodium();
+  buildScoreboard(topScore);
+  buildGraph(chalPoints);
+  buildChallenges();
+
+  document.getElementById('loading').style.opacity = '0';
+  setTimeout(() => document.getElementById('loading').style.display = 'none', 500);
+}
+
+// ── PODIUM ──
+function buildPodium() {
+  const pod = document.getElementById('podium');
+  // exclude TestingTeam
+  const top3 = S.scoreboard.filter(t => t.teamName !== 'TestingTeam').slice(0, 3);
+  const config = [
+    { cls:'second', idx:1, medal:'🥈', data_pos:'2' },
+    { cls:'first',  idx:0, medal:'🥇', data_pos:'1' },
+    { cls:'third',  idx:2, medal:'🥉', data_pos:'3' },
+  ];
+  config.forEach(c => {
+    const t = top3[c.idx];
+    if (!t) return;
+    const el = document.createElement('div');
+    el.className = 'podium-slot ' + c.cls;
+    el.innerHTML = `
+      <div class="podium-info">
+        <div class="podium-medal">${c.medal}</div>
+        <div class="podium-name" title="${t.teamName}">${t.teamName}</div>
+        <div class="podium-score">${t.score.toLocaleString()} pts</div>
+      </div>
+      <div class="podium-block" data-pos="${c.data_pos}"></div>`;
+    pod.appendChild(el);
+  });
+}
+
+// ── SCOREBOARD TABLE ──
+function buildScoreboard(topScore) {
+  const wrap  = document.getElementById('score-table');
+  const teams = S.scoreboard.filter(t => t.teamName !== 'TestingTeam');
+  document.getElementById('rank-count').textContent = teams.length + ' TEAMS';
+
+  teams.forEach((t, i) => {
+    const pct = topScore ? (t.score / topScore * 100).toFixed(1) : 0;
+    const rc  = i===0?'r1':i===1?'r2':i===2?'r3':'';
+    const members = S.teamMembers[t.teamId] || [];
+
+    const row = document.createElement('div');
+    row.className = `score-row ${rc}`;
+    row.style.animationDelay = (i * 25) + 'ms';
+    row.setAttribute('data-team', t.teamId);
+
+    const memberPreview = members.length
+      ? members.map(m => m.name).join(' · ')
+      : '';
+
+    row.innerHTML = `
+      <div class="row-rank">#${i+1}</div>
+      <div>
+        <div class="row-name">${t.teamName}</div>
+        ${memberPreview ? `<div class="row-members">${memberPreview}</div>` : ''}
+      </div>
+      <div class="row-bar-wrap">
+        <div class="row-bar"><div class="row-bar-fill" data-pct="${pct}"></div></div>
+      </div>
+      <div class="row-score">${t.score.toLocaleString()}</div>`;
+
+    // click to expand members
+    row.addEventListener('click', () => toggleMembers(t.teamId, members));
+    wrap.appendChild(row);
+
+    // member panel
+    if (members.length) {
+      const panel = document.createElement('div');
+      panel.className = 'member-panel';
+      panel.id = 'members-' + t.teamId;
+      members.forEach(m => {
+        const mr = document.createElement('div');
+        mr.className = 'member-row';
+        mr.innerHTML = `<span class="member-name">${m.name}</span><span class="member-score">${m.score.toLocaleString()} pts</span>`;
+        panel.appendChild(mr);
+      });
+      wrap.appendChild(panel);
+    }
+  });
+
+  // animate bars
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    document.querySelectorAll('.row-bar-fill').forEach(el => {
+      el.style.width = el.dataset.pct + '%';
+    });
+  }));
+}
+
+function toggleMembers(teamId, members) {
+  if (!members.length) return;
+  const panel = document.getElementById('members-' + teamId);
+  if (!panel) return;
+  panel.classList.toggle('open');
+}
+
+// ── GRAPH ──
+const PALETTE = [
+  '#ffd700','#00d4ff','#ff6b35','#39ff14','#ff3b8b',
+  '#a855f7','#ff9500','#00ffcc','#ff4444','#4fc3f7',
+  '#fbbf24','#34d399','#f87171','#818cf8','#fb923c',
+  '#22d3ee','#a78bfa','#6ee7b7','#fca5a5','#93c5fd'
+];
+
+function buildGraph(chalPoints) {
+  // Build per-team timelines from submissions
+  const teamTimelines = {};
+  S.submissions.forEach(s => {
+    const tid = s.team_id;
+    const t   = new Date(s.date);
+    const pts = chalPoints[s.challenge_id] || 0;
+    if (!tid || isNaN(t)) return;
+    if (!teamTimelines[tid]) teamTimelines[tid] = [];
+    teamTimelines[tid].push({ t, pts });
+  });
+
+  // axis bounds
+  const allTimes = S.submissions
+    .map(s => new Date(s.date))
+    .filter(d => !isNaN(d));
+  if (allTimes.length) {
+    S.axisMin = new Date(Math.min(...allTimes));
+    S.axisMax = new Date(Math.max(...allTimes));
+    S.axisMin.setMinutes(S.axisMin.getMinutes() - 30);
+    S.axisMax.setMinutes(S.axisMax.getMinutes() + 60);
+  }
+
+  // Build datasets ordered by scoreboard rank
+  S.allDatasets = [];
+  S.scoreboard
+    .filter(t => t.teamName !== 'TestingTeam')
+    .forEach((t, i) => {
+      const tl = teamTimelines[t.teamId];
+      if (!tl || tl.length === 0) return;
+      let total = 0;
+      const pts_sorted = tl.sort((a,b) => a.t - b.t);
+      const data = [
+        { x: S.axisMin, y: 0 },
+        ...pts_sorted.map(e => { total += e.pts; return { x: e.t, y: total }; })
+      ];
+      S.allDatasets.push({
+        label: t.teamName,
+        data,
+        borderColor:     PALETTE[i % PALETTE.length],
+        backgroundColor: PALETTE[i % PALETTE.length] + '18',
+        borderWidth:  i === 0 ? 2.5 : 1.5,
+        pointRadius:  3,
+        pointHoverRadius: 6,
+        fill:    false,
+        tension: 0,
+      });
+    });
+
+  renderChart(S.topN);
+}
+
+function renderChart(topN) {
+  const ctx = document.getElementById('ctfdGraph').getContext('2d');
+  if (S.chartInst) S.chartInst.destroy();
+  S.chartInst = new Chart(ctx, {
+    type: 'line',
+    data: { datasets: S.allDatasets.slice(0, topN) },
+    options: {
+      parsing:     false,
+      responsive:  true,
+      animation:   { duration: 600 },
+      interaction: { mode:'nearest', intersect:false },
+      plugins: {
+        legend: {
+          labels: { color:'#c8b898', font:{family:'Share Tech Mono',size:11}, boxWidth:12, padding:16 }
+        },
+        tooltip: {
+          backgroundColor:'rgba(13,21,38,0.95)', borderColor:'rgba(201,168,76,0.3)', borderWidth:1,
+          titleColor:'#f5de90', bodyColor:'#f4ecdc',
+          titleFont:{family:'Share Tech Mono'}, bodyFont:{family:'Share Tech Mono'},
+          callbacks: {
+            title: c => new Date(c[0].parsed.x).toLocaleString(),
+            label: c => ` ${c.dataset.label}: ${c.parsed.y.toLocaleString()} pts`
+          }
+        }
+      },
+      scales: {
+        x: {
+          type:'time',
+          min: S.axisMin,
+          max: S.axisMax,
+          time: { displayFormats:{ minute:'HH:mm', hour:'HH:mm' } },
+          ticks: { color:'#c8b898', font:{family:'Share Tech Mono',size:11}, maxTicksLimit:14, autoSkip:true },
+          grid:  { color:'rgba(201,168,76,0.08)' },
+          border:{ color:'rgba(201,168,76,0.2)' }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: { color:'#c8b898', font:{family:'Share Tech Mono',size:11} },
+          grid:  { color:'rgba(212,176,90,0.10)' },
+          border:{ color:'rgba(212,176,90,0.25)' }
+        }
+      }
+    }
+  });
+}
+
+function setTopN(n, btn) {
+  S.topN = n;
+  document.querySelectorAll('.ctrl-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderChart(n);
+}
+
+// ── CHALLENGES ──
+function buildChallenges() {
+  const grid = document.getElementById('challenges-grid');
+  const chals = S.challenges.filter(c => c.id && c.name);
+
+  // collect categories for filter bar
+  const cats = [...new Set(chals.map(c => (c.category||'Misc').trim()))].sort();
+  const filterBar = document.getElementById('chal-filters');
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'cat-btn active';
+  allBtn.textContent = 'ALL';
+  allBtn.onclick = () => filterCat('ALL', allBtn);
+  filterBar.appendChild(allBtn);
+
+  cats.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.textContent = cat;
+    btn.onclick = () => filterCat(cat, btn);
+    filterBar.appendChild(btn);
+  });
+
+  document.getElementById('chal-count').textContent = chals.length + ' CHALLENGES';
+
+  // sort: by category then value desc
+  chals.sort((a,b) => {
+    const cc = (a.category||'').localeCompare(b.category||'');
+    if (cc !== 0) return cc;
+    return Number(b.value||0) - Number(a.value||0);
+  });
+
+  chals.forEach((c, i) => {
+    const cid      = c.id;
+    const name     = c.name.trim();
+    const cat      = (c.category || 'Misc').trim();
+    const pts      = Number(c.value || c.initial || 0);
+    const solvers  = S.solvesPerChal[cid] || [];
+    const solveNames = solvers.map(tid => S.teams[tid] || ('Team ' + tid));
+    const hintList = S.hints[cid] || [];
+    const files    = S.chalFiles[cid] || [];
+    const desc     = (c.description || '').trim();
+
+    // solve badge class
+    const badgeCls = solvers.length === 0 ? 'none' : solvers.length >= 10 ? 'high' : '';
+
+    const card = document.createElement('div');
+    card.className = 'chal-card';
+    card.dataset.cat = cat;
+    card.style.animationDelay = (i * 20) + 'ms';
+
+    // ── CARD HEAD ──
+    let html = `<div class="chal-head">
+      <div class="chal-cat-label">${cat}</div>
+      <div class="chal-name">${escHtml(name)}</div>
+      <div class="chal-meta">
+        <div class="chal-pts">${pts.toLocaleString()} <span>pts</span></div>
+        <div class="chal-solves-badge ${badgeCls}">
+          ${solvers.length === 0 ? '✗ UNSOLVED' : solvers.length + ' solve' + (solvers.length!==1?'s':'')}
+        </div>
+      </div>
+    </div><div class="chal-body">`;
+
+    // ── FILES ──
+    if (files.length) {
+      html += `<div class="chal-files">`;
+      files.forEach(f => {
+        if (!f.url) return;
+        const icon = f.host === 'gdrive'
+          ? `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.28 3l5.72 9.9-5.72 9.9H0L5.72 12.9 0 3h6.28zm5.72 0h6.28L24 12.9l-5.72 9.9H12l5.72-9.9L12 3z"/></svg>`
+          : `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14v-4H7l5-8v4h4l-5 8z"/></svg>`;
+        const label = f.host === 'gdrive' ? '⬇ GDRIVE: ' + f.filename : '⬇ ' + f.filename;
+        const target = f.host === 'gdrive' ? '_blank' : '_blank';
+        html += `<a class="dl-btn ${f.host}" href="${f.url}" target="${target}" rel="noopener">${icon}${escHtml(label)}</a>`;
+      });
+      html += `</div>`;
+    }
+
+    // ── DESCRIPTION ──
+    if (desc) {
+      html += `<button class="chal-desc-toggle" onclick="toggleSection(this,'chal-desc-${cid}')">
+        <span>▸ CHALLENGE BRIEF</span><span class="arrow">▾</span></button>
+      <div class="chal-desc" id="chal-desc-${cid}">${renderMarkdown(desc)}</div>`;
+    }
+
+    // ── SOLVERS ──
+    if (solveNames.length) {
+      html += `<button class="chal-solvers-toggle" onclick="toggleSection(this,'chal-solvers-${cid}')">
+        <span>▸ SOLVERS (${solveNames.length})</span><span class="arrow">▾</span></button>
+      <div class="chal-solvers" id="chal-solvers-${cid}">
+        ${solveNames.map(n => `<span class="solver-chip">${escHtml(n)}</span>`).join('')}
+      </div>`;
+    }
+
+    // ── HINTS ──
+    if (hintList.length) {
+      html += `<button class="chal-hints-toggle" onclick="toggleSection(this,'chal-hints-${cid}')">
+        <span>▸ HINTS (${hintList.length})</span><span class="arrow">▾</span></button>
+      <div class="chal-hints" id="chal-hints-${cid}">`;
+      hintList.forEach(h => {
+        const cost = parseInt(h.cost) || 0;
+        html += `<div class="hint-item">
+          <div class="hint-title">
+            <span>${escHtml(h.title || 'Hint')}</span>
+            <span class="hint-cost ${cost===0?'free':''}">${cost===0?'FREE':cost+' pts'}</span>
+          </div>
+          <div class="hint-body">${escHtml(h.content || '')}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    html += '</div>'; // close chal-body
+    card.innerHTML = html;
+    grid.appendChild(card);
+  });
+}
+
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  // collapse all open sections first
+  document.querySelectorAll('.chal-desc, .chal-solvers, .chal-hints').forEach(el => {
+    el.classList.remove('open');
+  });
+  document.querySelectorAll('.chal-desc-toggle, .chal-solvers-toggle, .chal-hints-toggle').forEach(el => {
+    el.classList.remove('open');
+  });
+  // reset scroll position on all bodies
+  document.querySelectorAll('.chal-body').forEach(el => { el.scrollTop = 0; });
+  // show/hide cards
+  document.querySelectorAll('.chal-card').forEach(card => {
+    if (cat === 'ALL' || card.dataset.cat === cat) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+}
+
+function toggleSection(btn, id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle('open');
+  btn.classList.toggle('open');
+  // check if card body now overflows
+  const body = el.closest('.chal-body');
+  const card = el.closest('.chal-card');
+  if (body && card) {
+    setTimeout(() => {
+      card.classList.toggle('has-overflow', body.scrollHeight > body.clientHeight);
+    }, 50);
+  }
+}
+
+// ── SCROLLBAR: show on scroll, hide after idle ──
+let scrollTimers = new WeakMap();
+document.addEventListener('scroll', function(e) {
+  const body = e.target;
+  if (!body.classList || !body.classList.contains('chal-body')) return;
+  body.classList.add('scrolling');
+  clearTimeout(scrollTimers.get(body));
+  scrollTimers.set(body, setTimeout(() => body.classList.remove('scrolling'), 1000));
+}, true); // capture phase to catch scroll on non-window elements
+
+// ── UTILS ──
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+// minimal markdown: **bold**, `code`, > blockquote, [text](url), \n\n paragraphs
+function renderMarkdown(raw) {
+  let s = escHtml(raw);
+  // blockquotes
+  s = s.replace(/^&gt;(.+)$/gm, '<blockquote>$1</blockquote>');
+  // bold
+  s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // code
+  s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // links — need to unescape for href
+  s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, txt, url) => {
+    const safeUrl = url.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+    return `<a href="${safeUrl}" target="_blank" rel="noopener">${txt}</a>`;
+  });
+  // double newline = paragraph break
+  s = s.replace(/\n\n+/g, '</p><p>');
+  s = s.replace(/\n/g, '<br>');
+  return '<p>' + s + '</p>';
+}
+
+// ── TABS ──
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (name === 'graph' && S.chartInst) setTimeout(() => S.chartInst.resize(), 50);
+}
+</script>
+</body>
+</html>

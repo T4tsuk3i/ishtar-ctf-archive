@@ -1,0 +1,18 @@
+id,oauth_id,name,email,password,secret,website,affiliation,country,bracket_id,hidden,banned,captain_id,created
+1,4936,TestingTeam,,,,,,,,False,False,1,2026-02-18 14:27:26.899393
+2,4935,GARUDA,,,,,,,,False,False,2,2026-02-18 14:32:44.986430
+3,4940,Dream Hack,,,,,,,,False,False,6,2026-02-22 08:55:21.966639
+4,4943,Bitcode,,,,,,,,False,False,7,2026-02-22 09:04:40.779110
+5,4944,Altair,,,,,,,,False,False,8,2026-02-22 09:07:04.866514
+6,4945, Team DRACARYS,,,,,,,,False,False,9,2026-02-22 09:07:28.979895
+7,4947,NOVA,,,,,,,,False,False,10,2026-02-22 09:47:56.122147
+8,4942,OblivionNode,,,,,,,,False,False,12,2026-02-22 09:50:53.815059
+9,4946,Infinite Loopers,,,,,,,,False,False,13,2026-02-23 03:46:41.946756
+10,4951,Kanyaraasi,,,,,,,,False,False,16,2026-02-23 03:52:06.464013
+11,4956,The Beasts,,,,,,,,False,False,21,2026-02-23 03:56:40.344808
+12,4939,Hexsploit,,,,,,,,False,False,23,2026-02-23 03:57:03.838235
+13,4941,Cyphra,,,,,,,,False,False,29,2026-02-23 04:00:11.198992
+14,4955,zeroday,,,,,,,,False,False,30,2026-02-23 04:00:16.371553
+15,4954,Cyber Bulls,,,,,,,,False,False,32,2026-02-23 04:00:39.362502
+16,4958,FlagFury,,,,,,,,False,False,41,2026-02-23 04:19:52.438586
+17,4957,Tech Titans,,,,,,,,False,False,38,2026-02-23 04:26:48.470867
