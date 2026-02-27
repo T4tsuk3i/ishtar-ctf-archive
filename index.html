@@ -32,7 +32,6 @@
 
 body{background:var(--navy) url('bg.jpg') center top/cover fixed;color:var(--text);font-family:'Share Tech Mono',monospace;min-height:100vh;overflow-x:hidden;}
 
-/* vignette — heavier so panels pop */
 body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at center,transparent 20%,rgba(5,9,18,.80) 100%),linear-gradient(180deg,rgba(5,9,18,.60) 0%,rgba(5,9,18,.35) 40%,rgba(5,9,18,.72) 100%);pointer-events:none;z-index:0;}
 header,main,footer,#loading{position:relative;z-index:1;}
 
@@ -73,10 +72,10 @@ main{max-width:1400px;margin:0 auto;padding:40px 24px 80px;}
 .sec-tag{font-size:9px;letter-spacing:2px;color:var(--cream-dim);border:1px solid var(--border);padding:3px 8px;font-weight:700;}
 
 /* ── TABS ── */
-.tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:32px;background:rgba(4,7,16,.7);backdrop-filter:blur(8px);}
+.tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:32px;background:rgba(4,7,16,.7);backdrop-filter:blur(8px);flex-wrap:wrap;}
 .tab-btn{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--cream-dim);font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;font-weight:700;padding:16px 28px;cursor:pointer;text-transform:uppercase;transition:all .25s;margin-bottom:-1px;}
 .tab-btn.active{color:var(--gold-bright);border-bottom-color:var(--gold-bright);}
-.tab-btn:hover{color:var(--cream);}
+.tab-btn:hover{color:var(--cream);background:rgba(212,176,90,.04);}
 .tab-panel{display:none;}
 .tab-panel.active{display:block;}
 
@@ -90,7 +89,7 @@ main{max-width:1400px;margin:0 auto;padding:40px 24px 80px;}
 .podium-info{text-align:center;margin-bottom:12px;padding:0 8px;}
 .podium-medal{font-size:32px;line-height:1;}
 .podium-slot.first .podium-medal{filter:drop-shadow(0 0 12px rgba(255,215,0,.9));font-size:38px;}
-.podium-name{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;color:var(--cream);margin:8px 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;text-shadow:0 2px 6px rgba(0,0,0,.95);}
+.podium-name{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;color:var(--cream);margin:8px 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;text-shadow:0 2px 6px rgba(0,0,0,.95);text-transform:uppercase;letter-spacing:3px;}
 .podium-score{font-size:13px;color:var(--gold-bright);font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.9);}
 .podium-block{width:100%;border-top:2px solid;display:flex;align-items:center;justify-content:center;position:relative;}
 .podium-block::before{content:attr(data-pos);font-family:'Cinzel',serif;font-size:30px;font-weight:900;color:var(--cream);opacity:.55;}
@@ -100,7 +99,7 @@ main{max-width:1400px;margin:0 auto;padding:40px 24px 80px;}
 
 /* ── SCOREBOARD TABLE ── */
 .score-table-wrap{overflow:hidden;margin-bottom:50px;border:1px solid var(--border);backdrop-filter:blur(8px);}
-.score-table-head{display:grid;grid-template-columns:60px 1fr 160px 110px;background:rgba(4,7,16,.98);border-bottom:1px solid var(--border);padding:12px 20px;}
+.score-table-head{display:grid;grid-template-columns:60px 1fr 160px 110px;background:rgba(4,7,16,.98);border-bottom:1px solid var(--border);padding:12px 20px;border-left:2px solid var(--gold-dim);}
 .score-table-head span{font-size:9px;letter-spacing:3px;color:var(--cream-dim);text-transform:uppercase;font-family:'Share Tech Mono',monospace;font-weight:700;}
 .score-row{display:grid;grid-template-columns:60px 1fr 160px 110px;padding:14px 20px;border-bottom:1px solid var(--border-dim);align-items:center;transition:background .2s;cursor:pointer;animation:fadeIn .4s ease-out forwards;opacity:0;background:rgba(6,10,20,.94);}
 .score-row:hover{background:rgba(212,176,90,.07);}
@@ -117,6 +116,9 @@ main{max-width:1400px;margin:0 auto;padding:40px 24px 80px;}
 .row-bar{flex:1;height:3px;background:rgba(212,176,90,.12);overflow:hidden;}
 .row-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold-bright));box-shadow:0 0 6px rgba(212,176,90,.4);width:0%;transition:width 1.3s cubic-bezier(.4,0,.2,1);}
 .row-score{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--gold-bright);text-align:right;text-shadow:0 0 8px rgba(245,222,144,.3);}
+.score-row.r1{border-left:2px solid var(--gold-bright);}
+.score-row.r2{border-left:2px solid var(--silver);}
+.score-row.r3{border-left:2px solid var(--bronze);}
 
 /* ── MEMBER EXPAND ── */
 .member-panel{display:none;background:rgba(4,7,16,.97);border-bottom:1px solid var(--border-dim);padding:12px 20px 12px 80px;}
@@ -124,10 +126,11 @@ main{max-width:1400px;margin:0 auto;padding:40px 24px 80px;}
 .member-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(212,176,90,.08);}
 .member-row:last-child{border-bottom:none;}
 .member-name{font-family:'Rajdhani',sans-serif;font-size:14px;color:var(--cream);font-weight:700;}
+.member-name::before{content:'╰ ';color:var(--gold-dim);font-size:11px;}
 .member-score{font-size:12px;color:var(--gold-bright);font-weight:700;}
 
 /* ── GRAPH ── */
-.graph-panel{padding:30px;position:relative;margin-bottom:50px;background:rgba(6,10,20,.95);backdrop-filter:blur(8px);border:1px solid var(--border);}
+.graph-panel{padding:30px;position:relative;margin-bottom:50px;background:rgba(6,10,20,.95);backdrop-filter:blur(8px);border:1px solid var(--border);border-top:1px solid var(--gold-dim);}
 .graph-panel::before{content:'';position:absolute;top:0;left:20px;right:20px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
 .graph-controls{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
 .ctrl-btn{background:transparent;border:1px solid var(--border-dim);color:var(--cream-dim);padding:6px 16px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;cursor:pointer;transition:all .2s;text-transform:uppercase;font-weight:700;}
@@ -138,39 +141,39 @@ main{max-width:1400px;margin:0 auto;padding:40px 24px 80px;}
 .chal-filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
 .cat-btn{background:transparent;border:1px solid var(--border-dim);color:var(--cream-dim);padding:5px 14px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;cursor:pointer;transition:all .2s;text-transform:uppercase;font-weight:700;}
 .cat-btn:hover,.cat-btn.active{border-color:var(--gold-bright);color:var(--gold-bright);background:rgba(212,176,90,.09);}
+.cat-btn.active::before{content:'▸ ';}
 .challenges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;}
-.chal-card{background:rgba(6,10,20,.95);backdrop-filter:blur(8px);border:1px solid var(--border-dim);overflow:hidden;transition:all .25s;animation:fadeIn .5s ease-out forwards;opacity:0;display:flex;flex-direction:column;max-height:380px;}
+.chal-card{background:rgba(6,10,20,.95);backdrop-filter:blur(8px);border:1px solid var(--border-dim);overflow:hidden;transition:all .25s;animation:fadeIn .5s ease-out forwards;opacity:0;display:flex;flex-direction:column;max-height:380px;position:relative;}
 .chal-card::before{content:'';display:block;height:1px;background:var(--gold-dim);transition:all .35s;}
 .chal-card:hover::before{background:var(--gold-bright);box-shadow:0 0 8px rgba(245,222,144,.5);}
 .chal-card:hover{border-color:rgba(212,176,90,.45);box-shadow:0 4px 24px rgba(0,0,0,.5);}
 .chal-card.hidden{display:none;}
-.chal-body{flex:1;overflow-y:auto;min-height:0;position:relative;}
-.chal-body{scrollbar-width:none;} /* Firefox hidden by default */
+.chal-body{flex:1;overflow-y:auto;min-height:0;position:relative;scrollbar-width:none;}
 .chal-body::-webkit-scrollbar{width:4px;}
 .chal-body::-webkit-scrollbar-track{background:transparent;}
-.chal-body::-webkit-scrollbar-thumb{background:transparent;border-radius:2px;transition:background .3s;}
+.chal-body::-webkit-scrollbar-thumb{background:transparent;border-radius:2px;}
 .chal-body.scrolling{scrollbar-width:thin;scrollbar-color:var(--gold-dim) transparent;}
 .chal-body.scrolling::-webkit-scrollbar-thumb{background:var(--gold-dim);}
-.chal-body.scrolling::-webkit-scrollbar-thumb:hover{background:var(--gold-bright);}
-
+.chal-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:32px;background:linear-gradient(transparent,rgba(6,10,20,.95));pointer-events:none;z-index:2;opacity:0;transition:opacity .3s;}
+.chal-card.has-overflow::after{opacity:1;}
 .chal-head{padding:16px 16px 12px;flex-shrink:0;}
 .chal-cat-label{font-size:9px;letter-spacing:4px;color:var(--gold-bright);text-transform:uppercase;margin-bottom:7px;font-family:'Share Tech Mono',monospace;font-weight:700;}
 .chal-name{font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:var(--cream);margin-bottom:10px;line-height:1.3;text-shadow:0 1px 4px rgba(0,0,0,.8);}
 .chal-meta{display:flex;gap:16px;align-items:center;}
 .chal-pts{font-family:'Cinzel',serif;font-size:20px;font-weight:700;color:var(--gold-bright);}
 .chal-pts span{font-size:9px;color:var(--cream-dim);font-family:'Share Tech Mono',monospace;font-weight:700;}
-.chal-solves-badge{font-size:10px;color:var(--cream-dim);letter-spacing:1px;font-weight:700;}
+.chal-solves-badge{font-size:10px;color:var(--cream-dim);letter-spacing:1px;font-weight:700;padding-left:12px;border-left:1px solid var(--border-dim);}
 .chal-solves-badge.high{color:var(--green);}
 .chal-solves-badge.none{color:var(--red);}
-
-/* accordions shared */
 .chal-desc-toggle,.chal-solvers-toggle,.chal-hints-toggle{width:100%;background:transparent;border:none;border-top:1px solid var(--border-dim);padding:10px 16px;text-align:left;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;font-weight:700;color:var(--cream-dim);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .2s;text-transform:uppercase;}
 .chal-desc-toggle:hover{color:var(--cream);background:rgba(212,176,90,.05);}
 .chal-solvers-toggle:hover{color:var(--green);background:rgba(144,216,128,.04);}
 .chal-hints-toggle:hover{color:var(--gold-bright);background:rgba(212,176,90,.04);}
 .chal-desc-toggle .arrow,.chal-solvers-toggle .arrow,.chal-hints-toggle .arrow{transition:transform .3s;}
 .chal-desc-toggle.open .arrow,.chal-solvers-toggle.open .arrow,.chal-hints-toggle.open .arrow{transform:rotate(180deg);}
-
+.chal-desc-toggle.open{color:var(--cream);border-left:2px solid var(--gold-dim);padding-left:14px;}
+.chal-solvers-toggle.open{color:var(--green);border-left:2px solid var(--green);padding-left:14px;}
+.chal-hints-toggle.open{color:var(--gold-bright);border-left:2px solid var(--gold);padding-left:14px;}
 .chal-desc{display:none;padding:16px;border-top:1px solid var(--border-dim);font-family:'Rajdhani',sans-serif;font-size:14px;line-height:1.8;color:var(--cream);background:rgba(4,7,16,.8);font-weight:600;}
 .chal-desc.open{display:block;}
 .chal-desc code{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--gold-bright);background:rgba(212,176,90,.12);padding:1px 5px;}
@@ -178,21 +181,19 @@ main{max-width:1400px;margin:0 auto;padding:40px 24px 80px;}
 .chal-desc a:hover{color:var(--cream);}
 .chal-desc blockquote{border-left:2px solid var(--gold-dim);padding-left:12px;color:var(--cream-dim);margin:8px 0;font-style:italic;}
 .chal-desc strong{color:var(--gold-bright);font-weight:700;}
-
 .chal-solvers{display:none;padding:12px 16px;border-top:1px solid var(--border-dim);background:rgba(4,7,16,.8);}
 .chal-solvers.open{display:block;}
 .solver-chip{display:inline-block;background:rgba(144,216,128,.10);border:1px solid rgba(144,216,128,.35);color:#c4f0b4;font-size:9px;letter-spacing:2px;padding:3px 9px;margin:3px 3px 3px 0;font-family:'Share Tech Mono',monospace;font-weight:700;}
-
-.chal-hints{display:none;border-top:1px solid var(--border-dim);background:rgba(4,7,16,.8);}
+.solver-chip:first-child{border-color:rgba(144,216,128,.6);color:#d8ffd0;}
+.chal-hints{display:none;border-top:1px solid var(--border-dim);background:rgba(4,7,16,.8);counter-reset:hint-counter;}
 .chal-hints.open{display:block;}
-.hint-item{padding:12px 16px;border-bottom:1px solid rgba(212,176,90,.08);}
+.hint-item{padding:12px 16px;border-bottom:1px solid rgba(212,176,90,.08);counter-increment:hint-counter;}
 .hint-item:last-child{border-bottom:none;}
 .hint-title{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-weight:700;}
+.hint-title::before{content:counter(hint-counter,decimal-leading-zero) ' ';color:var(--gold-dim);margin-right:4px;}
 .hint-cost{color:var(--red);}
 .hint-cost.free{color:var(--green);}
 .hint-body{font-family:'Rajdhani',sans-serif;font-size:14px;line-height:1.7;color:var(--cream);white-space:pre-wrap;font-weight:600;}
-
-/* ── DOWNLOADS ── */
 .chal-files{padding:12px 16px;border-top:1px solid var(--border-dim);display:flex;flex-wrap:wrap;gap:8px;}
 .dl-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;text-decoration:none;transition:all .2s;border:1px solid;text-transform:uppercase;font-weight:700;}
 .dl-btn.github{color:var(--cream);border-color:var(--border);background:rgba(212,176,90,.06);}
@@ -204,65 +205,149 @@ main{max-width:1400px;margin:0 auto;padding:40px 24px 80px;}
 /* ── ERROR ── */
 #error-msg{display:none;background:rgba(224,112,80,.10);border:1px solid rgba(224,112,80,.40);color:#f0a080;padding:20px;font-size:13px;letter-spacing:1px;line-height:1.8;margin-bottom:30px;font-weight:700;}
 
+/* ══════════════════════════════════════════
+   WRITE-UP SECTION
+══════════════════════════════════════════ */
+
+/* ── TOC sidebar + content layout ── */
+.wu-layout{display:grid;grid-template-columns:280px 1fr;gap:32px;align-items:start;}
+@media(max-width:900px){.wu-layout{grid-template-columns:1fr;}}
+
+/* ── Table of Contents ── */
+.wu-toc{position:sticky;top:24px;background:rgba(4,7,16,.97);border:1px solid var(--border-dim);border-top:2px solid var(--gold-dim);padding:0;overflow:hidden;max-height:calc(100vh - 80px);display:flex;flex-direction:column;}
+.wu-toc-header{padding:16px 20px;border-bottom:1px solid var(--border-dim);font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;color:var(--gold-bright);font-weight:700;text-transform:uppercase;flex-shrink:0;}
+.wu-toc-header::before{content:'◆ ';font-size:8px;color:var(--gold-dim);}
+.wu-toc-body{overflow-y:auto;flex:1;padding:10px 0;scrollbar-width:thin;scrollbar-color:var(--gold-dim) transparent;}
+.wu-toc-body::-webkit-scrollbar{width:3px;}
+.wu-toc-body::-webkit-scrollbar-thumb{background:var(--gold-dim);}
+.toc-category{padding:10px 20px 4px;font-size:8px;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase;font-family:'Share Tech Mono',monospace;font-weight:700;border-top:1px solid var(--border-dim);margin-top:4px;}
+.toc-category:first-child{border-top:none;margin-top:0;}
+.toc-link{display:block;padding:6px 20px 6px 28px;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;color:var(--cream-dim);text-decoration:none;transition:all .2s;border-left:2px solid transparent;letter-spacing:.5px;cursor:pointer;}
+.toc-link:hover{color:var(--gold-bright);border-left-color:var(--gold-dim);background:rgba(212,176,90,.05);padding-left:32px;}
+.toc-link.active{color:var(--gold-bright);border-left-color:var(--gold-bright);background:rgba(212,176,90,.08);}
+
+/* ── Write-Up Content ── */
+.wu-content{}
+
+/* Docker button banner */
+.wu-docker-banner{display:flex;align-items:center;gap:16px;padding:16px 24px;background:rgba(212,176,90,.08);border:1px solid rgba(212,176,90,.35);margin-bottom:32px;}
+.wu-docker-icon{font-size:20px;flex-shrink:0;}
+.wu-docker-text{flex:1;}
+.wu-docker-text strong{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--gold-bright);font-weight:700;display:block;margin-bottom:3px;}
+.wu-docker-text span{font-size:10px;color:var(--cream-dim);letter-spacing:1px;}
+.wu-docker-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:rgba(212,176,90,.12);border:1px solid var(--gold-dim);color:var(--gold-bright);font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;text-decoration:none;transition:all .25s;text-transform:uppercase;font-weight:700;white-space:nowrap;}
+.wu-docker-btn:hover{background:rgba(212,176,90,.22);border-color:var(--gold-bright);box-shadow:0 0 16px rgba(212,176,90,.2);}
+
+/* Category banners */
+.wu-category-banner{padding:20px 28px;margin-bottom:24px;margin-top:8px;position:relative;overflow:hidden;}
+.wu-category-banner::before{content:'';position:absolute;inset:0;opacity:.06;}
+.wu-category-banner.cat-warmup{background:rgba(90,180,130,.08);border-left:3px solid rgba(90,180,130,.7);}
+.wu-category-banner.cat-warmup::before{background:linear-gradient(135deg,#5ab482,transparent);}
+.wu-category-banner.cat-newlight{background:rgba(80,160,220,.08);border-left:3px solid rgba(80,160,220,.7);}
+.wu-category-banner.cat-newlight::before{background:linear-gradient(135deg,#50a0dc,transparent);}
+.wu-category-banner.cat-justiclair{background:rgba(180,130,220,.08);border-left:3px solid rgba(180,130,220,.7);}
+.wu-category-banner.cat-justiclair::before{background:linear-gradient(135deg,#b482dc,transparent);}
+.wu-category-banner.cat-vanquisher{background:rgba(220,110,80,.08);border-left:3px solid rgba(220,110,80,.7);}
+.wu-category-banner.cat-vanquisher::before{background:linear-gradient(135deg,#dc6e50,transparent);}
+.wu-category-banner.cat-special{background:rgba(212,176,90,.10);border-left:3px solid var(--gold);}
+.wu-category-banner.cat-special::before{background:linear-gradient(135deg,#d4b45a,transparent);}
+.wu-category-banner.cat-mega{background:rgba(245,222,144,.12);border-left:3px solid var(--gold-bright);box-shadow:0 0 30px rgba(245,222,144,.06);}
+.wu-category-banner.cat-mega::before{background:linear-gradient(135deg,#f5de90,transparent);}
+.cat-banner-label{font-size:8px;letter-spacing:5px;text-transform:uppercase;font-family:'Share Tech Mono',monospace;font-weight:700;margin-bottom:6px;opacity:.8;}
+.cat-banner-title{font-family:'Cinzel',serif;font-size:22px;font-weight:900;letter-spacing:3px;color:var(--cream);text-shadow:0 1px 6px rgba(0,0,0,.8);}
+.cat-banner-subtitle{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;color:var(--cream-dim);margin-top:6px;letter-spacing:.5px;font-style:italic;}
+
+/* Challenge write-up cards */
+.wu-challenge{background:rgba(6,10,20,.95);border:1px solid var(--border-dim);margin-bottom:20px;overflow:hidden;scroll-margin-top:80px;}
+.wu-challenge::before{content:'';display:block;height:1px;background:linear-gradient(90deg,var(--gold-dim),transparent 60%);}
+.wu-challenge-header{padding:18px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;cursor:pointer;transition:background .2s;}
+.wu-challenge-header:hover{background:rgba(212,176,90,.04);}
+.wu-ch-left{flex:1;}
+.wu-ch-cat{font-size:8px;letter-spacing:4px;color:var(--gold-bright);text-transform:uppercase;font-family:'Share Tech Mono',monospace;font-weight:700;margin-bottom:6px;}
+.wu-ch-name{font-family:'Cinzel',serif;font-size:17px;font-weight:700;color:var(--cream);letter-spacing:1px;}
+.wu-ch-tags{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.wu-tag{font-size:8px;letter-spacing:2px;padding:3px 10px;font-family:'Share Tech Mono',monospace;font-weight:700;text-transform:uppercase;}
+.wu-tag.skill{color:#a0c8f0;border:1px solid rgba(160,200,240,.3);background:rgba(160,200,240,.06);}
+.wu-tag.pts{color:var(--gold-bright);border:1px solid rgba(212,176,90,.3);background:rgba(212,176,90,.06);}
+.wu-tag.solved{color:#90d880;border:1px solid rgba(144,216,128,.3);background:rgba(144,216,128,.06);}
+.wu-tag.unsolved{color:var(--red);border:1px solid rgba(224,112,80,.3);background:rgba(224,112,80,.06);}
+.wu-ch-toggle{color:var(--cream-dim);font-size:18px;flex-shrink:0;transition:transform .35s;line-height:1;margin-top:2px;}
+.wu-challenge.open .wu-ch-toggle{transform:rotate(180deg);}
+
+.wu-challenge-body{display:none;border-top:1px solid var(--border-dim);}
+.wu-challenge.open .wu-challenge-body{display:block;}
+
+/* Section tabs within a challenge */
+.wu-sections{display:flex;border-bottom:1px solid var(--border-dim);background:rgba(4,7,16,.6);}
+.wu-sec-btn{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--cream-dim);font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;font-weight:700;padding:12px 20px;cursor:pointer;text-transform:uppercase;transition:all .2s;margin-bottom:-1px;}
+.wu-sec-btn.active{color:var(--gold-bright);border-bottom-color:var(--gold-bright);}
+.wu-sec-btn:hover{color:var(--cream);}
+.wu-sec-panel{display:none;padding:24px;}
+.wu-sec-panel.active{display:block;}
+
+/* Breakdown prose */
+.wu-breakdown{font-family:'Rajdhani',sans-serif;font-size:15px;line-height:1.85;color:var(--cream);font-weight:600;}
+.wu-breakdown p{margin-bottom:14px;}
+.wu-breakdown p:last-child{margin-bottom:0;}
+.wu-breakdown strong{color:var(--gold-bright);font-weight:700;}
+.wu-breakdown em{color:var(--cream-dim);font-style:italic;}
+.wu-breakdown code{font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--gold-bright);background:rgba(212,176,90,.10);padding:2px 7px;border:1px solid rgba(212,176,90,.15);}
+.wu-breakdown blockquote{border-left:2px solid var(--gold-dim);padding:10px 16px;margin:14px 0;background:rgba(212,176,90,.04);color:var(--cream-dim);font-style:italic;}
+
+/* Code blocks */
+.wu-codeblock{background:rgba(2,4,10,.98);border:1px solid var(--border-dim);border-left:3px solid var(--gold-dim);margin:16px 0;overflow:hidden;}
+.wu-code-header{padding:8px 14px;background:rgba(212,176,90,.06);border-bottom:1px solid var(--border-dim);display:flex;justify-content:space-between;align-items:center;}
+.wu-code-lang{font-size:8px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase;font-family:'Share Tech Mono',monospace;font-weight:700;}
+.wu-code-copy{background:none;border:none;color:var(--cream-dim);font-size:9px;letter-spacing:2px;font-family:'Share Tech Mono',monospace;cursor:pointer;text-transform:uppercase;padding:2px 6px;transition:color .2s;}
+.wu-code-copy:hover{color:var(--gold-bright);}
+.wu-code-body{padding:16px;overflow-x:auto;}
+.wu-code-body pre{font-family:'Share Tech Mono',monospace;font-size:12px;line-height:1.7;color:#d4e8c4;white-space:pre;}
+.wu-code-body .cmd{color:#90d880;}
+.wu-code-body .comment{color:#5a7050;font-style:italic;}
+.wu-code-body .str{color:#d4b45a;}
+.wu-code-body .kw{color:#a0c8f0;}
+.wu-code-body .num{color:#c088a0;}
+
+/* Flag reveal box */
+.wu-flag-box{display:flex;align-items:center;gap:16px;padding:16px 20px;background:rgba(144,216,128,.06);border:1px solid rgba(144,216,128,.3);margin-top:16px;}
+.wu-flag-icon{font-size:20px;flex-shrink:0;}
+.wu-flag-label{font-size:8px;letter-spacing:4px;color:rgba(144,216,128,.7);font-family:'Share Tech Mono',monospace;font-weight:700;text-transform:uppercase;margin-bottom:5px;}
+.wu-flag-value{font-family:'Share Tech Mono',monospace;font-size:13px;color:#c4f0b4;font-weight:700;letter-spacing:1px;word-break:break-all;}
+
+/* Real-world callout */
+.wu-callout{padding:14px 18px;background:rgba(160,200,240,.06);border:1px solid rgba(160,200,240,.2);border-left:3px solid rgba(160,200,240,.5);margin:16px 0;}
+.wu-callout-title{font-size:8px;letter-spacing:4px;color:#a0c8f0;text-transform:uppercase;font-family:'Share Tech Mono',monospace;font-weight:700;margin-bottom:8px;}
+.wu-callout-body{font-family:'Rajdhani',sans-serif;font-size:13px;line-height:1.7;color:var(--cream-dim);font-weight:600;}
+
+/* Final flag list */
+.wu-flaglist{background:rgba(2,4,10,.98);border:1px solid var(--border);padding:24px;margin-bottom:40px;}
+.wu-flaglist-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;color:var(--gold-bright);font-weight:700;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border-dim);}
+.wu-flaglist-title::before{content:'◆ ';}
+.wu-flag-entry{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(212,176,90,.06);}
+.wu-flag-entry:last-child{border-bottom:none;}
+.wu-flag-num{font-size:9px;color:var(--gold-dim);font-family:'Share Tech Mono',monospace;font-weight:700;width:24px;flex-shrink:0;}
+.wu-flag-text{font-family:'Share Tech Mono',monospace;font-size:11px;color:#c4f0b4;letter-spacing:.5px;}
+
+/* Closing thoughts */
+.wu-closing{padding:32px;background:rgba(6,10,20,.95);border:1px solid var(--border-dim);margin-bottom:40px;position:relative;}
+.wu-closing::before{content:'';position:absolute;top:0;left:20px;right:20px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.wu-closing h3{font-family:'Cinzel',serif;font-size:14px;letter-spacing:4px;color:var(--gold-bright);font-weight:700;margin-bottom:20px;text-transform:uppercase;}
+.wu-tier{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border-dim);}
+.wu-tier:last-child{border-bottom:none;}
+.wu-tier-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.wu-tier-dot.green{background:#5ab482;box-shadow:0 0 8px rgba(90,180,130,.5);}
+.wu-tier-dot.blue{background:#50a0dc;box-shadow:0 0 8px rgba(80,160,220,.5);}
+.wu-tier-dot.purple{background:#b482dc;box-shadow:0 0 8px rgba(180,130,220,.5);}
+.wu-tier-dot.red{background:#dc6e50;box-shadow:0 0 8px rgba(220,110,80,.5);}
+.wu-tier-text{font-family:'Rajdhani',sans-serif;font-size:14px;line-height:1.7;color:var(--cream);font-weight:600;}
+.wu-tier-text strong{color:var(--gold-bright);}
+
 /* ── FOOTER ── */
 footer{border-top:1px solid var(--border-dim);padding:30px 24px;text-align:center;color:var(--cream-dim);font-size:10px;letter-spacing:3px;font-weight:700;}
 
-/* ── SCROLL FADE INDICATOR at bottom of card ── */
-.chal-card{position:relative;}
-.chal-card::after{
-  content:'';
-  position:absolute;bottom:0;left:0;right:0;height:32px;
-  background:linear-gradient(transparent, rgba(6,10,20,.95));
-  pointer-events:none;z-index:2;
-  opacity:0;transition:opacity .3s;
-}
-.chal-card.has-overflow::after{opacity:1;}
-
-/* ── ACCORDION TOGGLES: colored left border when open ── */
-.chal-desc-toggle.open{color:var(--cream);border-left:2px solid var(--gold-dim);padding-left:14px;}
-.chal-solvers-toggle.open{color:var(--green);border-left:2px solid var(--green);padding-left:14px;}
-.chal-hints-toggle.open{color:var(--gold-bright);border-left:2px solid var(--gold);padding-left:14px;}
-
-/* ── SCORE ROW: left accent on rank 1/2/3 ── */
-.score-row.r1{border-left:2px solid var(--gold-bright);}
-.score-row.r2{border-left:2px solid var(--silver);}
-.score-row.r3{border-left:2px solid var(--bronze);}
-
-/* ── PODIUM: team name uppercase ── */
-.podium-name{text-transform:uppercase;letter-spacing:3px;}
-
-/* ── SECTION HEAD: decorative diamond ── */
+/* ── SECTION HEAD decoration ── */
 .sec-head h2::before{content:'◆ ';font-size:8px;color:var(--gold-dim);vertical-align:middle;}
-
-/* ── GRAPH: subtle top border glow ── */
-.graph-panel{border-top:1px solid var(--gold-dim);}
-
-/* ── TABS: subtle bg on hover ── */
-.tab-btn:hover{background:rgba(212,176,90,.04);}
-
-/* ── CAT FILTER: active has left tick ── */
-.cat-btn.active::before{content:'▸ ';}
-
-/* ── HEADER: subtle backdrop ── */
 header{background:linear-gradient(180deg,rgba(4,7,16,.55) 0%,rgba(4,7,16,.25) 100%);backdrop-filter:blur(4px);}
-
-/* ── SCORE TABLE HEAD: gold left border ── */
-.score-table-head{border-left:2px solid var(--gold-dim);}
-
-/* ── MEMBER ROW: indent marker ── */
-.member-name::before{content:'╰ ';color:var(--gold-dim);font-size:11px;}
-
-/* ── HINT ITEM: numbered marker ── */
-.hint-item{counter-increment:hint-counter;}
-.chal-hints{counter-reset:hint-counter;}
-.hint-title::before{content:counter(hint-counter,decimal-leading-zero) ' ';color:var(--gold-dim);margin-right:4px;}
-
-/* ── SOLVER CHIP: subtle pulse on first one ── */
-.solver-chip:first-child{border-color:rgba(144,216,128,.6);color:#d8ffd0;}
-
-/* ── CHAL META: separator dot ── */
-.chal-meta::before{display:none;}
-.chal-solves-badge{padding-left:12px;border-left:1px solid var(--border-dim);}
 
 /* ── RESPONSIVE ── */
 @media(max-width:640px){
@@ -272,6 +357,8 @@ header{background:linear-gradient(180deg,rgba(4,7,16,.55) 0%,rgba(4,7,16,.25) 10
   h1{letter-spacing:2px;}
   .challenges-grid{grid-template-columns:1fr;}
   .hstat+.hstat{border-left:none;padding-left:0;}
+  .wu-sections{flex-wrap:wrap;}
+  .wu-sec-btn{font-size:8px;padding:10px 12px;}
 }
 </style>
 </head>
@@ -305,6 +392,7 @@ header{background:linear-gradient(180deg,rgba(4,7,16,.55) 0%,rgba(4,7,16,.25) 10
     <button class="tab-btn active" onclick="switchTab('scoreboard',this)">Scoreboard</button>
     <button class="tab-btn" onclick="switchTab('graph',this)">Score Timeline</button>
     <button class="tab-btn" onclick="switchTab('challenges',this)">Challenges</button>
+    <button class="tab-btn" onclick="switchTab('writeup',this)">Write-Up</button>
   </div>
 
   <div id="error-msg"></div>
@@ -341,6 +429,1052 @@ header{background:linear-gradient(180deg,rgba(4,7,16,.55) 0%,rgba(4,7,16,.25) 10
     <div class="chal-filter-bar" id="chal-filters"></div>
     <div class="challenges-grid" id="challenges-grid"></div>
   </div>
+
+  <!-- WRITE-UP TAB -->
+  <div class="tab-panel" id="tab-writeup">
+    <div class="sec-head"><h2>Official Write-Up</h2><div class="sec-line"></div><div class="sec-tag">FULL SOLUTIONS</div></div>
+
+    <div class="wu-layout">
+
+      <!-- TOC -->
+      <aside class="wu-toc">
+        <div class="wu-toc-header">Navigation</div>
+        <div class="wu-toc-body">
+          <div class="toc-category">Warmup</div>
+          <a class="toc-link" onclick="scrollToChallenge('wu-welcome')">Welcome Guardian</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-firstlight')">First Light</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-beneath')">Beneath the Surface</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-log')">Recovered Log</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-archive')">Incomplete Archive</a>
+          <div class="toc-category">New Light</div>
+          <a class="toc-link" onclick="scrollToChallenge('wu-heresy')">Heresy of the Shoemaker</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-spacetime')">Flaws in SPACE-time</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-separation')">Principles of Separation</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-helm')">Resonant Fury // Helm</a>
+          <div class="toc-category">Ishtar Justiclair</div>
+          <a class="toc-link" onclick="scrollToChallenge('wu-dominance')">Dominance Without Purpose</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-inevitability')">Inevitability Simulation</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-doctrine')">Doctrine of Balance</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-salvation')">Salvation Convergence Record</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-patternfall')">Patternfall</a>
+          <div class="toc-category">Ishtar Vanquisher</div>
+          <a class="toc-link" onclick="scrollToChallenge('wu-whatami')">What Am I</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-rheliksbane')">Rheliksbane</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-fedfree')">Fed and Free</a>
+          <div class="toc-category">Special Challenges</div>
+          <a class="toc-link" onclick="scrollToChallenge('wu-needle')">Needle and Worm</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-gauntlets')">Resonant Fury // Gauntlets</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-plate')">Resonant Fury // Plate</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-greaves')">Resonant Fury // Greaves</a>
+          <a class="toc-link" onclick="scrollToChallenge('wu-mark')">Resonant Fury // Mark</a>
+          <div class="toc-category">Mega Challenge</div>
+          <a class="toc-link" onclick="scrollToChallenge('wu-arohal')">AROHAL SYLORIN</a>
+          <div class="toc-category">Reference</div>
+          <a class="toc-link" onclick="scrollToChallenge('wu-flaglist')">Complete Flag List</a>
+        </div>
+      </aside>
+
+      <!-- Content -->
+      <div class="wu-content">
+
+        <!-- Docker banner -->
+        <div class="wu-docker-banner">
+          <div class="wu-docker-icon">🐳</div>
+          <div class="wu-docker-text">
+            <strong>Docker Files Available</strong>
+            <span>All challenge containers available for self-hosted deployment</span>
+          </div>
+          <a class="wu-docker-btn" href="https://drive.google.com/drive/folders/10mL0CMMfBPiUrI18QrqletRrYYjGu4Yy?usp=sharing" target="_blank" rel="noopener">
+            ⬇ Download Docker Files
+          </a>
+        </div>
+
+        <!-- ════════════════ WARMUP ════════════════ -->
+        <div class="wu-category-banner cat-warmup">
+          <div class="cat-banner-label" style="color:#5ab482;">Category</div>
+          <div class="cat-banner-title">Warmup</div>
+          <div class="cat-banner-subtitle">"Observation Before Exploitation — Don't overthink before you inspect."</div>
+        </div>
+
+        <!-- Welcome Guardian -->
+        <div class="wu-challenge" id="wu-welcome">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Warmup</div>
+              <div class="wu-ch-name">Welcome Guardian</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Reading Comprehension</span>
+                <span class="wu-tag skill">Flag Format</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-welcome-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-welcome-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-welcome-breakdown">
+              <div class="wu-breakdown">
+                <p>The description ends with the directive: <em>"Submit the initialization designation."</em></p>
+                <p>The phrase <strong>Eyes up, Guardian</strong> is embedded directly in the challenge text itself. No steganography. No encoding. No tricks.</p>
+                <p>The challenge teaches beginners to read carefully, understand exactly what is being asked, and recognize the flag format in use throughout the competition.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-welcome-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{EYES-UP-GUARDIAN}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- First Light -->
+        <div class="wu-challenge" id="wu-firstlight">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Warmup</div>
+              <div class="wu-ch-name">First Light</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">UI Inspection</span>
+                <span class="wu-tag skill">Hidden Text</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-firstlight-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-firstlight-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-firstlight-breakdown">
+              <div class="wu-breakdown">
+                <p>The text hints: <em>"Look carefully at what is already in front of you."</em></p>
+                <p>The solution is simply selecting all text on the page (<code>Ctrl + A</code>). The flag is hidden using invisible styling — white text on a white background.</p>
+                <p>This reinforces a foundational beginner reflex: always inspect visually before assuming technical complexity.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-firstlight-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{ISHTAR-HIDDEN-IN-PLAIN-SIGHT}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Beneath the Surface -->
+        <div class="wu-challenge" id="wu-beneath">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Warmup</div>
+              <div class="wu-ch-name">Beneath the Surface</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">HTML Source Inspection</span>
+                <span class="wu-tag skill">DOM</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-beneath-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-beneath-solution')">Solution</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-beneath-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-beneath-breakdown">
+              <div class="wu-breakdown">
+                <p>The clue: <em>"Additional details exist just beneath the surface layer."</em></p>
+                <p>Viewing the page source reveals the flag hidden in an HTML comment. This teaches two things: the browser renders only part of the content it receives, and hidden HTML comments are one of the most common beginner CTF hiding techniques.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-beneath-solution">
+              <div class="wu-breakdown"><p>Press <code>Ctrl + U</code> to view page source. Look for the comment:</p></div>
+              <div class="wu-codeblock">
+                <div class="wu-code-header"><span class="wu-code-lang">HTML</span></div>
+                <div class="wu-code-body"><pre>&lt;!-- flag{ISHTAR-SURFACE-LEVEL-DECEPTION} --&gt;</pre></div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-beneath-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{ISHTAR-SURFACE-LEVEL-DECEPTION}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recovered Log -->
+        <div class="wu-challenge" id="wu-log">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Warmup</div>
+              <div class="wu-ch-name">Recovered Log</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Binary Inspection</span>
+                <span class="wu-tag skill">strings</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-log-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-log-solution')">Solution</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-log-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-log-breakdown">
+              <div class="wu-breakdown">
+                <p><strong>File:</strong> <code>recovered_fragment.bin</code></p>
+                <p>The file appears unreadable in a text editor. Running <code>strings</code> extracts printable ASCII sequences embedded in the binary — the flag appears clearly in the extracted output.</p>
+                <div class="wu-callout">
+                  <div class="wu-callout-title">Real-World Relevance</div>
+                  <div class="wu-callout-body">Malware and compiled binaries often embed hardcoded URLs, credentials, and debug strings in their data sections. Running <code>strings</code> before full reverse engineering saves significant time.</div>
+                </div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-log-solution">
+              <div class="wu-codeblock">
+                <div class="wu-code-header"><span class="wu-code-lang">Bash</span></div>
+                <div class="wu-code-body"><pre><span class="cmd">strings</span> recovered_fragment.bin</pre></div>
+              </div>
+              <div class="wu-breakdown"><p>The flag appears clearly in the extracted ASCII output.</p></div>
+            </div>
+            <div class="wu-sec-panel" id="wu-log-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{ISHTAR-TERMINAL-ACCESS}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Incomplete Archive -->
+        <div class="wu-challenge" id="wu-archive">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Warmup</div>
+              <div class="wu-ch-name">Incomplete Archive</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Hidden Files</span>
+                <span class="wu-tag skill">Dotfiles</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-archive-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-archive-solution')">Solution</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-archive-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-archive-breakdown">
+              <div class="wu-breakdown">
+                <p><strong>File:</strong> <code>container.zip</code></p>
+                <p>Extracting normally shows nothing useful. A hidden dotfile invisible to a standard <code>ls</code> call is present in the archive. Dotfiles are overlooked regularly — always list all files after extraction.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-archive-solution">
+              <div class="wu-codeblock">
+                <div class="wu-code-header"><span class="wu-code-lang">Bash</span></div>
+                <div class="wu-code-body"><pre><span class="cmd">unzip</span> container.zip
+<span class="cmd">ls -a</span>   <span class="comment"># reveals hidden dotfile beginning with .</span></pre></div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-archive-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{ISHTAR-HIDDEN-STRUCTURE}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════ NEW LIGHT ════════════════ -->
+        <div class="wu-category-banner cat-newlight" style="margin-top:40px;">
+          <div class="cat-banner-label" style="color:#50a0dc;">Category</div>
+          <div class="cat-banner-title">New Light</div>
+          <div class="cat-banner-subtitle">"Structure and Encoding — Transform data, don't merely observe it."</div>
+        </div>
+
+        <!-- Heresy of the Shoemaker -->
+        <div class="wu-challenge" id="wu-heresy">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">New Light</div>
+              <div class="wu-ch-name">Heresy of the Shoemaker</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Acrostic Cipher</span>
+                <span class="wu-tag skill">Pattern Recognition</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-heresy-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-heresy-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-heresy-breakdown">
+              <div class="wu-breakdown">
+                <p>Taking the <strong>first letter of each line</strong> of the provided text yields: <code>SYLORINENDURES</code></p>
+                <p>Formatted to match the competition's flag convention: <code>flag{SYLORIN_ENDURES}</code></p>
+                <p>This reinforces that formatting irregularities are intentional. When lines are oddly spaced or capitalized inconsistently, the <strong>structure itself is the cipher</strong>.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-heresy-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{SYLORIN_ENDURES}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flaws in SPACE-time -->
+        <div class="wu-challenge" id="wu-spacetime">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">New Light</div>
+              <div class="wu-ch-name">Flaws in SPACE-time</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Whitespace Steganography</span>
+                <span class="wu-tag skill">Binary Encoding</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-spacetime-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-spacetime-solution')">Solution</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-spacetime-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-spacetime-breakdown">
+              <div class="wu-breakdown">
+                <p><strong>File:</strong> <code>sylorin_fragment_T0.txt</code></p>
+                <p>Tabs and spaces scattered through the file encode binary data. These are not formatting artifacts.</p>
+                <p><strong>Mapping:</strong> Tab (<code>^I</code>) = <code>1</code> &nbsp;|&nbsp; Space = <code>0</code></p>
+                <p>Converting the resulting binary string to ASCII reveals: <code>FIRST_STRIKE</code></p>
+                <div class="wu-callout">
+                  <div class="wu-callout-title">Learning Outcome</div>
+                  <div class="wu-callout-body">Whitespace is data. Invisible does not mean empty. Many real-world covert channels exploit whitespace precisely because it goes unnoticed.</div>
+                </div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-spacetime-solution">
+              <div class="wu-codeblock">
+                <div class="wu-code-header"><span class="wu-code-lang">Bash</span></div>
+                <div class="wu-code-body"><pre><span class="cmd">cat -A</span> sylorin_fragment_T0.txt
+<span class="comment"># ^I = tab = 1, space = 0 → binary → ASCII → FIRST_STRIKE</span></pre></div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-spacetime-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{FIRST_STRIKE}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Principles of Separation -->
+        <div class="wu-challenge" id="wu-separation">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">New Light</div>
+              <div class="wu-ch-name">Principles of Separation</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Multi-Step Encoding</span>
+                <span class="wu-tag skill">XOR</span>
+                <span class="wu-tag skill">Base64</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-sep-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-sep-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-sep-breakdown">
+              <div class="wu-breakdown">
+                <p>A three-step transformation pipeline must be applied in order:</p>
+                <p><strong>1.</strong> Base64 decode the input &nbsp; <strong>2.</strong> XOR each byte with key <code>23</code> &nbsp; <strong>3.</strong> Reverse the byte order</p>
+                <p>This tests whether players understand transformation <em>chains</em> rather than expecting single-step decoding. Many real obfuscation schemes layer operations intentionally to defeat naive analysis.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-sep-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{SEPARATE_THE_FLOURISHING}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resonant Fury // Helm -->
+        <div class="wu-challenge" id="wu-helm">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">New Light</div>
+              <div class="wu-ch-name">Resonant Fury // Helm</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Linux Internals</span>
+                <span class="wu-tag skill">/proc Filesystem</span>
+                <span class="wu-tag skill">File Descriptors</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-helm-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-helm-solution')">Solution</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-helm-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-helm-breakdown">
+              <div class="wu-breakdown">
+                <p><strong>Files:</strong> <code>Dockerfile</code>, <code>ishtar-resonant-fury-helm.tar</code></p>
+                <p>A background daemon (<code>ur-daemon</code>) opens <code>/var/lib/deep/.sustenance</code>, reads the flag, then <strong>deletes the file from disk</strong> while keeping the file descriptor open in memory.</p>
+                <p>Even after deletion, Linux retains file content in memory until all file descriptors pointing to it are closed — creating a "ghost file" accessible via <code>/proc</code>.</p>
+                <div class="wu-callout">
+                  <div class="wu-callout-title">Real-World Relevance</div>
+                  <div class="wu-callout-body">Secrets stored in environment variables persist in <code>/proc</code>. Deleted credential files remain accessible via open file descriptors. Memory forensics on live processes can recover data that "no longer exists" on disk.</div>
+                </div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-helm-solution">
+              <div class="wu-codeblock">
+                <div class="wu-code-header"><span class="wu-code-lang">Bash</span></div>
+                <div class="wu-code-body"><pre><span class="comment"># Step 1: find the daemon PID</span>
+<span class="cmd">ps aux</span> | grep ur-daemon
+
+<span class="comment"># Step 2: list its file descriptors</span>
+<span class="cmd">ls -l</span> /proc/&lt;PID&gt;/fd
+
+<span class="comment"># Step 3: read the deleted file from memory</span>
+<span class="cmd">cat</span> /proc/&lt;PID&gt;/fd/3
+
+<span class="comment"># Alternative: inspect environment variables</span>
+<span class="cmd">cat</span> /proc/&lt;PID&gt;/environ | <span class="cmd">tr</span> '\0' '\n'</pre></div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-helm-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{ur_yearns_through_hunger}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════ JUSTICLAIR ════════════════ -->
+        <div class="wu-category-banner cat-justiclair" style="margin-top:40px;">
+          <div class="cat-banner-label" style="color:#b482dc;">Category</div>
+          <div class="cat-banner-title">Ishtar Justiclair</div>
+          <div class="cat-banner-subtitle">"Applied Cryptography & Systems Analysis"</div>
+        </div>
+
+        <!-- Dominance Without Purpose -->
+        <div class="wu-challenge" id="wu-dominance">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Ishtar Justiclair</div>
+              <div class="wu-ch-name">Dominance Without Purpose</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">XOR Cipher</span>
+                <span class="wu-tag skill">Brute Force</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-dom-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-dom-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-dom-breakdown">
+              <div class="wu-breakdown">
+                <p>Testing all 256 possible single-byte XOR keys against the ciphertext, one key produces readable English output: <code>WILL_TO_GO_ON_EXISTING</code></p>
+                <p>This mirrors real-world C2 obfuscation techniques used in malware, where simple XOR masking is applied to strings to defeat basic signature detection.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-dom-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{WILL_TO_GO_ON_EXISTING}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inevitability Simulation -->
+        <div class="wu-challenge" id="wu-inevitability">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Ishtar Justiclair</div>
+              <div class="wu-ch-name">Inevitability Simulation</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Conway's Game of Life</span>
+                <span class="wu-tag skill">Cellular Automaton</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-inev-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-inev-flag')">Flags</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-inev-breakdown">
+              <div class="wu-breakdown">
+                <p>Given a starting grid, players must simulate Conway's Game of Life step by step using the standard rules:</p>
+                <p>• A live cell with 2 or 3 live neighbors <strong>survives</strong><br>• A dead cell with exactly 3 live neighbors <strong>becomes alive</strong><br>• All other cells die or stay dead</p>
+                <p>A single miscount cascades into wrong answers in subsequent generations. Precise simulation is required.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-inev-flag">
+              <div class="wu-flag-box" style="margin-bottom:10px;"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">After 1 Generation (12 live cells)</div><div class="wu-flag-value">flag{TWELVE}</div></div></div>
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">After 2 Generations (14 live cells)</div><div class="wu-flag-value">flag{FOURTEEN}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Doctrine of Balance -->
+        <div class="wu-challenge" id="wu-doctrine">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Ishtar Justiclair</div>
+              <div class="wu-ch-name">Doctrine of Balance</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">JWT Decoding</span>
+                <span class="wu-tag skill">Base64url</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-doc-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-doc-solution')">Solution</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-doc-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-doc-breakdown">
+              <div class="wu-breakdown">
+                <p>JWT tokens are structured as <code>HEADER.PAYLOAD.SIGNATURE</code> — each section is Base64url-encoded.</p>
+                <p>Decoding the payload section of the provided token reveals the flag carried plainly in the decoded JSON. No signature cracking is required.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-doc-solution">
+              <div class="wu-codeblock">
+                <div class="wu-code-header"><span class="wu-code-lang">Python</span></div>
+                <div class="wu-code-body"><pre><span class="kw">import</span> base64, json
+
+token = <span class="str">"HEADER.PAYLOAD.SIGNATURE"</span>
+payload = token.split(<span class="str">'.'</span>)[<span class="num">1</span>]
+<span class="comment"># pad to multiple of 4</span>
+payload += <span class="str">'='</span> * (-len(payload) % <span class="num">4</span>)
+decoded = json.loads(base64.urlsafe_b64decode(payload))
+<span class="cmd">print</span>(decoded)</pre></div>
+              </div>
+              <div class="wu-breakdown"><p>The decoded payload contains: <code>{"doctrine": "UNSHAKABLE-IRRATIONAL-HOPE"}</code></p></div>
+            </div>
+            <div class="wu-sec-panel" id="wu-doc-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{UNSHAKABLE-IRRATIONAL-HOPE}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Salvation Convergence Record -->
+        <div class="wu-challenge" id="wu-salvation">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Ishtar Justiclair</div>
+              <div class="wu-ch-name">Salvation Convergence Record</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Hash Verification</span>
+                <span class="wu-tag skill">SHA-256</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-sal-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-sal-solution')">Solution</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-sal-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-sal-breakdown">
+              <div class="wu-breakdown">
+                <p>A SHA-256 hash is provided. Hash candidate phrases and compare to find the match: <code>ETERNAL-AND-PERFECTED</code></p>
+                <p>Critical detail: many failed attempts come from including a trailing newline. Always use the <code>-n</code> flag to suppress it.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-sal-solution">
+              <div class="wu-codeblock">
+                <div class="wu-code-header"><span class="wu-code-lang">Bash</span></div>
+                <div class="wu-code-body"><pre><span class="cmd">echo -n</span> <span class="str">"ETERNAL-AND-PERFECTED"</span> | <span class="cmd">sha256sum</span>
+<span class="comment"># -n suppresses the newline echo appends by default</span></pre></div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-sal-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{ETERNAL-AND-PERFECTED}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Patternfall -->
+        <div class="wu-challenge" id="wu-patternfall">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Ishtar Justiclair</div>
+              <div class="wu-ch-name">Patternfall</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Network Forensics</span>
+                <span class="wu-tag skill">PCAP</span>
+                <span class="wu-tag skill">Wireshark</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-pat-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-pat-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-pat-breakdown">
+              <div class="wu-breakdown">
+                <p><strong>File:</strong> <code>patternfall.pcap</code></p>
+                <p>Open in Wireshark → filter for HTTP → <strong>File → Export Objects → HTTP</strong> to reconstruct files transmitted during the captured session. One exported object contains the flag.</p>
+                <div class="wu-callout">
+                  <div class="wu-callout-title">Real-World Skill</div>
+                  <div class="wu-callout-body">HTTP object reconstruction from PCAPs allows analysts to recover transferred files, credentials, and malware payloads from captured network traffic.</div>
+                </div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-pat-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{GEOMETRY-AND-SILICA}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════ VANQUISHER ════════════════ -->
+        <div class="wu-category-banner cat-vanquisher" style="margin-top:40px;">
+          <div class="cat-banner-label" style="color:#dc6e50;">Category</div>
+          <div class="cat-banner-title">Ishtar Vanquisher</div>
+          <div class="cat-banner-subtitle">"Reverse Engineering & Systems Exploitation"</div>
+        </div>
+
+        <!-- What Am I -->
+        <div class="wu-challenge" id="wu-whatami">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Ishtar Vanquisher</div>
+              <div class="wu-ch-name">What Am I</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Esoteric Languages</span>
+                <span class="wu-tag skill">Brainfuck</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-wai-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-wai-flags')">Flags</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-wai-breakdown">
+              <div class="wu-breakdown">
+                <p>The provided sequences are written in <strong>Brainfuck</strong> — an esoteric Turing-complete language using only eight single-character commands: <code>&gt; &lt; + - . , [ ]</code></p>
+                <p>Recognizing the language requires familiarity with esoteric programming. Run through a Brainfuck interpreter — <strong>execution, not manual decoding</strong>, is the correct approach.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-wai-flags">
+              <div class="wu-flag-box" style="margin-bottom:10px;"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag 1</div><div class="wu-flag-value">flag{NOT-A-MONSTER-A-SAVIOR}</div></div></div>
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag 2</div><div class="wu-flag-value">flag{WORTHLESS-POINTLESS-THING}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rheliksbane -->
+        <div class="wu-challenge" id="wu-rheliksbane">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Ishtar Vanquisher</div>
+              <div class="wu-ch-name">Rheliksbane</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">ROT94 Cipher</span>
+                <span class="wu-tag skill">Extended Caesar</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-rhe-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-rhe-flags')">Flags</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-rhe-breakdown">
+              <div class="wu-breakdown">
+                <p>Instead of the familiar ROT13 (26 letters), this uses <strong>ROT94</strong> — rotating across all 94 printable ASCII characters.</p>
+                <p>Brute-forcing all shifts from 1 to 93 reveals readable output at specific rotation values. Standard ROT13 tools won't handle this extended domain.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-rhe-flags">
+              <div class="wu-flag-box" style="margin-bottom:10px;"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag 1</div><div class="wu-flag-value">flag{WASH-MY-HANDS-WITH-THEIR-BLOOD}</div></div></div>
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag 2</div><div class="wu-flag-value">flag{CONFIDENT-YOU-ARE-A-COWARD}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fed and Free -->
+        <div class="wu-challenge" id="wu-fedfree">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Ishtar Vanquisher</div>
+              <div class="wu-ch-name">Fed and Free</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Morse Code</span>
+                <span class="wu-tag skill">CSS Steganography</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-ff-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-ff-flags')">Flags</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-ff-breakdown">
+              <div class="wu-breakdown">
+                <p>Inspecting the stylesheet reveals sequences of dots and dashes embedded as CSS class names or comments — content that <strong>never renders visually</strong> in a browser.</p>
+                <p>Extract the Morse sequences and decode them, carefully observing spacing rules for letters vs. words.</p>
+                <p>This demonstrates that data can be hidden in any layer of a web document.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-ff-flags">
+              <div class="wu-flag-box" style="margin-bottom:10px;"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag 1</div><div class="wu-flag-value">flag{NOBODY-DENIES-MY-THIRST}</div></div></div>
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag 2</div><div class="wu-flag-value">flag{THE-REGIME-FREED-ME}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════ SPECIAL ════════════════ -->
+        <div class="wu-category-banner cat-special" style="margin-top:40px;">
+          <div class="cat-banner-label" style="color:var(--gold);">Special Challenges</div>
+          <div class="cat-banner-title">Standalone & Series</div>
+          <div class="cat-banner-subtitle">"Binary analysis, RSA, environment enumeration, network discovery, game reversing"</div>
+        </div>
+
+        <!-- Needle and Worm -->
+        <div class="wu-challenge" id="wu-needle">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Special</div>
+              <div class="wu-ch-name">Needle and Worm</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Binary Inspection</span>
+                <span class="wu-tag skill">strings</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-needle-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-needle-solution')">Solution</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-needle-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-needle-breakdown">
+              <div class="wu-breakdown">
+                <p><strong>Files:</strong> <code>Dockerfile</code>, <code>make_needle.py</code>, <code>ishtar-needle-and-worm.tar</code></p>
+                <p>A compiled binary at <code>/usr/local/bin/needle</code> was generated with junk bytes surrounding the flag. No packing or encryption — only noise insertion. A classic needle-in-a-haystack scenario.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-needle-solution">
+              <div class="wu-codeblock">
+                <div class="wu-code-header"><span class="wu-code-lang">Bash</span></div>
+                <div class="wu-code-body"><pre><span class="cmd">strings</span> /usr/local/bin/needle | <span class="cmd">grep</span> flag</pre></div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-needle-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{listen_closely_oh_vengeance_mine}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resonant Fury // Gauntlets -->
+        <div class="wu-challenge" id="wu-gauntlets">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Special</div>
+              <div class="wu-ch-name">Resonant Fury // Gauntlets</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Multi-Prime RSA</span>
+                <span class="wu-tag skill">Cryptography</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-gaunt-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-gaunt-solution')">Solution</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-gaunt-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-gaunt-breakdown">
+              <div class="wu-breakdown">
+                <p><strong>Files:</strong> <code>Dockerfile</code>, <code>gen_rsa.py</code></p>
+                <p>RSA ciphertext where <code>n</code> is the product of <strong>three primes</strong> instead of the standard two. Given: <code>n = 151951</code>, <code>e = 17</code></p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-gaunt-solution">
+              <div class="wu-codeblock">
+                <div class="wu-code-header"><span class="wu-code-lang">Steps</span></div>
+                <div class="wu-code-body"><pre><span class="comment"># Step 1: Factor n</span>
+151951 = 47 × 53 × 61
+
+<span class="comment"># Step 2: Euler's Totient for 3 primes</span>
+φ(n) = (p−1)(q−1)(r−1) = 46 × 52 × 60 = 143520
+
+<span class="comment"># Step 3: Find private exponent d</span>
+<span class="comment"># 17d ≡ 1 mod 143520 → d = 126641</span>
+
+<span class="comment"># Step 4: Decrypt each block</span>
+m = c^d mod n → convert to ASCII</pre></div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-gaunt-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{yul_speaks_through_honesty}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resonant Fury // Plate -->
+        <div class="wu-challenge" id="wu-plate">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Special</div>
+              <div class="wu-ch-name">Resonant Fury // Plate</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Environment Enumeration</span>
+                <span class="wu-tag skill">Shared Memory</span>
+                <span class="wu-tag skill">Zero-Width Chars</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-plate-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-plate-flags')">Flags</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-plate-breakdown">
+              <div class="wu-breakdown">
+                <p>Three hidden flags scattered across unconventional locations in the container environment:</p>
+                <p><strong>Whisper 1 — Shared Memory:</strong> Linux shared memory at <code>/dev/shm</code> is commonly used for IPC but often overlooked.</p>
+                <div class="wu-codeblock"><div class="wu-code-header"><span class="wu-code-lang">Bash</span></div><div class="wu-code-body"><pre><span class="cmd">cat</span> /dev/shm/.xol_fragment</pre></div></div>
+                <p><strong>Whisper 2 — Systemd Unit:</strong> Inspect <code>/etc/systemd/system/witness.service</code> — the <code>Environment=</code> directive contains hidden text.</p>
+                <p><strong>Whisper 3 — Zero-Width Filename:</strong> A file in <code>/opt/osmium/</code> has invisible Unicode zero-width characters in its name.</p>
+                <div class="wu-codeblock"><div class="wu-code-header"><span class="wu-code-lang">Bash</span></div><div class="wu-code-body"><pre><span class="cmd">ls -lb</span> /opt/osmium/    <span class="comment"># -b reveals hidden Unicode</span>
+<span class="cmd">find</span> /opt/osmium -type f | <span class="cmd">xargs cat</span></pre></div></div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-plate-flags">
+              <div class="wu-flag-box" style="margin-bottom:10px;"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Whisper 1 — Shared Memory</div><div class="wu-flag-value">flag{xol_whispers_in_shared_memory}</div></div></div>
+              <div class="wu-flag-box" style="margin-bottom:10px;"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Whisper 2 — Systemd Unit</div><div class="wu-flag-value">flag{the_witness_writes_in_margins}</div></div></div>
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Whisper 3 — Zero-Width Filename</div><div class="wu-flag-value">flag{hidden_in_the_name_itself}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resonant Fury // Greaves -->
+        <div class="wu-challenge" id="wu-greaves">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Special</div>
+              <div class="wu-ch-name">Resonant Fury // Greaves</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Network Service Discovery</span>
+                <span class="wu-tag skill">TCP</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-greaves-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-greaves-solution')">Solution</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-greaves-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-greaves-breakdown">
+              <div class="wu-breakdown">
+                <p>A daemon listens on a non-standard TCP port undocumented anywhere in the challenge files. Service discovery is required to find and connect to it.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-greaves-solution">
+              <div class="wu-codeblock">
+                <div class="wu-code-header"><span class="wu-code-lang">Bash</span></div>
+                <div class="wu-code-body"><pre><span class="cmd">ss -lntp</span>           <span class="comment"># reveals service on port 9447</span>
+<span class="cmd">nc</span> localhost 9447  <span class="comment"># flag broadcast on connect</span></pre></div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-greaves-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">ISHTAR{4kk4_k33p5_thr0ugh_53cr3t5}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resonant Fury // Mark -->
+        <div class="wu-challenge" id="wu-mark">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Special</div>
+              <div class="wu-ch-name">Resonant Fury // Mark</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag skill">Reverse Engineering</span>
+                <span class="wu-tag skill">Game Logic</span>
+                <span class="wu-tag skill">Python</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-mark-breakdown')">Breakdown</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-mark-solution')">Both Methods</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-mark-flag')">Flag</button>
+            </div>
+            <div class="wu-sec-panel active" id="wu-mark-breakdown">
+              <div class="wu-breakdown">
+                <p><strong>Files:</strong> <code>resonant_fury_mark.py</code></p>
+                <p>A projectile-based game where surviving all four waves reveals the flag. Alternatively, reverse the source to extract the flag without playing.</p>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-mark-solution">
+              <div class="wu-breakdown"><p><strong>Method 2 — Source Reversal</strong> (bypass the game entirely):</p></div>
+              <div class="wu-codeblock">
+                <div class="wu-code-header"><span class="wu-code-lang">Python</span></div>
+                <div class="wu-code-body"><pre><span class="comment"># Inside the script:</span>
+_VALS = [<span class="num">97</span>,<span class="num">103</span>,<span class="num">92</span>,<span class="num">98</span>,<span class="num">118</span>,<span class="num">109</span>,<span class="num">99</span>,<span class="num">112</span>,<span class="num">103</span>,<span class="num">102</span>,<span class="num">90</span>,<span class="num">114</span>,
+         <span class="num">92</span>,<span class="num">110</span>,<span class="num">90</span>,<span class="num">105</span>,<span class="num">96</span>,<span class="num">113</span>,<span class="num">96</span>,<span class="num">109</span>,<span class="num">90</span>,<span class="num">113</span>,<span class="num">100</span>,<span class="num">109</span>,
+         <span class="num">111</span>,<span class="num">112</span>,<span class="num">106</span>,<span class="num">112</span>,<span class="num">110</span>,<span class="num">120</span>]
+<span class="cmd">print</span>(<span class="str">""</span>.join(<span class="cmd">chr</span>(v + <span class="num">5</span>) <span class="kw">for</span> v <span class="kw">in</span> _VALS))
+<span class="comment"># Add 5 to each value → ASCII → flag</span></pre></div>
+              </div>
+            </div>
+            <div class="wu-sec-panel" id="wu-mark-flag">
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Flag</div><div class="wu-flag-value">flag{order_maintained_in_chaos}</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════ MEGA CHALLENGE ════════════════ -->
+        <div class="wu-category-banner cat-mega" style="margin-top:40px;">
+          <div class="cat-banner-label" style="color:var(--gold-bright);">Mega Challenge — 1500 Points</div>
+          <div class="cat-banner-title">AROHAL SYLORIN</div>
+          <div class="cat-banner-subtitle">"Steganography · SQL Injection · JWT Forgery · Buffer Overflow · Log Forensics · AES Decryption"</div>
+        </div>
+
+        <div class="wu-challenge" id="wu-arohal">
+          <div class="wu-challenge-header" onclick="toggleChallenge(this)">
+            <div class="wu-ch-left">
+              <div class="wu-ch-cat">Mega Challenge</div>
+              <div class="wu-ch-name">AROHAL SYLORIN</div>
+              <div class="wu-ch-tags">
+                <span class="wu-tag pts">1500 pts total</span>
+                <span class="wu-tag skill">Multi-Stage Exploitation</span>
+              </div>
+            </div>
+            <div class="wu-ch-toggle">▾</div>
+          </div>
+          <div class="wu-challenge-body">
+            <div class="wu-sections">
+              <button class="wu-sec-btn active" onclick="switchWuSec(this,'wu-ar-overview')">Overview</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-ar-p1')">P1: Stego</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-ar-p2')">P2: SQLi</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-ar-p3')">P3: JWT</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-ar-p4')">P4: BOF</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-ar-p5')">P5: Logs</button>
+              <button class="wu-sec-btn" onclick="switchWuSec(this,'wu-ar-p6')">P6: AES</button>
+            </div>
+
+            <div class="wu-sec-panel active" id="wu-ar-overview">
+              <div class="wu-breakdown">
+                <p><strong>Files:</strong> <code>webapp.py</code>, <code>arohal_sylorin.log</code>, <code>sylorin_query.c</code>, <code>finale.png</code>, <code>final_transmission.enc</code>, <code>decrypt.py</code></p>
+                <p>The culmination challenge combining six vulnerability classes into a single connected arc. Each flag contributes to the final decryption key for Protocol 6.</p>
+                <blockquote>"Not all records were meant to be opened." — Ishtar Collective Archive Node: AROHAL SYLORIN</blockquote>
+              </div>
+            </div>
+
+            <div class="wu-sec-panel" id="wu-ar-p1">
+              <div class="wu-breakdown"><p><strong>Protocol 1 — Steganography</strong> &nbsp;|&nbsp; File: <code>finale.jpg</code></p>
+              <p>The image contains hidden data embedded using <code>steghide</code>. The passphrase is derived from the challenge's own name.</p></div>
+              <div class="wu-codeblock"><div class="wu-code-header"><span class="wu-code-lang">Bash</span></div><div class="wu-code-body"><pre><span class="cmd">steghide</span> extract -sf finale.jpg -p <span class="str">"arohal sylorin"</span></pre></div></div>
+              <div class="wu-flag-box" style="margin-top:16px;"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Protocol 1 Flag</div><div class="wu-flag-value">flag{arohal_sylorin_node_online}</div></div></div>
+            </div>
+
+            <div class="wu-sec-panel" id="wu-ar-p2">
+              <div class="wu-breakdown"><p><strong>Protocol 2 — SQL Injection</strong> &nbsp;|&nbsp; Interface: <code>webapp.py</code> search endpoint</p>
+              <p>The search endpoint directly concatenates user input into an SQLite query. Basic injection confirms vulnerability:</p></div>
+              <div class="wu-codeblock"><div class="wu-code-header"><span class="wu-code-lang">SQL</span></div><div class="wu-code-body"><pre><span class="comment">-- Confirm injection:</span>
+' OR 1=1 --
+
+<span class="comment">-- Extract classified records:</span>
+' UNION SELECT 1,2,3,data FROM archives WHERE classification='CLASSIFIED'--</pre></div></div>
+              <div class="wu-flag-box" style="margin-top:16px;margin-bottom:10px;"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Protocol 2 Flag A</div><div class="wu-flag-value">flag{augurmind_saw_the_end}</div></div></div>
+              <div class="wu-flag-box"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Protocol 2 Flag B</div><div class="wu-flag-value">flag{rasputin_purged_the_record}</div></div></div>
+            </div>
+
+            <div class="wu-sec-panel" id="wu-ar-p3">
+              <div class="wu-breakdown"><p><strong>Protocol 3 — JWT Forgery</strong> &nbsp;|&nbsp; Endpoint: <code>/auth</code></p>
+              <p>The application issues JWTs signed with a weak, guessable secret. Discover the secret, modify the payload, re-sign.</p></div>
+              <div class="wu-codeblock"><div class="wu-code-header"><span class="wu-code-lang">Steps</span></div><div class="wu-code-body"><pre><span class="num">1.</span> Request token from /auth
+<span class="num">2.</span> Decode at jwt.io → change "role": "user" → "administrator"
+<span class="num">3.</span> Brute-force secret with hashcat (JWT mode) → discovers: <span class="str">"ishtar"</span>
+<span class="num">4.</span> Re-sign with secret <span class="str">"ishtar"</span>
+<span class="num">5.</span> Submit forged token to admin endpoint</pre></div></div>
+              <div class="wu-flag-box" style="margin-top:16px;"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Protocol 3 Flag</div><div class="wu-flag-value">flag{the_copies_went_back_in}</div></div></div>
+            </div>
+
+            <div class="wu-sec-panel" id="wu-ar-p4">
+              <div class="wu-breakdown"><p><strong>Protocol 4 — Buffer Overflow</strong> &nbsp;|&nbsp; Binary: <code>sylorin-query</code></p>
+              <p>An unchecked input buffer — classic stack-based overflow. Overwrite the return address at offset 76 to redirect to <code>win()</code>.</p></div>
+              <div class="wu-codeblock"><div class="wu-code-header"><span class="wu-code-lang">Bash + Python</span></div><div class="wu-code-body"><pre><span class="comment"># Find SUID binary</span>
+<span class="cmd">find</span> / -perm -4000 2>/dev/null
+
+<span class="comment"># Get win() address</span>
+<span class="cmd">objdump -d</span> sylorin-query | <span class="cmd">grep</span> win
+
+<span class="comment"># Craft payload (offset = 76 bytes)</span>
+payload = <span class="kw">b</span><span class="str">"A"</span> * <span class="num">76</span> + win_address_little_endian</pre></div></div>
+              <div class="wu-flag-box" style="margin-top:16px;"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Protocol 4 Flag</div><div class="wu-flag-value">flag{soteria_sent_the_warning}</div></div></div>
+            </div>
+
+            <div class="wu-sec-panel" id="wu-ar-p5">
+              <div class="wu-breakdown"><p><strong>Protocol 5 — Log Forensics</strong> &nbsp;|&nbsp; File: <code>arohal_sylorin.log</code></p>
+              <p>The log contains scattered flag fragments marked with a specific keyword. Extract and reassemble in order.</p></div>
+              <div class="wu-codeblock"><div class="wu-code-header"><span class="wu-code-lang">Bash</span></div><div class="wu-code-body"><pre><span class="cmd">grep</span> FRAGMENT arohal_sylorin.log
+<span class="comment"># Reassemble fragments by number/timestamp order</span></pre></div></div>
+              <div class="wu-flag-box" style="margin-top:16px;"><div class="wu-flag-icon">🚩</div><div><div class="wu-flag-label">Protocol 5 Flag</div><div class="wu-flag-value">flag{the_witness_was_always_coming}</div></div></div>
+            </div>
+
+            <div class="wu-sec-panel" id="wu-ar-p6">
+              <div class="wu-breakdown"><p><strong>Protocol 6 — Final AES Decryption</strong> &nbsp;|&nbsp; File: <code>final_transmission.enc</code></p>
+              <p>The decryption key is a composite string built from all five previously recovered flags, joined by underscores:</p></div>
+              <div class="wu-codeblock"><div class="wu-code-header"><span class="wu-code-lang">Key</span></div><div class="wu-code-body"><pre>arohal_sylorin_node_online_the_copies_went_back_in_augurmind_saw_the_end_soteria_sent_the_warning_rasputin_purged_the_record</pre></div></div>
+              <div class="wu-codeblock"><div class="wu-code-header"><span class="wu-code-lang">Bash</span></div><div class="wu-code-body"><pre><span class="cmd">python3</span> decrypt.py   <span class="comment"># enter composite key when prompted</span></pre></div></div>
+              <div class="wu-breakdown" style="margin-top:16px;"><p>The final transmission is decrypted, completing the challenge arc. 🎉</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════ FLAG LIST ════════════════ -->
+        <div id="wu-flaglist" style="scroll-margin-top:80px;margin-top:40px;">
+          <div class="sec-head"><h2>Complete Flag List</h2><div class="sec-line"></div><div class="sec-tag">26 FLAGS</div></div>
+          <div class="wu-flaglist">
+            <div class="wu-flaglist-title">All Flags — ISHTAR ANOMALY CTF</div>
+            <div id="wu-flag-entries"></div>
+          </div>
+        </div>
+
+        <!-- ════════════════ CLOSING THOUGHTS ════════════════ -->
+        <div class="wu-closing">
+          <h3>Final Thoughts</h3>
+          <div class="wu-tier">
+            <div class="wu-tier-dot green"></div>
+            <div class="wu-tier-text"><strong>Observe before exploiting</strong> — The warmup tier teaches you to look before you act. Many competitors burn time writing scripts for challenges solvable with <code>Ctrl + A</code>.</div>
+          </div>
+          <div class="wu-tier">
+            <div class="wu-tier-dot blue"></div>
+            <div class="wu-tier-text"><strong>Decode before brute forcing</strong> — The New Light tier rewards recognizing encoding patterns. A single insight (whitespace = binary, first letters = acrostic) unlocks the flag instantly.</div>
+          </div>
+          <div class="wu-tier">
+            <div class="wu-tier-dot purple"></div>
+            <div class="wu-tier-text"><strong>Understand systems before breaking them</strong> — The Justiclair tier builds applied cryptanalysis and network analysis skills. You cannot forge a JWT you don't understand.</div>
+          </div>
+          <div class="wu-tier">
+            <div class="wu-tier-dot red"></div>
+            <div class="wu-tier-text"><strong>Break systems only after understanding them</strong> — The Vanquisher and final challenges assume you can reason about memory layouts, process state, and binary structure at a low level. The AROHAL SYLORIN mega-challenge is the synthesis — no single skill suffices, and every flag you recover becomes material for the next step. That's how real engagements work.</div>
+          </div>
+        </div>
+
+      </div><!-- /wu-content -->
+    </div><!-- /wu-layout -->
+  </div><!-- /tab-writeup -->
+
 </main>
 
 <footer>ISHTAR ANOMALY CTF — PERMANENT ARCHIVE // ALL DATA FINAL</footer>
@@ -350,18 +1484,18 @@ header{background:linear-gradient(180deg,rgba(4,7,16,.55) 0%,rgba(4,7,16,.25) 10
 //  STATE
 // ══════════════════════════════════════════════════════
 const S = {
-  challenges:   [],   // from challenges.csv
-  teams:        {},   // id -> name
-  teamMembers:  {},   // team_id -> [{name, score}]
-  scoreboard:   [],   // [{place, teamName, teamId, score}]
-  solves:       [],   // from solves.csv
-  submissions:  [],   // correct submissions for graph
-  hints:        {},   // challenge_id -> [hints]
-  filesConfig:  {},   // filename -> {url, host, challenge_id}
-  chalFiles:    {},   // challenge_id -> [{filename, url, host}]
-  solvesPerChal:{},   // challenge_id -> [team_names]
+  challenges:   [],
+  teams:        {},
+  teamMembers:  {},
+  scoreboard:   [],
+  solves:       [],
+  submissions:  [],
+  hints:        {},
+  filesConfig:  {},
+  chalFiles:    {},
+  solvesPerChal:{},
   loaded:       0,
-  total:        6,    // challenges, teams, scoreboard, solves, submissions, filesConfig
+  total:        6,
   chartInst:    null,
   allDatasets:  [],
   axisMin:      null,
@@ -369,7 +1503,6 @@ const S = {
   topN:         10,
 };
 
-// ── progress bar ──
 function progress(msg, n) {
   document.getElementById('ld-status').textContent = msg;
   document.getElementById('ld-bar').style.width = Math.round((n / S.total) * 100) + '%';
@@ -399,75 +1532,53 @@ function showError(msg) {
 function loadAll() {
   progress('LOADING CHALLENGES...', 0);
 
-  // 1. challenges.csv
   Papa.parse('challenges.csv', { download:true, header:true,
-    complete(r) {
-      S.challenges = r.data.filter(x => x.id);
-      checkDone();
-    }, error: () => showError('Failed: challenges.csv')
+    complete(r) { S.challenges = r.data.filter(x => x.id); checkDone(); },
+    error: () => showError('Failed: challenges.csv')
   });
 
-  // 2. teams.csv
   Papa.parse('teams.csv', { download:true, header:true,
     complete(r) {
-      r.data.forEach(row => {
-        if (row.id) S.teams[row.id] = (row.name || '').trim();
-      });
+      r.data.forEach(row => { if (row.id) S.teams[row.id] = (row.name || '').trim(); });
       checkDone();
     }, error: () => showError('Failed: teams.csv')
   });
 
-  // 3. scoreboard.csv — hierarchical: team row then member rows
   Papa.parse('scoreboard.csv', { download:true, header:true,
     complete(r) {
       let curTeam = null;
       r.data.forEach(row => {
         if (row.place && row.place.trim()) {
-          curTeam = {
-            place:    parseInt(row.place),
-            teamName: (row.team || '').trim(),
-            teamId:   (row['team id'] || '').trim(),
-            score:    parseInt(row.score) || 0,
-          };
+          curTeam = { place:parseInt(row.place), teamName:(row.team||'').trim(), teamId:(row['team id']||'').trim(), score:parseInt(row.score)||0 };
           S.scoreboard.push(curTeam);
           S.teamMembers[curTeam.teamId] = [];
-        } else if (curTeam && (row['member name'] || '').trim()) {
-          S.teamMembers[curTeam.teamId].push({
-            name:  (row['member name'] || '').trim(),
-            score: parseInt(row['member score']) || 0,
-          });
+        } else if (curTeam && (row['member name']||'').trim()) {
+          S.teamMembers[curTeam.teamId].push({ name:(row['member name']||'').trim(), score:parseInt(row['member score'])||0 });
         }
       });
       checkDone();
     }, error: () => showError('Failed: scoreboard.csv')
   });
 
-  // 4. solves.csv — for per-challenge solver lists
   Papa.parse('solves.csv', { download:true, header:true,
     complete(r) {
       S.solves = r.data.filter(x => x.challenge_id);
       S.solves.forEach(s => {
-        const cid = s.challenge_id;
-        const tid = s.team_id;
+        const cid = s.challenge_id, tid = s.team_id;
         if (!S.solvesPerChal[cid]) S.solvesPerChal[cid] = [];
-        if (!S.solvesPerChal[cid].includes(tid))
-          S.solvesPerChal[cid].push(tid);
+        if (!S.solvesPerChal[cid].includes(tid)) S.solvesPerChal[cid].push(tid);
       });
       checkDone();
     }, error: () => showError('Failed: solves.csv')
   });
 
-  // 5. submissions.csv — correct ones for the graph timeline
   Papa.parse('submissions.csv', { download:true, header:true,
     complete(r) {
-      S.submissions = r.data.filter(x =>
-        (x.type || '').toLowerCase() === 'correct'
-      );
+      S.submissions = r.data.filter(x => (x.type||'').toLowerCase() === 'correct');
       checkDone();
     }, error: () => showError('Failed: submissions.csv')
   });
 
-  // 6. hints.csv
   Papa.parse('hints.csv', { download:true, header:true,
     complete(r) {
       r.data.forEach(h => {
@@ -476,13 +1587,9 @@ function loadAll() {
         S.hints[h.challenge_id].push(h);
       });
       checkDone();
-    }, error: () => {
-      // hints are optional — don't block
-      checkDone();
-    }
+    }, error: () => { checkDone(); }
   });
 
-  // files-config.json — optional, don't block on failure
   fetch('files-config.json')
     .then(r => r.json())
     .then(cfg => {
@@ -491,17 +1598,9 @@ function loadAll() {
         const cid = String(info.challenge_id || '');
         if (!cid) return;
         if (!S.chalFiles[cid]) S.chalFiles[cid] = [];
-        S.chalFiles[cid].push({
-          filename,
-          url:  info.url || '',
-          host: info.host || 'github',
-          note: info.note || '',
-        });
+        S.chalFiles[cid].push({ filename, url:info.url||'', host:info.host||'github', note:info.note||'' });
       });
-    })
-    .catch(() => {})
-    // files-config counts as one of our "total" loads only if we treat it as a bonus
-    // we handle it outside the counter — already set total=6
+    }).catch(() => {});
 }
 
 loadAll();
@@ -510,11 +1609,9 @@ loadAll();
 //  BUILD EVERYTHING
 // ══════════════════════════════════════════════════════
 function buildAll() {
-  // challenge points lookup
   const chalPoints = {};
   S.challenges.forEach(c => { chalPoints[c.id] = Number(c.value || c.initial || 0); });
 
-  // header stats
   const topScore = S.scoreboard.length ? S.scoreboard[0].score : 0;
   document.getElementById('stat-teams').textContent  = S.scoreboard.filter(t => t.teamName !== 'TestingTeam').length;
   document.getElementById('stat-solves').textContent  = S.solves.length;
@@ -525,6 +1622,7 @@ function buildAll() {
   buildScoreboard(topScore);
   buildGraph(chalPoints);
   buildChallenges();
+  buildFlagList();
 
   document.getElementById('loading').style.opacity = '0';
   setTimeout(() => document.getElementById('loading').style.display = 'none', 500);
@@ -533,7 +1631,6 @@ function buildAll() {
 // ── PODIUM ──
 function buildPodium() {
   const pod = document.getElementById('podium');
-  // exclude TestingTeam
   const top3 = S.scoreboard.filter(t => t.teamName !== 'TestingTeam').slice(0, 3);
   const config = [
     { cls:'second', idx:1, medal:'🥈', data_pos:'2' },
@@ -566,16 +1663,11 @@ function buildScoreboard(topScore) {
     const pct = topScore ? (t.score / topScore * 100).toFixed(1) : 0;
     const rc  = i===0?'r1':i===1?'r2':i===2?'r3':'';
     const members = S.teamMembers[t.teamId] || [];
-
     const row = document.createElement('div');
     row.className = `score-row ${rc}`;
     row.style.animationDelay = (i * 25) + 'ms';
     row.setAttribute('data-team', t.teamId);
-
-    const memberPreview = members.length
-      ? members.map(m => m.name).join(' · ')
-      : '';
-
+    const memberPreview = members.length ? members.map(m => m.name).join(' · ') : '';
     row.innerHTML = `
       <div class="row-rank">#${i+1}</div>
       <div>
@@ -586,12 +1678,9 @@ function buildScoreboard(topScore) {
         <div class="row-bar"><div class="row-bar-fill" data-pct="${pct}"></div></div>
       </div>
       <div class="row-score">${t.score.toLocaleString()}</div>`;
-
-    // click to expand members
     row.addEventListener('click', () => toggleMembers(t.teamId, members));
     wrap.appendChild(row);
 
-    // member panel
     if (members.length) {
       const panel = document.createElement('div');
       panel.className = 'member-panel';
@@ -606,19 +1695,15 @@ function buildScoreboard(topScore) {
     }
   });
 
-  // animate bars
   requestAnimationFrame(() => requestAnimationFrame(() => {
-    document.querySelectorAll('.row-bar-fill').forEach(el => {
-      el.style.width = el.dataset.pct + '%';
-    });
+    document.querySelectorAll('.row-bar-fill').forEach(el => { el.style.width = el.dataset.pct + '%'; });
   }));
 }
 
 function toggleMembers(teamId, members) {
   if (!members.length) return;
   const panel = document.getElementById('members-' + teamId);
-  if (!panel) return;
-  panel.classList.toggle('open');
+  if (panel) panel.classList.toggle('open');
 }
 
 // ── GRAPH ──
@@ -630,21 +1715,15 @@ const PALETTE = [
 ];
 
 function buildGraph(chalPoints) {
-  // Build per-team timelines from submissions
   const teamTimelines = {};
   S.submissions.forEach(s => {
-    const tid = s.team_id;
-    const t   = new Date(s.date);
-    const pts = chalPoints[s.challenge_id] || 0;
+    const tid = s.team_id, t = new Date(s.date), pts = chalPoints[s.challenge_id] || 0;
     if (!tid || isNaN(t)) return;
     if (!teamTimelines[tid]) teamTimelines[tid] = [];
     teamTimelines[tid].push({ t, pts });
   });
 
-  // axis bounds
-  const allTimes = S.submissions
-    .map(s => new Date(s.date))
-    .filter(d => !isNaN(d));
+  const allTimes = S.submissions.map(s => new Date(s.date)).filter(d => !isNaN(d));
   if (allTimes.length) {
     S.axisMin = new Date(Math.min(...allTimes));
     S.axisMax = new Date(Math.max(...allTimes));
@@ -652,31 +1731,15 @@ function buildGraph(chalPoints) {
     S.axisMax.setMinutes(S.axisMax.getMinutes() + 60);
   }
 
-  // Build datasets ordered by scoreboard rank
   S.allDatasets = [];
-  S.scoreboard
-    .filter(t => t.teamName !== 'TestingTeam')
-    .forEach((t, i) => {
-      const tl = teamTimelines[t.teamId];
-      if (!tl || tl.length === 0) return;
-      let total = 0;
-      const pts_sorted = tl.sort((a,b) => a.t - b.t);
-      const data = [
-        { x: S.axisMin, y: 0 },
-        ...pts_sorted.map(e => { total += e.pts; return { x: e.t, y: total }; })
-      ];
-      S.allDatasets.push({
-        label: t.teamName,
-        data,
-        borderColor:     PALETTE[i % PALETTE.length],
-        backgroundColor: PALETTE[i % PALETTE.length] + '18',
-        borderWidth:  i === 0 ? 2.5 : 1.5,
-        pointRadius:  3,
-        pointHoverRadius: 6,
-        fill:    false,
-        tension: 0,
-      });
-    });
+  S.scoreboard.filter(t => t.teamName !== 'TestingTeam').forEach((t, i) => {
+    const tl = teamTimelines[t.teamId];
+    if (!tl || tl.length === 0) return;
+    let total = 0;
+    const pts_sorted = tl.sort((a,b) => a.t - b.t);
+    const data = [{ x: S.axisMin, y: 0 }, ...pts_sorted.map(e => { total += e.pts; return { x: e.t, y: total }; })];
+    S.allDatasets.push({ label:t.teamName, data, borderColor:PALETTE[i%PALETTE.length], backgroundColor:PALETTE[i%PALETTE.length]+'18', borderWidth:i===0?2.5:1.5, pointRadius:3, pointHoverRadius:6, fill:false, tension:0 });
+  });
 
   renderChart(S.topN);
 }
@@ -688,40 +1751,20 @@ function renderChart(topN) {
     type: 'line',
     data: { datasets: S.allDatasets.slice(0, topN) },
     options: {
-      parsing:     false,
-      responsive:  true,
-      animation:   { duration: 600 },
-      interaction: { mode:'nearest', intersect:false },
-      plugins: {
-        legend: {
-          labels: { color:'#c8b898', font:{family:'Share Tech Mono',size:11}, boxWidth:12, padding:16 }
-        },
-        tooltip: {
-          backgroundColor:'rgba(13,21,38,0.95)', borderColor:'rgba(201,168,76,0.3)', borderWidth:1,
-          titleColor:'#f5de90', bodyColor:'#f4ecdc',
-          titleFont:{family:'Share Tech Mono'}, bodyFont:{family:'Share Tech Mono'},
-          callbacks: {
-            title: c => new Date(c[0].parsed.x).toLocaleString(),
-            label: c => ` ${c.dataset.label}: ${c.parsed.y.toLocaleString()} pts`
-          }
+      parsing:false, responsive:true, animation:{duration:600},
+      interaction:{mode:'nearest',intersect:false},
+      plugins:{
+        legend:{labels:{color:'#c8b898',font:{family:'Share Tech Mono',size:11},boxWidth:12,padding:16}},
+        tooltip:{
+          backgroundColor:'rgba(13,21,38,0.95)',borderColor:'rgba(201,168,76,0.3)',borderWidth:1,
+          titleColor:'#f5de90',bodyColor:'#f4ecdc',
+          titleFont:{family:'Share Tech Mono'},bodyFont:{family:'Share Tech Mono'},
+          callbacks:{title:c=>new Date(c[0].parsed.x).toLocaleString(),label:c=>` ${c.dataset.label}: ${c.parsed.y.toLocaleString()} pts`}
         }
       },
-      scales: {
-        x: {
-          type:'time',
-          min: S.axisMin,
-          max: S.axisMax,
-          time: { displayFormats:{ minute:'HH:mm', hour:'HH:mm' } },
-          ticks: { color:'#c8b898', font:{family:'Share Tech Mono',size:11}, maxTicksLimit:14, autoSkip:true },
-          grid:  { color:'rgba(201,168,76,0.08)' },
-          border:{ color:'rgba(201,168,76,0.2)' }
-        },
-        y: {
-          beginAtZero: true,
-          ticks: { color:'#c8b898', font:{family:'Share Tech Mono',size:11} },
-          grid:  { color:'rgba(212,176,90,0.10)' },
-          border:{ color:'rgba(212,176,90,0.25)' }
-        }
+      scales:{
+        x:{type:'time',min:S.axisMin,max:S.axisMax,time:{displayFormats:{minute:'HH:mm',hour:'HH:mm'}},ticks:{color:'#c8b898',font:{family:'Share Tech Mono',size:11},maxTicksLimit:14,autoSkip:true},grid:{color:'rgba(201,168,76,0.08)'},border:{color:'rgba(201,168,76,0.2)'}},
+        y:{beginAtZero:true,ticks:{color:'#c8b898',font:{family:'Share Tech Mono',size:11}},grid:{color:'rgba(212,176,90,0.10)'},border:{color:'rgba(212,176,90,0.25)'}}
       }
     }
   });
@@ -738,139 +1781,132 @@ function setTopN(n, btn) {
 function buildChallenges() {
   const grid = document.getElementById('challenges-grid');
   const chals = S.challenges.filter(c => c.id && c.name);
-
-  // collect categories for filter bar
   const cats = [...new Set(chals.map(c => (c.category||'Misc').trim()))].sort();
   const filterBar = document.getElementById('chal-filters');
-
   const allBtn = document.createElement('button');
-  allBtn.className = 'cat-btn active';
-  allBtn.textContent = 'ALL';
-  allBtn.onclick = () => filterCat('ALL', allBtn);
+  allBtn.className = 'cat-btn active'; allBtn.textContent = 'ALL'; allBtn.onclick = () => filterCat('ALL', allBtn);
   filterBar.appendChild(allBtn);
-
   cats.forEach(cat => {
     const btn = document.createElement('button');
-    btn.className = 'cat-btn';
-    btn.textContent = cat;
-    btn.onclick = () => filterCat(cat, btn);
+    btn.className = 'cat-btn'; btn.textContent = cat; btn.onclick = () => filterCat(cat, btn);
     filterBar.appendChild(btn);
   });
-
   document.getElementById('chal-count').textContent = chals.length + ' CHALLENGES';
-
-  // sort: by category then value desc
-  chals.sort((a,b) => {
-    const cc = (a.category||'').localeCompare(b.category||'');
-    if (cc !== 0) return cc;
-    return Number(b.value||0) - Number(a.value||0);
-  });
+  chals.sort((a,b) => { const cc=(a.category||'').localeCompare(b.category||''); return cc!==0?cc:Number(b.value||0)-Number(a.value||0); });
 
   chals.forEach((c, i) => {
-    const cid      = c.id;
-    const name     = c.name.trim();
-    const cat      = (c.category || 'Misc').trim();
-    const pts      = Number(c.value || c.initial || 0);
-    const solvers  = S.solvesPerChal[cid] || [];
-    const solveNames = solvers.map(tid => S.teams[tid] || ('Team ' + tid));
-    const hintList = S.hints[cid] || [];
-    const files    = S.chalFiles[cid] || [];
-    const desc     = (c.description || '').trim();
-
-    // solve badge class
-    const badgeCls = solvers.length === 0 ? 'none' : solvers.length >= 10 ? 'high' : '';
+    const cid=c.id, name=c.name.trim(), cat=(c.category||'Misc').trim();
+    const pts=Number(c.value||c.initial||0);
+    const solvers=S.solvesPerChal[cid]||[];
+    const solveNames=solvers.map(tid=>S.teams[tid]||('Team '+tid));
+    const hintList=S.hints[cid]||[];
+    const files=S.chalFiles[cid]||[];
+    const desc=(c.description||'').trim();
+    const badgeCls=solvers.length===0?'none':solvers.length>=10?'high':'';
 
     const card = document.createElement('div');
-    card.className = 'chal-card';
-    card.dataset.cat = cat;
-    card.style.animationDelay = (i * 20) + 'ms';
+    card.className='chal-card'; card.dataset.cat=cat; card.style.animationDelay=(i*20)+'ms';
 
-    // ── CARD HEAD ──
-    let html = `<div class="chal-head">
+    let html=`<div class="chal-head">
       <div class="chal-cat-label">${cat}</div>
       <div class="chal-name">${escHtml(name)}</div>
       <div class="chal-meta">
         <div class="chal-pts">${pts.toLocaleString()} <span>pts</span></div>
-        <div class="chal-solves-badge ${badgeCls}">
-          ${solvers.length === 0 ? '✗ UNSOLVED' : solvers.length + ' solve' + (solvers.length!==1?'s':'')}
-        </div>
+        <div class="chal-solves-badge ${badgeCls}">${solvers.length===0?'✗ UNSOLVED':solvers.length+' solve'+(solvers.length!==1?'s':'')}</div>
       </div>
     </div><div class="chal-body">`;
 
-    // ── FILES ──
     if (files.length) {
-      html += `<div class="chal-files">`;
+      html+=`<div class="chal-files">`;
       files.forEach(f => {
         if (!f.url) return;
-        const icon = f.host === 'gdrive'
-          ? `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.28 3l5.72 9.9-5.72 9.9H0L5.72 12.9 0 3h6.28zm5.72 0h6.28L24 12.9l-5.72 9.9H12l5.72-9.9L12 3z"/></svg>`
-          : `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14v-4H7l5-8v4h4l-5 8z"/></svg>`;
-        const label = f.host === 'gdrive' ? '⬇ GDRIVE: ' + f.filename : '⬇ ' + f.filename;
-        const target = f.host === 'gdrive' ? '_blank' : '_blank';
-        html += `<a class="dl-btn ${f.host}" href="${f.url}" target="${target}" rel="noopener">${icon}${escHtml(label)}</a>`;
+        const icon=f.host==='gdrive'?`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.28 3l5.72 9.9-5.72 9.9H0L5.72 12.9 0 3h6.28zm5.72 0h6.28L24 12.9l-5.72 9.9H12l5.72-9.9L12 3z"/></svg>`:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14v-4H7l5-8v4h4l-5 8z"/></svg>`;
+        const label=f.host==='gdrive'?'⬇ GDRIVE: '+f.filename:'⬇ '+f.filename;
+        html+=`<a class="dl-btn ${f.host}" href="${f.url}" target="_blank" rel="noopener">${icon}${escHtml(label)}</a>`;
       });
-      html += `</div>`;
+      html+=`</div>`;
     }
-
-    // ── DESCRIPTION ──
-    if (desc) {
-      html += `<button class="chal-desc-toggle" onclick="toggleSection(this,'chal-desc-${cid}')">
-        <span>▸ CHALLENGE BRIEF</span><span class="arrow">▾</span></button>
-      <div class="chal-desc" id="chal-desc-${cid}">${renderMarkdown(desc)}</div>`;
-    }
-
-    // ── SOLVERS ──
-    if (solveNames.length) {
-      html += `<button class="chal-solvers-toggle" onclick="toggleSection(this,'chal-solvers-${cid}')">
-        <span>▸ SOLVERS (${solveNames.length})</span><span class="arrow">▾</span></button>
-      <div class="chal-solvers" id="chal-solvers-${cid}">
-        ${solveNames.map(n => `<span class="solver-chip">${escHtml(n)}</span>`).join('')}
-      </div>`;
-    }
-
-    // ── HINTS ──
+    if (desc) html+=`<button class="chal-desc-toggle" onclick="toggleSection(this,'chal-desc-${cid}')"><span>▸ CHALLENGE BRIEF</span><span class="arrow">▾</span></button><div class="chal-desc" id="chal-desc-${cid}">${renderMarkdown(desc)}</div>`;
+    if (solveNames.length) html+=`<button class="chal-solvers-toggle" onclick="toggleSection(this,'chal-solvers-${cid}')"><span>▸ SOLVERS (${solveNames.length})</span><span class="arrow">▾</span></button><div class="chal-solvers" id="chal-solvers-${cid}">${solveNames.map(n=>`<span class="solver-chip">${escHtml(n)}</span>`).join('')}</div>`;
     if (hintList.length) {
-      html += `<button class="chal-hints-toggle" onclick="toggleSection(this,'chal-hints-${cid}')">
-        <span>▸ HINTS (${hintList.length})</span><span class="arrow">▾</span></button>
-      <div class="chal-hints" id="chal-hints-${cid}">`;
+      html+=`<button class="chal-hints-toggle" onclick="toggleSection(this,'chal-hints-${cid}')"><span>▸ HINTS (${hintList.length})</span><span class="arrow">▾</span></button><div class="chal-hints" id="chal-hints-${cid}">`;
       hintList.forEach(h => {
-        const cost = parseInt(h.cost) || 0;
-        html += `<div class="hint-item">
-          <div class="hint-title">
-            <span>${escHtml(h.title || 'Hint')}</span>
-            <span class="hint-cost ${cost===0?'free':''}">${cost===0?'FREE':cost+' pts'}</span>
-          </div>
-          <div class="hint-body">${escHtml(h.content || '')}</div>
-        </div>`;
+        const cost=parseInt(h.cost)||0;
+        html+=`<div class="hint-item"><div class="hint-title"><span>${escHtml(h.title||'Hint')}</span><span class="hint-cost ${cost===0?'free':''}">${cost===0?'FREE':cost+' pts'}</span></div><div class="hint-body">${escHtml(h.content||'')}</div></div>`;
       });
-      html += `</div>`;
+      html+=`</div>`;
     }
-
-    html += '</div>'; // close chal-body
-    card.innerHTML = html;
+    html+='</div>';
+    card.innerHTML=html;
     grid.appendChild(card);
   });
 }
 
+// ── FLAG LIST ──
+function buildFlagList() {
+  const flags = [
+    'flag{EYES-UP-GUARDIAN}','flag{ISHTAR-HIDDEN-IN-PLAIN-SIGHT}','flag{ISHTAR-SURFACE-LEVEL-DECEPTION}',
+    'flag{ISHTAR-TERMINAL-ACCESS}','flag{ISHTAR-HIDDEN-STRUCTURE}','flag{SYLORIN_ENDURES}',
+    'flag{FIRST_STRIKE}','flag{SEPARATE_THE_FLOURISHING}','flag{ur_yearns_through_hunger}',
+    'flag{WILL_TO_GO_ON_EXISTING}','flag{UNSHAKABLE-IRRATIONAL-HOPE}','flag{ETERNAL-AND-PERFECTED}',
+    'flag{GEOMETRY-AND-SILICA}','flag{listen_closely_oh_vengeance_mine}','flag{yul_speaks_through_honesty}',
+    'flag{xol_whispers_in_shared_memory}','flag{the_witness_writes_in_margins}','flag{hidden_in_the_name_itself}',
+    'ISHTAR{4kk4_k33p5_thr0ugh_53cr3t5}','flag{order_maintained_in_chaos}','flag{arohal_sylorin_node_online}',
+    'flag{augurmind_saw_the_end}','flag{rasputin_purged_the_record}','flag{the_copies_went_back_in}',
+    'flag{soteria_sent_the_warning}','flag{the_witness_was_always_coming}'
+  ];
+  const container = document.getElementById('wu-flag-entries');
+  flags.forEach((f, i) => {
+    const div = document.createElement('div');
+    div.className = 'wu-flag-entry';
+    div.innerHTML = `<span class="wu-flag-num">${String(i+1).padStart(2,'0')}</span><span class="wu-flag-text">${f}</span>`;
+    container.appendChild(div);
+  });
+}
+
+// ── WRITE-UP HELPERS ──
+function toggleChallenge(header) {
+  const card = header.parentElement;
+  card.classList.toggle('open');
+}
+
+function switchWuSec(btn, targetId) {
+  const body = btn.closest('.wu-challenge-body');
+  body.querySelectorAll('.wu-sec-btn').forEach(b => b.classList.remove('active'));
+  body.querySelectorAll('.wu-sec-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const target = document.getElementById(targetId);
+  if (target) target.classList.add('active');
+}
+
+function scrollToChallenge(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  // Switch to write-up tab if not already there
+  const writeupBtn = document.querySelector('.tab-btn:nth-child(4)');
+  if (!document.getElementById('tab-writeup').classList.contains('active')) {
+    switchTab('writeup', writeupBtn);
+  }
+  setTimeout(() => {
+    el.scrollIntoView({ behavior:'smooth', block:'start' });
+    if (!el.classList.contains('open') && el.classList.contains('wu-challenge')) {
+      const header = el.querySelector('.wu-challenge-header');
+      if (header) toggleChallenge(header);
+    }
+    // highlight TOC
+    document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+  }, 100);
+}
+
+// ── SHARED HELPERS ──
 function filterCat(cat, btn) {
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  // collapse all open sections first
-  document.querySelectorAll('.chal-desc, .chal-solvers, .chal-hints').forEach(el => {
-    el.classList.remove('open');
-  });
-  document.querySelectorAll('.chal-desc-toggle, .chal-solvers-toggle, .chal-hints-toggle').forEach(el => {
-    el.classList.remove('open');
-  });
-  // reset scroll position on all bodies
-  document.querySelectorAll('.chal-body').forEach(el => { el.scrollTop = 0; });
-  // show/hide cards
+  document.querySelectorAll('.chal-desc,.chal-solvers,.chal-hints').forEach(el => el.classList.remove('open'));
+  document.querySelectorAll('.chal-desc-toggle,.chal-solvers-toggle,.chal-hints-toggle').forEach(el => el.classList.remove('open'));
+  document.querySelectorAll('.chal-body').forEach(el => { el.scrollTop=0; });
   document.querySelectorAll('.chal-card').forEach(card => {
-    if (cat === 'ALL' || card.dataset.cat === cat) {
-      card.classList.remove('hidden');
-    } else {
-      card.classList.add('hidden');
-    }
+    card.classList.toggle('hidden', !(cat==='ALL'||card.dataset.cat===cat));
   });
 }
 
@@ -879,63 +1915,52 @@ function toggleSection(btn, id) {
   if (!el) return;
   el.classList.toggle('open');
   btn.classList.toggle('open');
-  // check if card body now overflows
-  const body = el.closest('.chal-body');
-  const card = el.closest('.chal-card');
-  if (body && card) {
-    setTimeout(() => {
-      card.classList.toggle('has-overflow', body.scrollHeight > body.clientHeight);
-    }, 50);
-  }
+  const body=el.closest('.chal-body'), card=el.closest('.chal-card');
+  if (body&&card) setTimeout(()=>{card.classList.toggle('has-overflow',body.scrollHeight>body.clientHeight);},50);
 }
 
-// ── SCROLLBAR: show on scroll, hide after idle ──
 let scrollTimers = new WeakMap();
 document.addEventListener('scroll', function(e) {
   const body = e.target;
-  if (!body.classList || !body.classList.contains('chal-body')) return;
+  if (!body.classList||!body.classList.contains('chal-body')) return;
   body.classList.add('scrolling');
   clearTimeout(scrollTimers.get(body));
-  scrollTimers.set(body, setTimeout(() => body.classList.remove('scrolling'), 1000));
-}, true); // capture phase to catch scroll on non-window elements
+  scrollTimers.set(body, setTimeout(()=>body.classList.remove('scrolling'),1000));
+}, true);
 
-// ── UTILS ──
 function escHtml(s) {
-  return String(s)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// minimal markdown: **bold**, `code`, > blockquote, [text](url), \n\n paragraphs
 function renderMarkdown(raw) {
   let s = escHtml(raw);
-  // blockquotes
-  s = s.replace(/^&gt;(.+)$/gm, '<blockquote>$1</blockquote>');
-  // bold
-  s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  // code
-  s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
-  // links — need to unescape for href
-  s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, txt, url) => {
-    const safeUrl = url.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
-    return `<a href="${safeUrl}" target="_blank" rel="noopener">${txt}</a>`;
-  });
-  // double newline = paragraph break
-  s = s.replace(/\n\n+/g, '</p><p>');
-  s = s.replace(/\n/g, '<br>');
-  return '<p>' + s + '</p>';
+  s = s.replace(/^&gt;(.+)$/gm,'<blockquote>$1</blockquote>');
+  s = s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  s = s.replace(/`([^`]+)`/g,'<code>$1</code>');
+  s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g,(_,txt,url)=>{const safeUrl=url.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>');return `<a href="${safeUrl}" target="_blank" rel="noopener">${txt}</a>`;});
+  s = s.replace(/\n\n+/g,'</p><p>');
+  s = s.replace(/\n/g,'<br>');
+  return '<p>'+s+'</p>';
 }
 
-// ── TABS ──
 function switchTab(name, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
+  document.getElementById('tab-'+name).classList.add('active');
   btn.classList.add('active');
-  if (name === 'graph' && S.chartInst) setTimeout(() => S.chartInst.resize(), 50);
+  if (name==='graph'&&S.chartInst) setTimeout(()=>S.chartInst.resize(),50);
 }
+
+// Code copy buttons
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('wu-code-copy')) {
+    const pre = e.target.closest('.wu-codeblock').querySelector('pre');
+    navigator.clipboard.writeText(pre.textContent).then(() => {
+      e.target.textContent = 'COPIED!';
+      setTimeout(() => e.target.textContent = 'COPY', 1500);
+    });
+  }
+});
 </script>
 </body>
 </html>
