@@ -1,0 +1,214 @@
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 1:05:44 AM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Computer:      WS-FIN-07
+Description:
+An account was successfully logged on.
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		WS-FIN-07$
+Logon Information:
+	Logon Type:		2
+	Logon ID:		0x12C45
+New Logon:
+	Account Name:		s.roberts
+	Account Domain:		CORP
+	Elevated Token:		No
+
+Date:          2/12/2026 1:08:12 AM
+Event ID:      4634
+Task Category: Logoff
+Level:         Information
+Keywords:      Audit Success
+Computer:      WS-FIN-07
+Description:
+An account was logged off.
+Subject:
+	Account Name:		s.roberts
+	Logon ID:		0x12C45
+
+Date:          2/12/2026 1:12:05 AM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Computer:      DC-01
+Description:
+An account was successfully logged on.
+Subject:
+	Account Name:		DC-01$
+New Logon:
+	Account Name:		svc_backup
+	Logon Type:		5
+	Elevated Token:		Yes
+
+Date:          2/12/2026 1:15:30 AM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Computer:      FILE-SRV-02
+Description:
+An account was successfully logged on.
+Subject:
+	Account Name:		FILE-SRV-02$
+Logon Information:
+	Logon Type:		3
+	Account Name:		p.jones
+	Source Network Address:	10.10.10.45
+
+Date:          2/12/2026 1:18:44 AM
+Event ID:      4769
+Task Category: Kerberos Service Ticket Operations
+Level:         Information
+Keywords:      Audit Success
+Computer:      DC-01
+Description:
+A Kerberos service ticket was requested.
+Account Information:
+	Account Name:		s.roberts@CORP.LOCAL
+Service Information:
+	Service Name:		FILE-SRV-02$
+
+Date:          2/12/2026 1:22:14 AM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Computer:      WS-FIN-07
+Description:
+An account was successfully logged on.
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		WS-FIN-07$
+Logon Information:
+	Logon Type:		3
+	Logon ID:		0x88F21
+New Logon:
+	Account Name:		finance.user
+	Account Domain:		CORP
+Network Information:
+	Source Network Address:	10.10.12.34
+
+Date:          2/12/2026 1:23:45 AM
+Event ID:      4672
+Task Category: Special Logon
+Level:         Information
+Keywords:      Audit Success
+Computer:      DC-01
+Description:
+Special privileges assigned to new logon.
+Account Name:		svc_sql
+Privileges:		SeSecurityPrivilege
+			SeBackupPrivilege
+			SeRestorePrivilege
+
+Date:          2/12/2026 1:24:22 AM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Computer:      FILE-SRV-02
+Description:
+An account was successfully logged on.
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		FILE-SRV-02$
+Logon Information:
+	Logon Type:		3
+	Logon ID:		0x99A34
+New Logon:
+	Account Name:		finance.user
+	Account Domain:		CORP
+Network Information:
+	Workstation Name:	-
+	Source Network Address:	10.10.12.34
+
+Date:          2/12/2026 1:25:55 AM
+Event ID:      4634
+Task Category: Logoff
+Level:         Information
+Keywords:      Audit Success
+Computer:      FILE-SRV-02
+Description:
+An account was logged off.
+Subject:
+	Account Name:		p.jones
+	Logon ID:		0x15D32
+
+Date:          2/12/2026 1:27:10 AM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Computer:      DC-01
+Description:
+An account was successfully logged on.
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		DC-01$
+Logon Information:
+	Logon Type:		3
+	Logon ID:		0x11B67
+New Logon:
+	Account Name:		finance.user
+	Account Domain:		CORP
+Network Information:
+	Source Network Address:	10.10.12.34
+
+Date:          2/12/2026 1:29:12 AM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Computer:      WS-FIN-07
+Description:
+An account was successfully logged on.
+Subject:
+	Account Name:		WS-FIN-07$
+New Logon:
+	Account Name:		j.smith
+	Logon Type:		2
+	Elevated Token:		No
+
+Date:          2/12/2026 1:32:01 AM
+Event ID:      4634
+Task Category: Logoff
+Level:         Information
+Keywords:      Audit Success
+Computer:      WS-FIN-07
+Description:
+An account was logged off.
+Account Name:		finance.user
+Logon ID:		0x88F21
+
+Date:          2/12/2026 1:35:44 AM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Keywords:      Audit Success
+Computer:      WS-FIN-07
+Description:
+A new process has been created.
+New Process Name:	C:\Windows\System32\notepad.exe
+Process Command Line:	notepad.exe
+Token Elevation Type:	%%1937
+
+Date:          2/12/2026 1:40:12 AM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Computer:      DC-01
+Description:
+An account was successfully logged on.
+Subject:
+	Account Name:		DC-01$
+New Logon:
+	Account Name:		admin_service
+	Logon Type:		5
+	Elevated Token:		Yes

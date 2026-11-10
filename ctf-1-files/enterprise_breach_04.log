@@ -1,0 +1,209 @@
+[2026-02-12 22:00:01] VPN-GATEWAY: [INFO] Session Started: User: m.abara, IP: 72.14.211.45, Country: US, Device: Managed-Win10, MFA: Enabled
+[2026-02-12 22:01:14] VPN-GATEWAY: [INFO] Session Started: User: j.smith, IP: 98.11.44.12, Country: US, Device: Managed-Win10, MFA: Enabled
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:02:15 PM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Computer:      WS-HR-03
+Description:   An account was successfully logged on.
+               Subject: Security ID: SYSTEM, Account Name: WS-HR-03$
+               Logon Information: Logon Type: 2, Account Name: l.chen, Elevated Token: No
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:04:33 PM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Computer:      WS-HR-03
+Description:   A new process has been created.
+               New Process Name: C:\Program Files\Google\Chrome\Application\chrome.exe
+               Parent Process Name: C:\Windows\explorer.exe
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:08:11 PM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Computer:      FILE-SRV-01
+Description:   An account was successfully logged on.
+               Logon Information: Logon Type: 5, Account Name: svc_backup, Elevated Token: Yes
+
+[2026-02-12 22:12:45] VPN-GATEWAY: [INFO] Session Started: User: k.white, IP: 142.250.190.45, Country: CA, Device: Managed-MBP, MFA: Enabled
+[2026-02-12 22:15:22] VPN-GATEWAY: [INFO] Session Started: User: hr.user, IP: 185.211.92.18, Country: RU, Device: Unknown, MFA: Disabled
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:16:40 PM
+Event ID:      4634
+Task Category: Logoff
+Level:         Information
+Computer:      WS-HR-03
+Description:   An account was logged off. Account Name: l.chen, Logon ID: 0x44A12
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:18:05 PM
+Event ID:      1001
+Source:        Microsoft-Windows-Windows Defender
+Computer:      WS-HR-03
+Description:   Windows Defender Antimalware platform scan has finished. Scan ID: {B2A1C9...}
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:20:11 PM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Computer:      WS-HR-03
+Description:   An account was successfully logged on.
+               Subject: Account Name: WS-HR-03$
+               Logon Information:
+                 Logon Type: 3
+                 Account Name: hr.user
+                 Account Domain: CORP
+                 Logon ID: 0x77E12
+               Network Information:
+                 Source Network Address: 10.20.5.33
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:22:45 PM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Keywords:      Audit Success
+Computer:      WS-HR-03
+Description:   A new process has been created.
+               New Process Name: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+               Parent Process Name: C:\Windows\explorer.exe
+               Command Line: powershell.exe -nop -w hidden -EncodedCommand SUVYRUNNRC5leGUgL2MgY2FsYwo=
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:25:30 PM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Computer:      WS-HR-03
+Description:   A new process has been created.
+               New Process Name: C:\Windows\System32\conhost.exe
+               Parent Process Name: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:28:12 PM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Computer:      DC-01
+Description:   An account was successfully logged on.
+               Logon Information: Logon Type: 3, Account Name: p.jones, Source Address: 10.20.1.5
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:32:04 PM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Computer:      FILE-SRV-01
+Description:   An account was successfully logged on.
+               Logon Information:
+                 Logon Type: 3
+                 Account Name: hr.user
+                 Account Domain: CORP
+               Network Information:
+                 Source Network Address: 10.20.5.33
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:33:55 PM
+Event ID:      4634
+Task Category: Logoff
+Level:         Information
+Computer:      FILE-SRV-01
+Description:   An account was logged off. Account Name: svc_backup
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:35:12 PM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Computer:      DC-01
+Description:   An account was successfully logged on.
+               Logon Information:
+                 Logon Type: 3
+                 Account Name: hr.user
+                 Account Domain: CORP
+               Network Information:
+                 Source Network Address: 10.20.5.33
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:38:22 PM
+Event ID:      4732
+Task Category: Security Group Management
+Level:         Information
+Keywords:      Audit Success
+Computer:      DC-01
+Description:   A member was added to a security-enabled local group.
+               Group: Administrators
+               Member:
+                 Security ID: CORP\hr.user
+                 Account Name: hr.user
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:41:00 PM
+Event ID:      4698
+Task Category: Scheduled Task Creation
+Level:         Information
+Keywords:      Audit Success
+Computer:      DC-01
+Description:   A scheduled task was created.
+               Task Name: SysHealthCheck
+               Task Content: <Actions><Exec><Command>C:\Windows\temp\rev.exe</Command></Exec></Actions>
+               Run As: SYSTEM
+               Trigger: At startup
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:43:18 PM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Computer:      WS-HR-03
+Description:   A new process has been created.
+               New Process Name: C:\Windows\System32\taskmgr.exe
+               Parent Process Name: C:\Windows\explorer.exe
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:45:01 PM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Computer:      FILE-SRV-01
+Description:   An account was successfully logged on.
+               Logon Information: Logon Type: 3, Account Name: admin_service, Source Address: 10.20.1.10
+
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 10:46:12 PM
+Event ID:      4634
+Task Category: Logoff
+Level:         Information
+Computer:      DC-01
+Description:   An account was logged off. Account Name: p.jones
+
+[2026-02-12 22:48:30] VPN-GATEWAY: [INFO] Session Ended: User: m.abara, IP: 72.14.211.45, Duration: 00:48:29
+[2026-02-12 22:49:15] VPN-GATEWAY: [INFO] Session Started: User: d.vance, IP: 66.249.79.10, Country: US, Device: Managed-Win10, MFA: Enabled

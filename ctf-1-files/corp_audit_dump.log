@@ -1,0 +1,52 @@
+===== Enterprise Security Audit Export =====
+Host: DC01.corp.local
+Export Time: 2026-03-12T04:11:22Z
+
+2026-03-10T21:14:03Z WINSEC 4624 Logon Success User: j.shetty LogonType: 2 Workstation: WS-DEV-07
+2026-03-10T21:14:03Z WINSEC 4672 Special privileges assigned to new logon User: j.shetty
+2026-03-10T21:14:05Z WINSEC 4634 Logoff User: j.shetty
+2026-03-10T21:22:11Z WINSEC 4625 Logon Failure User: svc-backup Status: 0xC000006A
+2026-03-10T21:22:14Z WINSEC 4625 Logon Failure User: svc-backup Status: 0xC000006A
+2026-03-10T21:22:19Z WINSEC 4624 Logon Success User: svc-backup LogonType: 3 Workstation: WS-DEV-07
+2026-03-10T21:22:19Z WINSEC 4672 Special privileges assigned to new logon User: svc-backup
+2026-03-10T21:22:22Z WINSEC 4663 Object Access Object: \\FILE-SRV01\HR\Payroll_2025.xlsx User: svc-backup Access: ReadData
+2026-03-10T21:22:23Z WINSEC 4663 Object Access Object: \\FILE-SRV01\HR\EmployeeContracts.zip User: svc-backup Access: ReadData
+2026-03-10T21:22:25Z WINSEC 4663 Object Access Object: \\FILE-SRV01\Finance\Q4_Budget.xlsx User: svc-backup Access: ReadData
+2026-03-10T21:23:02Z DNS Query WS-DEV-07 corp.local
+2026-03-10T21:23:08Z DNS Query WS-DEV-07 api.github.com
+2026-03-10T21:23:09Z PROXY POST https://api.github.com/gists Size: 482332B User: j.shetty
+2026-03-10T21:23:11Z PROXY POST https://api.github.com/gists Size: 510221B User: j.shetty
+2026-03-10T21:23:15Z GIT Commit Repo: internal-tools Branch: main User: j.shetty File: temp_sync.ps1
+2026-03-10T21:23:17Z WINSEC 4634 Logoff User: svc-backup
+2026-03-10T21:25:02Z WINSEC 4624 Logon Success User: m.kumar LogonType: 2 Workstation: WS-FIN-02
+2026-03-10T21:26:44Z PROXY GET https://intranet.corp.local/dashboard User: m.kumar
+2026-03-10T21:30:18Z WINSEC 4663 Object Access Object: \\FILE-SRV01\Public\HolidayList.pdf User: m.kumar
+2026-03-10T21:33:54Z DNS Query WS-DEV-07 raw.githubusercontent.com
+2026-03-10T21:34:02Z PROXY POST https://api.github.com/gists Size: 502331B User: j.shetty
+2026-03-10T21:34:07Z GIT Commit Repo: internal-tools Branch: main User: j.shetty File: cleanup.ps1
+2026-03-10T22:01:33Z EMAIL Metadata From: hr@competitor-tech.com To: j.shetty Subject: Offer Letter - Confidential Attachment: encrypted.pdf
+2026-03-10T22:02:11Z EMAIL Metadata Deletion Event User: j.shetty MessageID: 9982342
+2026-03-10T22:11:05Z WINSEC 4663 Object Access Object: \\FILE-SRV01\HR\Resignation_Template.docx User: j.shetty Access: ReadData
+2026-03-10T22:15:48Z WINSEC 4663 Object Access Object: \\FILE-SRV01\HR\Exit_Clearance_Form.docx User: j.shetty Access: ReadData
+2026-03-10T22:17:33Z PROXY POST https://api.github.com/gists Size: 503112B User: j.shetty
+2026-03-10T22:18:44Z DNS Query WS-DEV-07 api.github.com
+2026-03-10T22:21:04Z WINSEC 4634 Logoff User: j.shetty
+
+2026-03-11T01:12:02Z WINSEC 4624 Logon Success User: svc-backup LogonType: 3 Workstation: WS-DEV-07
+2026-03-11T01:12:02Z WINSEC 4672 Special privileges assigned to new logon User: svc-backup
+2026-03-11T01:12:04Z WINSEC PrivilegeList: SeBackupPrivilege, SeRestorePrivilege
+2026-03-11T01:12:05Z WINSEC 4663 Object Access Object: \\FILE-SRV01\HR\EmployeeContracts.zip User: svc-backup Access: ReadData
+2026-03-11T01:12:06Z WINSEC 4663 Object Access Object: \\FILE-SRV01\Finance\Q4_Budget.xlsx User: svc-backup Access: ReadData
+2026-03-11T01:12:09Z PROXY POST https://api.github.com/gists Size: 610221B User: j.shetty
+2026-03-11T01:12:12Z DNS Query WS-DEV-07 api.github.com
+2026-03-11T01:12:15Z GIT Commit Repo: internal-tools Branch: main User: j.shetty File: sync_archive.ps1
+2026-03-11T01:13:02Z WINSEC 4634 Logoff User: svc-backup
+
+2026-03-11T09:02:12Z HR System Event User: j.shetty Resignation Submitted EffectiveDate: 2026-03-25
+2026-03-11T09:04:12Z WINSEC 4624 Logon Success User: j.shetty LogonType: 2 Workstation: WS-DEV-07
+2026-03-11T09:10:21Z PROXY GET https://api.github.com/gists User: j.shetty
+2026-03-11T09:10:55Z PROXY POST https://api.github.com/gists Size: 321998B User: j.shetty
+2026-03-11T09:11:02Z DNS Query WS-DEV-07 api.github.com
+2026-03-11T09:11:05Z WINSEC 4634 Logoff User: j.shetty
+
+===== End of Export =====

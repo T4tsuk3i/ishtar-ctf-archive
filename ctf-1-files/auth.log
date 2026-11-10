@@ -1,0 +1,4 @@
+Feb 12 10:10:01 server sshd[2101]: Failed password for root from 185.220.101.12 port 51122 ssh2
+Feb 12 10:10:03 server sshd[2102]: Failed password for root from 185.220.101.12 port 51123 ssh2
+Feb 12 10:10:05 server sshd[2103]: Failed password for root from 185.220.101.12 port 51124 ssh2
+Feb 12 10:10:08 server sshd[2104]: Accepted password for root from 185.220.101.12 port 51125 ssh2

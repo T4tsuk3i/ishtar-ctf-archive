@@ -1,0 +1,201 @@
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 2:15:02 AM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Description:
+An account was successfully logged on.
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		WS-FIN-091$
+Logon Information:
+	Logon Type:		2
+	Logon ID:		0x44A12
+New Logon:
+	Security ID:		CORP\s.miller
+	Account Name:		s.miller
+	Elevated Token:		No
+
+Date:          2/12/2026 2:16:45 AM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Keywords:      Audit Success
+Description:
+A new process has been created.
+New Process Name:	C:\Windows\explorer.exe
+Process Command Line:	explorer.exe
+Token Elevation Type:	%%1937
+
+Date:          2/12/2026 2:18:12 AM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Keywords:      Audit Success
+Description:
+A new process has been created.
+New Process Name:	C:\Program Files\Google\Chrome\Application\chrome.exe
+Process Command Line:	"C:\Program Files\Google\Chrome\Application\chrome.exe"
+Token Elevation Type:	%%1938
+
+Date:          2/12/2026 2:22:33 AM
+Event ID:      4634
+Task Category: Logoff
+Level:         Information
+Keywords:      Audit Success
+Description:
+An account was logged off.
+Subject:
+	Account Name:		s.miller
+	Logon ID:		0x44A12
+Logon Type:		2
+
+Date:          2/12/2026 2:25:01 AM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Description:
+An account was successfully logged on.
+Subject:
+	Account Name:		WS-FIN-091$
+New Logon:
+	Account Name:		b.jenkins
+	Logon Type:		2
+	Elevated Token:		No
+
+Date:          2/12/2026 2:28:19 AM
+Event ID:      1000
+Source:        Microsoft-Windows-Windows Defender
+Task Category: None
+Level:         Information
+Description:
+Windows Defender Antimalware platform Scan has started.
+Scan ID: {9A2B-3C4D-5E6F}
+Scan Type: Antimalware Quick Scan
+
+Date:          2/12/2026 2:32:44 AM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Keywords:      Audit Success
+Description:
+A new process has been created.
+New Process Name:	C:\Windows\System32\notepad.exe
+Process Command Line:	notepad.exe C:\Users\b.jenkins\Documents\notes.txt
+
+Date:          2/12/2026 2:35:10 AM
+Event ID:      1001
+Source:        Microsoft-Windows-Windows Defender
+Task Category: None
+Level:         Information
+Description:
+Windows Defender Antimalware platform Scan has finished.
+Scan ID: {9A2B-3C4D-5E6F}
+
+Date:          2/12/2026 2:38:55 AM
+Event ID:      4634
+Task Category: Logoff
+Level:         Information
+Keywords:      Audit Success
+Description:
+An account was logged off.
+Subject:
+	Account Name:		b.jenkins
+	Logon ID:		0x55B21
+
+Date:          2/12/2026 2:41:05 AM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Description:
+An account was successfully logged on.
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		WS-FIN-091$
+New Logon:
+	Security ID:		CORP\finance.user
+	Account Name:		finance.user
+	Logon ID:		0x77C34
+Logon Information:
+	Logon Type:		2
+	Elevated Token:		No
+
+Date:          2/12/2026 2:41:12 AM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Keywords:      Audit Success
+Description:
+A new process has been created.
+Creator Process ID:	0x1a4
+New Process ID:		0x8f2
+New Process Name:	C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+Parent Process Name:	C:\Windows\explorer.exe
+Process Command Line:	powershell.exe -nop -w hidden -EncodedCommand SUVYRUNNRC5leGUgL2MgY2FsYwo=
+
+Date:          2/12/2026 2:42:18 AM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Keywords:      Audit Success
+Description:
+A new process has been created.
+New Process Name:	C:\Windows\System32\conhost.exe
+Parent Process Name:	C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+
+Date:          2/12/2026 2:43:15 AM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Keywords:      Audit Success
+Description:
+A new process has been created.
+Creator Process ID:	0x8f2
+New Process ID:		0x9a1
+New Process Name:	C:\Windows\System32\whoami.exe
+Process Command Line:	whoami.exe
+
+Date:          2/12/2026 2:45:44 AM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Description:
+An account was successfully logged on.
+New Logon:
+	Account Name:		svc_sql
+	Logon Type:		5
+	Elevated Token:		Yes
+
+Date:          2/12/2026 2:48:22 AM
+Event ID:      4634
+Task Category: Logoff
+Level:         Information
+Keywords:      Audit Success
+Description:
+An account was logged off.
+Subject:
+	Account Name:		finance.user
+	Logon ID:		0x77C34
+
+Date:          2/12/2026 2:52:11 AM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Keywords:      Audit Success
+Description:
+A new process has been created.
+New Process Name:	C:\Windows\System32\taskhostw.exe
+Process Command Line:	taskhostw.exe {222A-333B-444C}
+
+Date:          2/12/2026 2:55:00 AM
+Event ID:      1000
+Source:        Microsoft-Windows-Windows Defender
+Task Category: None
+Level:         Information
+Description:
+Windows Defender Antimalware platform Quick Scan has started.

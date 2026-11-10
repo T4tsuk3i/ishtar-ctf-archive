@@ -1,0 +1,102 @@
+/* ============================================================
+   ISHTAR COLLECTIVE — ANCIENT PAST ARCHIVE
+   AROHAL SYLORIN // Fragment: Defiant // LUBRAE ORIGIN RECORD
+   ============================================================
+
+   Analyst note: Two transmission keys recovered from this
+   stylesheet. Both are encoded in a signalling system older
+   than any digital cipher — dots and dashes carried across
+   wire and radio long before computers existed.
+   Each letter separated by a space. Each word by a slash.
+   Find a decoder. Listen carefully.
+   ============================================================ */
+
+/* ── ARCHIVE RESET ───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── ROOT VARIABLES ──────────────────────────────────────── */
+:root {
+  --color-bg:        #0a0a0a;
+  --color-text:      #c8a96e;
+  --color-accent:    #e8c97e;
+  --color-muted:     #555555;
+  --color-dim:       #888888;
+  --font-mono:       'Courier New', Courier, monospace;
+  --max-width:       860px;
+  --spacing-base:    1.8rem;
+}
+
+/* ── BODY ────────────────────────────────────────────────── */
+body {
+  background-color: var(--color-bg);
+  color:            var(--color-text);
+  font-family:      var(--font-mono);
+  line-height:      var(--spacing-base);
+  max-width:        var(--max-width);
+  margin:           60px auto;
+  padding:          0 20px;
+}
+
+/* ── HEADINGS ────────────────────────────────────────────── */
+h1 {
+  color:           var(--color-accent);
+  font-size:       1em;
+  letter-spacing:  4px;
+  border-bottom:   1px solid var(--color-muted);
+  padding-bottom:  10px;
+  margin-bottom:   6px;
+}
+
+h2 {
+  color:       var(--color-dim);
+  font-size:   0.85em;
+  font-weight: normal;
+  margin-bottom: 30px;
+}
+
+/* ── LORE BODY ───────────────────────────────────────────── */
+.lore p {
+  color:         #aaaaaa;
+  margin-bottom: 1.2rem;
+}
+
+.lore .darkness {
+  color:       var(--color-dim);
+  font-style:  italic;
+}
+
+.lore .declaration {
+  color:       var(--color-accent);
+  font-weight: bold;
+}
+
+/* ── TRANSMISSION KEY 01 ─────────────────────────────────────
+   What the Darkness could not deny him.
+   The thirst The Regime fed willingly.
+   Decode the signal below.
+
+   ..-. .-.. .- --. -.--.- -. --- -... --- -.. -.-- -....- -.. . -. .. . ... -....- -- -.-- -....- - .... .. .-. ... - -.--.-
+
+   ──────────────────────────────────────────────────────── */
+
+/* ── TRANSMISSION KEY 02 ─────────────────────────────────────
+   What The Regime gave him that his clan never could.
+   His answer to Eris's question about enslavement.
+   Decode the signal below.
+
+   ..-. .-.. .- --. -.--.- - .... . -....- .-. . --. .. -- . -....- ..-. .-. . . -.. -....- -- . -.--.-
+
+   ──────────────────────────────────────────────────────── */
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+footer {
+  color:      var(--color-muted);
+  font-size:  0.75em;
+  margin-top: 60px;
+  border-top: 1px solid #1a1a1a;
+  padding-top: 10px;
+}

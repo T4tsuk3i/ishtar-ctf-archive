@@ -1,0 +1,4 @@
+EventID: 4672
+Special privileges assigned to new logon.
+Account Name: backup_admin
+Privileges: SeDebugPrivilege, SeTakeOwnershipPrivilege
