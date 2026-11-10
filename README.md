@@ -45,7 +45,7 @@ The event had 29 challenges across six categories:
 
 ## A note on student data
 
-The scoreboard export is kept for historical context. Credentials in `teams.csv` are blank. `submissions.csv` does contain source IP addresses and submitted flag attempts from the event — sanitize that file before reusing the archive publicly for a new cohort.
+The scoreboard export is kept for historical context only. Student credentials in `teams.csv`, IP addresses in `submissions.csv` and `solves.csv`, and member emails in `scoreboard.csv` have been removed from the public archive. The export contains no student IP addresses or email addresses.
 
 ## Reusing this
 
